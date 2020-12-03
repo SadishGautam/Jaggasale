@@ -721,6 +721,12 @@
 </div>   
 </section>
 
+
+<!-- sadish git tricks -->
+
+
+sodium_crypto_secretstream_xchacha20poly1305_init_push
+
 <!-- ----------------------------------------End of banner section--------------------------- -->
 
 <!-- ----------------------------------------Coded by sadish--------------------------- -->
