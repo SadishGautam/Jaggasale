@@ -1,4 +1,7 @@
-<?php include('include/header.php'); ?> 
+{% load static %}
+
+{% include 'header.php' %}
+
 
 <style>
     .header{
@@ -65,22 +68,24 @@
                 </div>
 
 
+                <!-- Registration part -->
+
                 <div class="col-md-6 clearfix" style="background: rgba(185, 184, 184, 0.192)">
                     <div class="second-form">
                         <h4>Registration</h4>
 
-                        <form action="#" method="POST">
-                                <p>Login</p>
-                                <input spellcheck="false" type="text" class="form-control" name="login" placeholder="Enter login" required>
+                        <form action="/signup" method="post">
+                                <p>Username</p>
+                                <input spellcheck="false" type="text" id="username" class="form-control" name="username" placeholder="Enter login" required>
 
                                 <p>First Name</p>
-                                <input spellcheck="false" type="text" class="form-control" name="first_name" placeholder="Enter first name" required>
+                                <input spellcheck="false" type="text" id="fname" class="form-control" name="fname" placeholder="Enter first name" required>
 
                                 <p>Last Name</p>
-                                <input spellcheck="false" type="text" class="form-control" name="last_name" placeholder="Enter last name" required>
+                                <input spellcheck="false" type="text" id="lname" class="form-control" name="lname" placeholder="Enter last name" required>
 
                                 <p>Email</p>
-                                <input spellcheck="false" type="text" class="form-control" name="email" placeholder="Enter email" required>
+                                <input spellcheck="false" type="text" id="email" class="form-control" name="email" placeholder="Enter email" required>
 
                                 <p>User role</p>
                                 <select style="height:50px;" class="custom-select">
@@ -92,11 +97,11 @@
                                 </select>
 
                                 <p>Password</p>
-                                <input spellcheck="false" type="password" class="form-control" name="password" placeholder="Enter password" required>
+                                <input spellcheck="false" type="password" id="pass1" class="form-control" name="pass1" placeholder="Enter password" required>
 
                                 <p>Re-enter Password</p>
-                                <input spellcheck="false" type="password" class="form-control" name="password" placeholder="Re-enter password" required>
-
+                                <input spellcheck="false" type="password" id="pass2" class="form-control" name="pass2" placeholder="Re-enter password" required>
+                                    {% csrf_token %}
                                <div class="but text-right ">
                                     <button class="btn" type="submit"> REGISTER </button>
                              </div>
@@ -108,4 +113,4 @@
         </div>
     </section>
 
-<?php include('include/footer.php'); ?>
+    {% include 'footer.php' %}
