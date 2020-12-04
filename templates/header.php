@@ -49,7 +49,7 @@
     <div class="container-fluid header pt-5 pb-5">
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-12 ">
-                <a href="index.php" style="padding-left:40px;color:white;text-decoration: none;display: inline-block;text-shadow:1px 1px 3px grey;font-family:'Tangerine'"><h1 class="display-4">JaggaSale.com</h1></a>
+                <a href="{% url 'home' %}" style="padding-left:40px;color:white;text-decoration: none;display: inline-block;text-shadow:1px 1px 3px grey;font-family:'Tangerine'"><h1 class="display-4">JaggaSale.com</h1></a>
 
                 
             </div>
@@ -57,11 +57,11 @@
                
                     <ul class="list-unstyled d-flex mt-3">
                      <li class="dropdown">
-                        <a class="dropbtn hm" href="index.php">HOME</a>
+                        <a class="dropbtn hm" href="{% url 'home' %}">HOME</a>
                         <div class="dropdown-content">
-                            <a href="about.php">About</a>
-                            <a href="contact.php">Contact</a>
-                            <a href="news.php">News</a>
+                            <a href="{% url 'about page' %}">About</a>
+                            <a href="{% url 'contact page' %}">Contact</a>
+                            <a href="{% url 'news page' %}">News</a>
                         </div>
                      </li>   
                     <li class="dropdown">
@@ -123,18 +123,19 @@
                             <a style="color:white;" href="#"><i class="far fa-user"></i></a> 
                         </div>
                         <div class="login container">
-                            <form method="POST" action="#">
+                            <form method="post" action="/loginonly">
+                                 {% csrf_token %}
                                 <div class="form-group">
-                                    <strong>Login</strong>
+                                    <strong>Username</strong>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" spellcheck="false" class="form-control log bg-light" placeholder="Enter Login" required>
+                                    <input type="text" spellcheck="false" id="loginusername" class="form-control log bg-light" placeholder="Enter Username" required>
                                 </div>
                                 <div class="form-group">
                                     <strong>Password</strong>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control log bg-light" placeholder="Enter Password" required>
+                                    <input type="password" class="form-control log bg-light" id="loginpassword" placeholder="Enter Password" required>
                                 </div>
                                 <div class="form-group">
                                 <div class="custom-checkbox custom-control">
@@ -151,7 +152,7 @@
                                     
                                 </div>
                                 <div class="register text-center" >
-                                    <a href="registerform.php">REGISTRATION</a>
+                                    <a href="{% url 'signupPage' %}">REGISTRATION</a>
                                 </div>
                             </form>
                         </div>
@@ -172,7 +173,7 @@
                         <div class="accordion">
                             <div class="card" style="background: var(--pri-color)">
                                 <div class="card-header">
-                                    <a href="index.php" style="color:white;text-decoration:none;">HOME</a>
+                                    <a href="{% url 'home' %}" style="color:white;text-decoration:none;">HOME</a>
                                 </div>
                             </div>
                         </div>

@@ -1,10 +1,11 @@
+from math import ceil
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from .models import Item
-from math import ceil
 from django.contrib import messages
 from django.views import generic
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
 
@@ -18,6 +19,7 @@ def signup(request):
 
 def about(request):
     return render(request, "about.php")
+
 
 
 def news(request):
@@ -38,6 +40,19 @@ def handleSignup(request):
         pass2 = request.POST['pass2']
     
         #Check for validation
+        if len(username) > 6:
+            messages.error(request, 'Username must be at least 6 character long')
+            return redirect('home')
+
+        if not username.isalnum():
+            messages.error(request, 'Username should only contain letters and numbers')
+            return redirect('home')
+
+        if pass1 != pass2:
+            messages.error(request, 'Password do not match')
+            return redirect('home')
+
+
 
         # Create the user
         myuser = User.objects.create_user(username, email, pass1)
@@ -46,11 +61,48 @@ def handleSignup(request):
         myuser.username = username
         myuser.save()
         messages.success(request, 'Your account has been created successfully')
+        print("Your account has been created successfully")
         return redirect('home')
 
     else:
         return HttpResponse('404 - Not Found')
 
+
+def handleLogin(request):
+    if request.method == 'POST':
+        #Get the POST parameters
+        loginusername = request.POST['loginusername']
+        loginpassword = request.POST['loginpassword']
+
+        user = authenticate(username=loginusername, password=loginpassword)
+
+      
+        if user is not None:
+            login(request, user)
+            messages.success(request, "Logged in Successfully")
+            print("login success")
+            return HttpResponse('Logged in Successfully')
+
+        else:
+            messages.error(request, "Invalid email or password")
+            print("login failed")
+            return redirect('news page')
+        
+
+    return HttpResponse('404 - Not Found')
+
+
+
+
+
+
+
+
+def handleLogout(request):
+    logout(request)
+    messages.success(request, "Logged out Successfully")
+    print("logout success")
+    return HttpResponse('Logged out Successfully')
 
 
 def index(request):

@@ -1,4 +1,4 @@
-<?php include('include/header.php'); ?> 
+{% include 'header.php' %}
 
 <style>
     .header{
@@ -159,6 +159,7 @@
 
 
 
-<?php include('include/footer.php'); ?> 
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox-plus-jquery.min.js"></script>
+{% include 'footer.php' %}

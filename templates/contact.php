@@ -1,4 +1,4 @@
-<?php include('include/header.php'); ?> 
+{% include 'header.php' %}
 
 <style>
     .header{
@@ -205,5 +205,4 @@
 
 
 
-
-<?php include('include/footer.php'); ?>
+        {% include 'footer.php' %}
