@@ -1,58 +1,68 @@
 from math import ceil
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView
-from .models import Item
 from django.contrib import messages
-from django.views import generic
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.http import HttpResponse
+from django.shortcuts import redirect, render
+from django.views import generic
+from django.views.generic import DetailView, ListView
+
+from .models import Item
 
 
 class HomeView(ListView):
     model = Item
-    template_name = 'index.php'
+    template_name = 'index.html'
+
 
 def signup(request):
-    return render(request, "registerform.php")
+    return render(request, "registerform.html")
+
+
+def profilepage(request):
+    return render(request, 'profile.html')
+
+
+def userPropertyList(request):
+    return render(request, 'userPropertyLists')
 
 
 def about(request):
-    return render(request, "about.php")
-
+    return render(request, "about.html")
 
 
 def news(request):
-    return render(request, "news.php")
+    return render(request, "news.html")
+
 
 def contact(request):
-    return render(request, "contact.php")
+    return render(request, "contact.html")
 
-    
+
 def handleSignup(request):
     if request.method == 'POST':
-        #Get the POST parameters
+        # Get the POST parameters
         fname = request.POST['fname']
         lname = request.POST['lname']
         username = request.POST['username']
         email = request.POST['email']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
-    
-        #Check for validation
+
+        # Check for validation
         if len(username) > 6:
-            messages.error(request, 'Username must be at least 6 character long')
+            messages.error(
+                request, 'Username must be at least 6 character long')
             return redirect('home')
 
         if not username.isalnum():
-            messages.error(request, 'Username should only contain letters and numbers')
+            messages.error(
+                request, 'Username should only contain letters and numbers')
             return redirect('home')
 
         if pass1 != pass2:
             messages.error(request, 'Password do not match')
             return redirect('home')
-
-
 
         # Create the user
         myuser = User.objects.create_user(username, email, pass1)
@@ -70,13 +80,12 @@ def handleSignup(request):
 
 def handleLogin(request):
     if request.method == 'POST':
-        #Get the POST parameters
+        # Get the POST parameters
         loginusername = request.POST['loginusername']
         loginpassword = request.POST['loginpassword']
 
         user = authenticate(username=loginusername, password=loginpassword)
 
-      
         if user is not None:
             login(request, user)
             messages.success(request, "Logged in Successfully")
@@ -87,15 +96,8 @@ def handleLogin(request):
             messages.error(request, "Invalid email or password")
             print("login failed")
             return redirect('news page')
-        
 
     return HttpResponse('404 - Not Found')
-
-
-
-
-
-
 
 
 def handleLogout(request):
@@ -115,11 +117,10 @@ def index(request):
     catprods = Item.objects.values('category', 'id')
     cats = {item['category'] for item in catprods}
     for cat in cats:
-        prod = Item.objects.filter(category = cat)
+        prod = Item.objects.filter(category=cat)
         n = len(prod)
         nslides = n//4 + ceil((n/4)) - (n//4)
         allprods = [[products, range(1, len(products)), nslides],
                     [products, range(1, len(products)), nslides]]
-        params = {'allprods': allprods}   
+        params = {'allprods': allprods}
         return render(request, 'index.php', params)
-        

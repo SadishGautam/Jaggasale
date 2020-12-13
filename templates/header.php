@@ -104,7 +104,7 @@
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="listing mt-2 d-flex align-items-center">
                     <div class="list ml-5">
-                        <a href="registerform.php"><i class="fas fa-home"></i>&nbsp; ADD LISTING</a>      
+                        <a href="{% url 'signupPage' %}"><i class="fas fa-home"></i>&nbsp; ADD LISTING</a>      
                     </div>
                     <div class="refresh ml-3">
                         <a style="color:white;" href="compare.php"><i class="fas fa-retweet"></i></a><span class="badge">0</span>

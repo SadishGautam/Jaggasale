@@ -7,6 +7,8 @@ from . import views
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('login', views.signup, name='signupPage'),
+    path('profile', views.profilepage, name='user profile'),
+    path('userPropertyList', views.userPropertyList, name="user property lists"),
     path('about', views.about, name='about page'),
     path('news', views.news, name='news page'),
     path('contact', views.contact, name='contact page'),

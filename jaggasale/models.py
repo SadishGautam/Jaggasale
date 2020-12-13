@@ -12,9 +12,8 @@ CATEGORY_LIST = (
 LABEL_LIST = (
     ('A', 'Active'),
     ('R', 'Rent'),
-    
-)
 
+)
 
 
 class Item(models.Model):
@@ -22,8 +21,10 @@ class Item(models.Model):
     price = models.IntegerField()
     discount_price = models.IntegerField(blank=True, null=True)
     slug = models.SlugField()
-    category = models.CharField(choices=CATEGORY_LIST ,max_length=2, default='SOME STRING')
-    label = models.CharField(choices=LABEL_LIST ,max_length=2, default='SOME STRING')
+    category = models.CharField(
+        choices=CATEGORY_LIST, max_length=2, default='SOME STRING')
+    label = models.CharField(
+        choices=LABEL_LIST, max_length=2, default='SOME STRING')
     picture_count = models.IntegerField()
     area = models.IntegerField(blank=True, null=True)
     date = models.DateField(blank=True, null=True)
@@ -33,7 +34,6 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title
-    
 
 
 def __str__(self):

@@ -64,7 +64,7 @@
 
             </div>  
             <div class="foranchors mt-5">
-                <h6><a href="index.php">Home</a>|<a href="about.php">About Us</a>|<a href="contact.php">Contact Us</a>|
+                <h6><a href="{% url 'home' %}">Home</a>|<a href="about.php">About Us</a>|<a href="contact.php">Contact Us</a>|
                 <a href="news.php">News</a>|<a href="wishlist.php">Wishlist</a></h6>
                
             </div>
@@ -72,7 +72,7 @@
             <div class="containerfooter text-white py-2">
               <div class="wrap d-flex align-items-center justify-content-between mb-4" style="font-family: 'abel';flex-wrap:wrap">
                 <div class="copyright text-center my-2">
-                  <span style="color:lightgray;">&copy; 2019 </span><a style="color: var(--pri-color);text-decoration:none;" href="index.php">JaggaSale</a><span style="color:lightgray;"> All rights reserve.
+                  <span style="color:lightgray;">&copy; <script> document.write(new Date().getFullYear()) </script> </span><a style="color: var(--pri-color);text-decoration:none;" href="{% url 'home' %}">JaggaSale</a><span style="color:lightgray;"> All rights reserve.
                   </span>
                 </div>
                 <div class="icons text-center my-2">
@@ -85,7 +85,7 @@
                 </span>
               </div>
               <div class="dsn text-center my-2">
-                <span>Designed & Developed by <a href="https://onlinezeal.com/" target="blank" style="color: var(--sec-color);text-decoration: none;">OnlineZeal</a></span>
+                <span>Designed & Developed by <a href="https://sadish.com.np/" target="blank" style="color: var(--sec-color);text-decoration: none;">Sadish Gautam</a></span>
               </div>
               </div>
             </div>
