@@ -38,6 +38,9 @@ def news(request):
 def contact(request):
     return render(request, "contact.html")
 
+def handleDetails(request):
+    return render(request, "details.html")
+
 
 def handleSignup(request):
     if request.method == 'POST':
