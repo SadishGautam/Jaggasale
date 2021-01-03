@@ -55,18 +55,18 @@
                             <input style="border: none; outline: none; box-shadow: none; color:white" type="email" class="form-control bg-secondary" id="email" placeholder="Enter email*" name="email" autocomplete="off">
                         </div>
                     </div>
-                    
+
                         <button style="font-family: 'abel'" type="submit" class="btn btn-primary form-control">Subscribe</button>
-                     
+
                 </div>
                 </div>
                 </div>
 
-            </div>  
+            </div>
             <div class="foranchors mt-5">
                 <h6><a href="{% url 'home' %}">Home</a>|<a href="about.php">About Us</a>|<a href="contact.php">Contact Us</a>|
                 <a href="news.php">News</a>|<a href="wishlist.php">Wishlist</a></h6>
-               
+
             </div>
             <hr size="30" class="w-100 mx-auto mt-5" style="padding:0.1px; background:grey;">
             <div class="containerfooter text-white py-2">
@@ -76,7 +76,7 @@
                   </span>
                 </div>
                 <div class="icons text-center my-2">
-               <span> 
+               <span>
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-youtube"></i></a>
@@ -96,7 +96,7 @@
 <!-- --------------------Sadish Codes----------------------- -->
 
 
-   
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -104,7 +104,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
     <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
     <!-- <script type="text/javascript" src="js/all.js"></script> -->
-    <script type="text/javascript" src="http://sadish.com.np/projects/jaggasale/js/custom.js"></script>
+    <script type="text/javascript" src="static/js/custom.js"></script>
 
 
 

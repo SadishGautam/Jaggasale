@@ -9,20 +9,17 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
-
+    <!-- <link rel="stylesheet" href="static/cssbootstrap.min.css"> -->
 
 
     <!-- css -->
-    <link rel="icon" href="{% static 'pics/home.ico' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/ofc-detail1.css' %}">
-    <link rel="stylesheet" type="text/css" href="http://sadish.com.np/projects/jaggasale/css/style.css">
-
-    <link rel="stylesheet"  type="text/css" href="http://sadish.com.np/projects/jaggasale/css/why-choose.css">
-    <link rel="stylesheet"  type="text/css" href="http://sadish.com.np/projects/jaggasale/css/register.css">
-    <link rel="stylesheet" type="text/css" href="http://sadish.com.np/projects/jaggasale/css/footer.css">
-    <link rel="stylesheet" type="text/css" href="http://sadish.com.np/projects/jaggasale/css/about.css">
+    <link rel="icon" href="pics/home.ico">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="static/css/ofc-detail1.css">
+    <link rel="stylesheet" href="static/css/why-choose.css">
+    <link rel="stylesheet" href="static/css/register.css">
+    <link rel="stylesheet" type="text/css" href="static/css/footer.css">
+    <link rel="stylesheet" type="text/css" href="static/css/about.css">
 
 
     <!-- fonts -->
@@ -36,8 +33,8 @@
 
 
     <!-- carousel -->
-    <link rel="stylesheet" type="text/css" href="http://sadish.com.np/projects/jaggasale/css/owl-carousel.min.css">
-    <link rel="stylesheet" type="text/css" href="http://sadish.com.np/projects/jaggasale/css/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/owl-carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/owl.theme.default.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 
     <title>JaggaSale</title>
