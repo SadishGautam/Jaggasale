@@ -2,6 +2,8 @@ from math import ceil
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from .models import Item
+from math import ceil
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import generic
@@ -56,16 +58,20 @@ def handleSignup(request):
         if len(username) > 6:
             messages.error(
                 request, 'Username must be at least 6 character long')
-            return redirect('home')
+            return HttpResponse('username must be 6 character long')
 
         if not username.isalnum():
             messages.error(
                 request, 'Username should only contain letters and numbers')
-            return redirect('home')
+            return HttpResponse('username format error')
 
         if pass1 != pass2:
             messages.error(request, 'Password do not match')
-            return redirect('home')
+            return HttpResponse('password donot match')
+
+
+
+
 
         # Create the user
         myuser = User.objects.create_user(username, email, pass1)

@@ -4,8 +4,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 
 
-class RestrictedView(LoginRequiredMixin, TemplateView):
-    template_name = 'login.html'
 
 CATEGORY_LIST = (
     ('H', 'House'),
@@ -16,7 +14,7 @@ CATEGORY_LIST = (
 
 LABEL_LIST = (
     ('A', 'Active'),
-    ('R', 'Rent'),
+    ('I', 'Inactive'),
 
 )
 
@@ -24,7 +22,7 @@ LOCATION_LIST = (
 ('K', 'Kathmandu'),
 ('L', 'Lalitpur'),
 ('L', 'Bhaktapur'),
-('L', 'Chitwan'),
+('C', 'Chitwan'),
 
 )
 
@@ -42,7 +40,7 @@ class Item(models.Model):
     area = models.IntegerField(blank=True, null=True)
     date = models.DateField(blank=True, null=True)
     rooms = models.IntegerField()
-    Description = models.CharField(max_length=1000)
+    Description = models.TextField(max_length=1000)
     location = models.CharField(choices=LOCATION_LIST, max_length=2, default='Kathmandu')
     map = models.CharField(max_length=150)
     image = models.ImageField(default='defeult.jpg', upload_to='static/images')
@@ -54,3 +52,38 @@ class Item(models.Model):
 
 def __str__(self):
     return self.user.username
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

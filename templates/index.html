@@ -740,6 +740,7 @@
     <div class="container">
         <div class="row">
             {% for object in item_list %}
+                {% if object.category == "H" %}
 
 
             <div class="col-lg-4 col-md-4 my-3">
@@ -787,6 +788,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
 
         </div>
@@ -812,6 +814,7 @@
     <div class="container">
     <div id="owl-sold-property" class="owl-carousel owl-theme">
     {% for object in object_list %}
+    {% if object.category == "A" %}
         <div class="item sold-item">
             <div class="card mb-5" style="padding:15px;">
                 <div class="card-img"style="position: relative;overflow:hidden;">
@@ -848,7 +851,51 @@
 
             </div>
         </div>
+        {% endif %}
         {% endfor %}
+
+
+
+
+        <div class="item rent-item">
+            <div class="card" style="padding:15px;">
+                <div class="card-img"style="position: relative;overflow:hidden;">
+                    <div class="img-box">
+                        <img src="pics/9.jpg" height="230px">
+                    </div>
+                    <a href=""><div class="img-overlay"></div></a>
+                    <div class="badge badge1 px-2 py-1 badge-danger">RENT</div>
+                    <div class="badge badge2 px-2 py-1"><i class="fas fa-camera"></i> 18</div>
+                    <div class="home-heart">
+                        <i id="home11" class="fas mx-1 py-2 fa-home"></i>
+                        <i id="heart11" class="fas mx-1 py-2 fa-heart"></i>
+                    </div>
+                </div>
+
+                <div class="card-title mt-3">
+                    <a href="#" >House In Khichapokhari</a>
+                </div>
+                <div class="car-footer">
+                    <strike>Rs. 50,00,000/mo</strike> <br> <span style="color:black;font-weight:bold;" >Rs. 45,00,000/mo</span>
+                </div>
+                <hr style="border-top:.5px solid lightgrey">
+                <div class="card-content d-flex" style="justify-content: space-between">
+                    <div class="bed room">
+                        <i class="fas fa-bed"></i> 10
+                    </div>
+                    <div class="bath room">
+                        <i class="fas fa-bath"></i> 5
+                    </div>
+                    <div class="year room">
+                        <i class="fas fa-clock"></i> 2018
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
 
     </div>
 </div>
@@ -944,6 +991,8 @@
 
                 </div>
             </div>
+
+
             <div class="item rent-item">
                 <div class="card" style="padding:15px;">
                     <div class="card-img"style="position: relative;overflow:hidden;">

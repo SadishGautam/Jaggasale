@@ -1,11 +1,11 @@
 // ---------------------------Menu BAr----------------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
 function openNav() {
     document.getElementById("myNav").style.width = "60%";
-    
+
   }
-  
+
   function closeNav() {
     document.getElementById("myNav").style.width = "0%";
     $('.header .closenav').css({"transform":"scale(0)","transition-delay": "0s"});
@@ -20,7 +20,7 @@ function openNav() {
   });
 
 // ---------------Hide Menu when Scroll----------------------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
 $(window).on('scroll',function(){
   let bodyScroll = $(window).scrollTop()
@@ -40,37 +40,37 @@ $(function(){
 
 
 //   ----------------------------------Hide Tabe pane when page reload---------------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
   $("#anemities").hide();
- 
+
     $("#advanced").click(function(){
         $("#anemities").toggle(500);
         $('#advanced i').toggleClass('ico-js');
     });
 
 // ------------------------------------Rent Tab Hide------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
     $("#anemities1").hide();
- 
+
     $("#advanced1").click(function(){
         $("#anemities1").toggle(500);
         $('#advanced1 i').toggleClass('ico-js');
     });
 
 // ----------------------------------------Sold tab Hide----------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
     $("#anemities2").hide();
- 
+
     $("#advanced2").click(function(){
         $("#anemities2").toggle(500);
         $('#advanced2 i').toggleClass('ico-js');
     });
 
 // -------------------Buy Price Range-----------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
 var slider = document.getElementById("customRange1");
 var output = document.getElementById("demo1");
@@ -89,7 +89,7 @@ sliders.oninput = function() {
 }
 
 // -------------------Rent Price Range-----------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
 var sliders1 = document.getElementById("customRange5");
 var outputs1 = document.getElementById("demo5");
@@ -108,7 +108,7 @@ sliders2.oninput = function() {
 }
 
 // -------------------Sold Price Range-----------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
 var sliders7 = document.getElementById("customRange9");
 var outputs7 = document.getElementById("demo9");
@@ -128,7 +128,7 @@ sliders8.oninput = function() {
 
 
 // ------------------------ Buy Square Feet Range----------------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
 var slider3 = document.getElementById("customRange3");
 var output3 = document.getElementById("demo3");
@@ -147,7 +147,7 @@ slider4.oninput = function() {
 }
 
 // ------------------------ Rent Square Feet Range----------------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
 var slider5 = document.getElementById("customRange11");
 var output5 = document.getElementById("demo11");
@@ -166,7 +166,7 @@ slider6.oninput = function() {
 }
 
 // ------------------------ Sold Square Feet Range----------------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
 var slider9 = document.getElementById("customRange7");
 var output9 = document.getElementById("demo7");
@@ -184,7 +184,7 @@ slider10.oninput = function() {
   output10.innerHTML = this.value;
 }
 // ---------------------------Home-Heart--------------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
 $('#home1').click(function(){
   $('#home1').toggleClass('blue-color');
@@ -296,7 +296,7 @@ $('.rent-item #heart13').click(function(){
 
 
 // -----------------------Owl Carousel for properties sold---------------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
 $('#owl-sold-property').owlCarousel({
   loop:true,
@@ -321,7 +321,7 @@ $('#owl-sold-property').owlCarousel({
 });
 
 // -----------------------Owl Carousel for properties rent---------------------
-// --------------------------Prasid Codes-----------------------
+// --------------------------sadish Codes-----------------------
 
 $('#owl-rent-property').owlCarousel({
   loop:true,
@@ -343,4 +343,3 @@ $('#owl-rent-property').owlCarousel({
       }
   }
 });
-

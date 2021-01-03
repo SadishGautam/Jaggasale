@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 
-    
+
 
     <!-- css -->
     <link rel="icon" href="{% static 'pics/home.ico' %}">
@@ -51,10 +51,10 @@
             <div class="col-lg-3 col-md-3 col-sm-12 ">
                 <a href="{% url 'home' %}" style="padding-left:40px;color:white;text-decoration: none;display: inline-block;text-shadow:1px 1px 3px grey;font-family:'Tangerine'"><h1 class="display-4">JaggaSale.com</h1></a>
 
-                
+
             </div>
             <div class="col-lg-5 col-md-5 col-sm-12 text-center">
-               
+
                     <ul class="list-unstyled d-flex mt-3">
                      <li class="dropdown">
                         <a class="dropbtn hm" href="{% url 'home' %}">HOME</a>
@@ -63,7 +63,7 @@
                             <a href="{% url 'contact page' %}">Contact</a>
                             <a href="{% url 'news page' %}">News</a>
                         </div>
-                     </li>   
+                     </li>
                     <li class="dropdown">
                         <a href="kathmandu.php" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">KATHMANDU</a>
                         <div class="dropdown-content">
@@ -104,7 +104,7 @@
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="listing mt-2 d-flex align-items-center">
                     <div class="list ml-5">
-                        <a href="{% url 'signupPage' %}"><i class="fas fa-home"></i>&nbsp; ADD LISTING</a>      
+                        <a href="{% url 'signupPage' %}"><i class="fas fa-home"></i>&nbsp; ADD LISTING</a>
                     </div>
                     <div class="refresh ml-3">
                         <a style="color:white;" href="compare.php"><i class="fas fa-retweet"></i></a><span class="badge">0</span>
@@ -120,7 +120,7 @@
                     </div>
                     <div class="login-form" style="position:relative;">
                         <div class="user icon ml-3">
-                            <a style="color:white;" href="#"><i class="far fa-user"></i></a> 
+                            <a style="color:white;" href="#"><i class="far fa-user"></i></a>
                         </div>
                         <div class="login container">
                             <form method="post" action="/loginonly">
@@ -139,17 +139,17 @@
                                 </div>
                                 <div class="form-group">
                                 <div class="custom-checkbox custom-control">
-                                    
+
                                     <input id="pk" type="checkbox" class="custom-control-input">
                                     <label style="user-select: none; cursor:pointer" for="pk" class="custom-control-label">Remember me</label>
-                                
+
                                 </div>
                                 </div>
                                 <div class="form-group">
                                     <button class="btn form-control d-flex align-items-center justify-content-center" type="submit">
                                         <span>SIGN IN</span>
                                     </button>
-                                    
+
                                 </div>
                                 <div class="register text-center" >
                                     <a href="{% url 'signupPage' %}">REGISTRATION</a>
@@ -161,7 +161,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="menu" style="display: none;">
             <span id="bars" style="font-size:30px;cursor:pointer;color:white" onclick="openNav()">&#9776;</span>
         </div>
@@ -177,16 +177,16 @@
                                 </div>
                             </div>
                         </div>
-                    </li> 
+                    </li>
                     <li class="small-drop">
                     <div class="accordion" id="accordionExample">
                         <div class="card">
                             <div class="card-header" id="headingOne">
                                 <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 KATHMANDU<i style="float: right;" class="fas fa-chevron-down"></i>
-                                </a>                           
+                                </a>
                             </div>
-                        
+
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
                                 <a href="kathmandu.php">Baneshwor</a>
@@ -205,9 +205,9 @@
                                 <div class="card-header" id="headingTwo">
                                     <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     LALITPUR<i style="float: right;" class="fas fa-chevron-down"></i>
-                                    </a>                           
+                                    </a>
                                 </div>
-                            
+
                                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                                 <div class="card-body">
                                     <a href="#">Patan</a>
@@ -224,9 +224,9 @@
                                 <div class="card-header" id="headingThree">
                                     <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                                     BHAKTAPUR<i style="float: right;" class="fas fa-chevron-down"></i>
-                                    </a>                           
+                                    </a>
                                 </div>
-                            
+
                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                                 <div class="card-body">
                                     <a href="#">Siddhapokhari</a>
@@ -243,9 +243,9 @@
                                 <div class="card-header" id="headingFour">
                                     <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                                     OTHERS<i style="float: right;" class="fas fa-chevron-down"></i>
-                                    </a>                           
+                                    </a>
                                 </div>
-                            
+
                                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
                                 <div class="card-body">
                                     <a href="#">Land</a>
@@ -256,13 +256,10 @@
                             </div>
                         </div>
                     </li>
-                </ul>  
+                </ul>
             </div>
         </div>
-        
-            <a href="javascript:void(0)" class="closenav" onclick="closeNav()"><i style="padding:0 10px" class="fas fa-times"></i></a>
-        
-     </div>
 
-        
-          
+            <a href="javascript:void(0)" class="closenav" onclick="closeNav()"><i style="padding:0 10px" class="fas fa-times"></i></a>
+
+     </div>

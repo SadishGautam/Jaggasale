@@ -1,6 +1,52 @@
   {% include 'header.php' %}
- 
 
- 
- 
+
+  <style>
+      .header{
+          box-shadow: 1px 1px 10px 1px grey;
+      }
+      .header a.hm{
+          background:transparent;
+      }
+      .header a{
+        color:black!important;
+      }
+      .header .listing .list a,
+      .header .listing .refresh,
+      .header .listing .heart,
+      .header .listing .user{
+          border: 1px solid var(--pri-color);
+      }
+      .header .listing .list a:hover{
+          background: var(--pri-color);
+          color:white!important;
+      }
+      .header .menu #bars{
+          color:var(--pri-color)!important;
+      }
+      .header .register a{
+          color:var(--pri-color)!important;
+      }
+      .header .register a:hover{
+          color:var(--sec-color)!important;
+      }
+      </style>
+
+
+
+ <section class="profile_section">
+   <div class="container">
+    <div class="profile_page">
+     <p>Username : {{ user.username|default:'Guest' }} </p>
+     <p>Name : {{ user.first_name}} {{ user.last_name  |default:'Guest' }} </p>
+     <p>Email : {{ user.email|default:'Guest email' }}</p>
+     <p>Last login : {{ user.last_login|default:'Guest email' }}</p>
+     <p>Joined date : {{ user.date_joined|default:'Guest email' }}</p>
+
+    </div>
+   </div>
+ </section>
+
+
+
  {% include 'footer.php' %}
