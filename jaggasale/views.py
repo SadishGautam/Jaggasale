@@ -8,6 +8,9 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import generic
 from django.views.generic import DetailView, ListView
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.decorators import login_required
 
 from .models import Item
 
@@ -40,8 +43,15 @@ def news(request):
 def contact(request):
     return render(request, "contact.html")
 
-def handleDetails(request):
+
+def handleDetails(request, id):
     return render(request, "details.html")
+
+# def handleDetails(request):
+#     return render(request, "details.html")
+
+def locationKathmandu(request):
+    return render(request, "kathmandu.html")
 
 
 def handleSignup(request):
@@ -69,10 +79,6 @@ def handleSignup(request):
             messages.error(request, 'Password do not match')
             return HttpResponse('password donot match')
 
-
-
-
-
         # Create the user
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
@@ -86,6 +92,8 @@ def handleSignup(request):
     else:
         return HttpResponse('404 - Not Found')
 
+# login the user if credentials are true
+
 
 def handleLogin(request):
     if request.method == 'POST':
@@ -94,13 +102,13 @@ def handleLogin(request):
         loginpassword = request.POST['loginpassword']
 
         user = authenticate(username=loginusername, password=loginpassword)
-
+# if user exists
         if user is not None:
             login(request, user)
             messages.success(request, "Logged in Successfully")
             print("login success")
-            return HttpResponse('Logged in Successfully')
-
+            return render(request, "index.html")
+# if user doesnot exists
         else:
             messages.error(request, "Invalid email or password")
             print("login failed")
@@ -108,28 +116,28 @@ def handleLogin(request):
 
     return HttpResponse('404 - Not Found')
 
+# logout function
+
 
 def handleLogout(request):
     logout(request)
     messages.success(request, "Logged out Successfully")
-    print("logout success")
-    return HttpResponse('Logged out Successfully')
+    return render(request, "index.html")
 
 
-def index(request):
-    products = Item.objects.all()
-    print(products)
-    n = len(products)
-    nslides = n//4 + ceil((n/4)) - (n//4)
-
-    allprods = []
-    catprods = Item.objects.values('category', 'id')
-    cats = {item['category'] for item in catprods}
-    for cat in cats:
-        prod = Item.objects.filter(category=cat)
-        n = len(prod)
-        nslides = n//4 + ceil((n/4)) - (n//4)
-        allprods = [[products, range(1, len(products)), nslides],
-                    [products, range(1, len(products)), nslides]]
-        params = {'allprods': allprods}
-        return render(request, 'index.php', params)
+# changing the user password via user
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(
+                request, 'Your password was updated successfully!')
+            return redirect('settings:password')
+        else:
+            messages.warning(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'commons/change-password.html', {'form': form})
