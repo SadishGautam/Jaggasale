@@ -737,13 +737,12 @@
             <span class="icon"><i class="fas fa-home"></i>1300+</span><span class="icon-text"> AVAILABLE PROPERTIES</span>
         </p>
     </div>
+
     <div class="container">
-        <div class="row">
+
+<div id="owl-featured-property" class="owl-carousel owl-theme">
             {% for object in item_list %}
-                {% if object.category == "H" %}
 
-
-            <div class="col-lg-4 col-md-4 my-3">
                 <div class="card">
                     <div class="card-img"style="position: relative;overflow:hidden;">
                         <div class="img-box"style="height:210px">
@@ -787,11 +786,13 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            {% endif %}
+
+
             {% endfor %}
 
-        </div>
+
+            </div>
+
     </div>
 
 </section>
@@ -814,7 +815,7 @@
     <div class="container">
     <div id="owl-sold-property" class="owl-carousel owl-theme">
     {% for object in object_list %}
-    {% if object.category == "A" %}
+    {% if object.category == "L" %}
         <div class="item sold-item">
             <div class="card mb-5" style="padding:15px;">
                 <div class="card-img"style="position: relative;overflow:hidden;">
@@ -831,7 +832,7 @@
                 </div>
 
                     <div class="card-title mt-3">
-                        <a href="#" >{{object.title}}</a>
+                        <a href="/property/{{i.id}}" >{{object.title}}</a>
                     </div>
                     <div class="car-footer">
                         <strike>Rs. 34,00,000/mo</strike> <br> <span style="color:black;font-weight:bold;" >Rs. 2,80,000/mo</span>
@@ -856,12 +857,12 @@
 
 
 
-
+<!--
         <div class="item rent-item">
             <div class="card" style="padding:15px;">
                 <div class="card-img"style="position: relative;overflow:hidden;">
                     <div class="img-box">
-                        <img src="pics/9.jpg" height="230px">
+                        <img src="static/pics/9.jpg" height="230px">
                     </div>
                     <a href=""><div class="img-overlay"></div></a>
                     <div class="badge badge1 px-2 py-1 badge-danger">RENT</div>
@@ -893,7 +894,7 @@
 
             </div>
         </div>
-
+ -->
 
 
 
@@ -918,16 +919,18 @@
             </p>
         </div>
         <div class="container">
+          {% for object in object_list %}
+          {% if object.category == "A" and "H"%}
         <div id="owl-rent-property" class="owl-carousel owl-theme">
             <div class="item rent-item">
                 <div class="card mb-5" style="padding:15px;">
                     <div class="card-img"style="position: relative;overflow:hidden;">
                         <div class="img-box">
-                            <img src="pics/1.jpg" height="230px">
+                            <img src="{{object.image.url}}" height="230px">
                         </div>
                         <a href=""><div class="img-overlay"></div></a>
                         <div class="badge badge1 px-2 py-1 badge-danger">RENT</div>
-                        <div class="badge badge2 px-2 py-1"><i class="fas fa-camera"></i> 15</div>
+                        <div class="badge badge2 px-2 py-1"><i class="fas fa-camera"></i> {{object.picture_count}}</div>
                         <div class="home-heart">
                             <i id="home9" class="fas mx-1 py-2 fa-home"></i>
                             <i id="heart9" class="fas mx-1 py-2 fa-heart"></i>
@@ -935,10 +938,10 @@
                     </div>
 
                         <div class="card-title mt-3">
-                            <a href="#" >House In New Road</a>
+                            <a href="#" >{{object.title}}</a>
                         </div>
                         <div class="car-footer">
-                            <strike>Rs. 34,00,000/mo</strike> <br> <span style="color:black;font-weight:bold;" >Rs. 2,80,000/mo</span>
+                            <strike>Rs. {{object.discount_price}}/mo</strike> <br> <span style="color:black;font-weight:bold;" >Rs. {{object.price}}/mo</span>
                         </div>
                         <hr style="border-top:.5px solid lightgrey">
                         <div class="card-content d-flex" style="justify-content: space-between">
@@ -955,154 +958,12 @@
 
                 </div>
             </div>
-            <div class="item rent-item">
-                <div class="card" style="padding:15px;">
-                    <div class="card-img"style="position: relative;overflow:hidden;">
-                        <div class="img-box">
-                            <img src="pics/10.jpg" height="230px">
-                        </div>
-                        <a href="#"><div class="img-overlay"></div></a>
-                        <div class="badge badge1 px-2 py-1 badge-danger">RENT</div>
-                        <div class="badge badge2 px-2 py-1"><i class="fas fa-camera"></i> 8</div>
-                        <div class="home-heart">
-                            <i id="home10" class="fas mx-1 py-2 fa-home"></i>
-                            <i id="heart10" class="fas mx-1 py-2 fa-heart"></i>
-                        </div>
-                    </div>
 
-                    <div class="card-title mt-3">
-                        <a href="#" >House In Lagankhel</a>
-                    </div>
-                    <div class="car-footer">
-                        <strike>Rs. 340,000/mo</strike> <br> <span style="color:black;font-weight:bold;" >Rs. 200,000/mo</span>
-                    </div>
-                    <hr style="border-top:.5px solid lightgrey">
-                    <div class="card-content d-flex" style="justify-content: space-between">
-                        <div class="bed room">
-                            <i class="fas fa-bed"></i> 8
-                        </div>
-                        <div class="bath room">
-                            <i class="fas fa-bath"></i> 2
-                        </div>
-                        <div class="year room">
-                            <i class="fas fa-clock"></i> 2018
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="item rent-item">
-                <div class="card" style="padding:15px;">
-                    <div class="card-img"style="position: relative;overflow:hidden;">
-                        <div class="img-box">
-                            <img src="pics/9.jpg" height="230px">
-                        </div>
-                        <a href=""><div class="img-overlay"></div></a>
-                        <div class="badge badge1 px-2 py-1 badge-danger">RENT</div>
-                        <div class="badge badge2 px-2 py-1"><i class="fas fa-camera"></i> 18</div>
-                        <div class="home-heart">
-                            <i id="home11" class="fas mx-1 py-2 fa-home"></i>
-                            <i id="heart11" class="fas mx-1 py-2 fa-heart"></i>
-                        </div>
-                    </div>
-
-                    <div class="card-title mt-3">
-                        <a href="#" >House In Khichapokhari</a>
-                    </div>
-                    <div class="car-footer">
-                        <strike>Rs. 50,00,000/mo</strike> <br> <span style="color:black;font-weight:bold;" >Rs. 45,00,000/mo</span>
-                    </div>
-                    <hr style="border-top:.5px solid lightgrey">
-                    <div class="card-content d-flex" style="justify-content: space-between">
-                        <div class="bed room">
-                            <i class="fas fa-bed"></i> 10
-                        </div>
-                        <div class="bath room">
-                            <i class="fas fa-bath"></i> 5
-                        </div>
-                        <div class="year room">
-                            <i class="fas fa-clock"></i> 2018
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="item rent-item">
-                <div class="card" style="padding:15px;">
-                    <div class="card-img"style="position: relative;overflow:hidden;">
-                        <div class="img-box">
-                            <img src="pics/6.jpg" height="230px">
-                        </div>
-                        <a href=""><div class="img-overlay"></div></a>
-                        <div class="badge badge1 px-2 py-1 badge-danger">RENT</div>
-                        <div class="badge badge2 px-2 py-1"><i class="fas fa-camera"></i> 10</div>
-                        <div class="home-heart">
-                            <i id="home12" class="fas mx-1 py-2 fa-home"></i>
-                            <i id="heart12" class="fas mx-1 py-2 fa-heart"></i>
-                        </div>
-                    </div>
-
-                    <div class="card-title mt-3">
-                        <a href="#" >House In Chabel</a>
-                    </div>
-                    <div class="car-footer">
-                        <strike>Rs. 14,20,000/mo</strike> <br> <span style="color:black;font-weight:bold;" >Rs. 12,02,000/mo</span>
-                    </div>
-                    <hr style="border-top:.5px solid lightgrey">
-                    <div class="card-content d-flex" style="justify-content: space-between">
-                        <div class="bed room">
-                            <i class="fas fa-bed"></i> 5
-                        </div>
-                        <div class="bath room">
-                            <i class="fas fa-bath"></i> 5
-                        </div>
-                        <div class="year room">
-                            <i class="fas fa-clock"></i> 2019
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="item rent-item">
-                <div class="card" style="padding:15px;">
-                    <div class="card-img"style="position: relative;overflow:hidden;">
-                        <div class="img-box">
-                            <img src="pics/4.jpg" height="230px">
-                        </div>
-                        <a href=""><div class="img-overlay"></div></a>
-                        <div class="badge badge1 px-2 py-1 badge-danger">RENT</div>
-                        <div class="badge badge2 px-2 py-1"><i class="fas fa-camera"></i> 12</div>
-                        <div class="home-heart">
-                            <i id="home13" class="fas mx-1 py-2 fa-home"></i>
-                            <i id="heart13" class="fas mx-1 py-2 fa-heart"></i>
-                        </div>
-                    </div>
-
-                    <div class="card-title mt-3">
-                        <a href="#" >House In Balaju</a>
-                    </div>
-                    <div class="car-footer">
-                        <strike>Rs. 5,40,000/mo</strike> <br> <span style="color:black;font-weight:bold;" >Rs. 4,20,000/mo</span>
-                    </div>
-                    <hr style="border-top:.5px solid lightgrey">
-                    <div class="card-content d-flex" style="justify-content: space-between">
-                        <div class="bed room">
-                            <i class="fas fa-bed"></i> 10
-                        </div>
-                        <div class="bath room">
-                            <i class="fas fa-bath"></i> 3
-                        </div>
-                        <div class="year room">
-                            <i class="fas fa-clock"></i> 2019
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
+    {% endif %}
+    {% endfor %}
+
 </section>
 
 
@@ -1171,7 +1032,7 @@
             <div class="col-lg-6 col-md-6 my-4">
                 <a href="#" class="card card">
                     <div class="card-img">
-                        <img src="pics/city1.jpg" height="100%"  width="100%">
+                        <img src="static/pics/city1.jpg" height="100%"  width="100%">
                     </div>
                     <div class="card-text text-center">
                         <h4>NAXAL</h4>
@@ -1182,7 +1043,7 @@
             <div class="col-lg-6 col-md-6 my-4">
                 <a href="#" class="card card">
                     <div class="card-img">
-                        <img src="pics/city2.jpg" height="100%"  width="100%">
+                        <img src="static/pics/city2.jpg" height="100%"  width="100%">
                     </div>
                     <div class="card-text text-center">
                         <h4>PULCHOWK</h4>
@@ -1195,7 +1056,7 @@
             <div class="col-lg-4 col-md-4 my-4">
                 <a href="#" class="card card">
                     <div class="card-img">
-                        <img src="pics/city3.jpg" height="100%"  width="100%">
+                        <img src="static/pics/city3.jpg" height="100%"  width="100%">
                     </div>
                     <div class="card-text text-center">
                         <h4>NEW ROAD</h4>
@@ -1206,7 +1067,7 @@
             <div class="col-lg-4 col-md-4 my-4">
                 <a href="#" class="card card">
                     <div class="card-img">
-                        <img src="pics/city4.jpg" height="100%"  width="100%">
+                        <img src="static/pics/city4.jpg" height="100%"  width="100%">
                     </div>
                     <div class="card-text text-center">
                         <h4>HATTISAR</h4>
@@ -1217,7 +1078,7 @@
             <div class="col-lg-4 col-md-4 my-4">
                 <a href="#" class="card card">
                     <div class="card-img">
-                        <img src="pics/city5.jpg" height="100%"  width="100%">
+                        <img src="static/pics/city5.jpg" height="100%"  width="100%">
                     </div>
                     <div class="card-text text-center">
                         <h4>RNAC</h4>
@@ -1314,23 +1175,26 @@
 
             <div class="row images">
                 <div class="col-lg-3 col-md-6 my-4">
-                    <img src="images/1p.png">
+                    <img src="static/images/1p.png">
                 </div>
 
                 <div class="col-lg-3 col-md-6 my-4">
-                        <img src="images/2p.png">
+                        <img src="static/images/2p.png">
                 </div>
 
                 <div class="col-lg-3 col-md-6 my-4">
-                        <img src="images/3p.png">
+                        <img src="static/images/3p.png">
                 </div>
 
                 <div class="col-lg-3 col-md-6 my-4">
-                        <img src="images/4p.png">
+                        <img src="static/images/4p.png">
                 </div>
             </div>
         </div>
     </section>
+
+
+
     {% endblock content %}
 <!-- --------------------------------------End of Our Partners------------------------------ -->
 

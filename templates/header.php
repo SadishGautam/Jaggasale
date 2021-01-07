@@ -13,7 +13,7 @@
 
 
     <!-- css -->
-    <link rel="icon" href="pics/home.ico">
+    <link rel="icon" href="static/pics/home.ico">
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
     <link rel="stylesheet" type="text/css" href="static/css/ofc-detail1.css">
     <link rel="stylesheet" href="static/css/why-choose.css">
@@ -98,65 +98,102 @@
                     </ul>
 
             </div>
+
+
+
+            <!-- login/signup part in header -->
+            {% if user.is_authenticated %}
             <div class="col-lg-4 col-md-4 col-sm-12">
                 <div class="listing mt-2 d-flex align-items-center">
                     <div class="list ml-5">
                         <a href="{% url 'signupPage' %}"><i class="fas fa-home"></i>&nbsp; ADD LISTING</a>
                     </div>
-                    <div class="refresh ml-3">
-                        <a style="color:white;" href="compare.php"><i class="fas fa-retweet"></i></a><span class="badge">0</span>
+
+                    <div class="login-form" style="position:relative;">
+                        <div class="user icon ml-3">
+                            <a style="color:white;" href="{% url 'user profile' %}"><i class="far fa-user"></i></a>
+                        </div>
+                        <div class="login container wish font-weight-bold">
+                          <a href="{% url 'user profile' %}">  {{ user.first_name}} {{ user.last_name  |default:'Guest' }} </a>
+                        </div>
+
                     </div>
+
                     <div class="wishlist" style="position:relative;">
                     <div class="heart icon ml-3">
                         <a style="color:white" href="#"><i class="far fa-heart"></i></a><span class="badge">0</span>
                     </div>
-                        <div class="container wish">
-                            <a href="wishlist.php">Wishlist <span class="badge">0</span></a>
-                            <a href="save-search.php">Save Searches <span class="badge">0</span></a>
-                        </div>
+
                     </div>
-                    <div class="login-form" style="position:relative;">
-                        <div class="user icon ml-3">
-                            <a style="color:white;" href="#"><i class="far fa-user"></i></a>
-                        </div>
-                        <div class="login container">
-                            <form method="post" action="/loginonly">
-                                 {% csrf_token %}
-                                <div class="form-group">
-                                    <strong>Username</strong>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" spellcheck="false" id="loginusername" class="form-control log bg-light" placeholder="Enter Username" required>
-                                </div>
-                                <div class="form-group">
-                                    <strong>Password</strong>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control log bg-light" id="loginpassword" placeholder="Enter Password" required>
-                                </div>
-                                <div class="form-group">
-                                <div class="custom-checkbox custom-control">
 
-                                    <input id="pk" type="checkbox" class="custom-control-input">
-                                    <label style="user-select: none; cursor:pointer" for="pk" class="custom-control-label">Remember me</label>
 
-                                </div>
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn form-control d-flex align-items-center justify-content-center" type="submit">
-                                        <span>SIGN IN</span>
-                                    </button>
-
-                                </div>
-                                <div class="register text-center" >
-                                    <a href="{% url 'signupPage' %}">REGISTRATION</a>
-                                </div>
-                            </form>
-                        </div>
-
+                    <div class="refresh ml-3">
+                        <a style="color:white;" href="{% url 'handleLogout' %}"><i class="fas fa-sign-out-alt" style=" padding-left: 5px; padding-right: 5px;"></i></a>
                     </div>
                 </div>
             </div>
+
+            {% else %}
+
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <div class="listing mt-2 d-flex align-items-center">
+                                <div class="list ml-5">
+                                    <a href="{% url 'signupPage' %}"><i class="fas fa-home"></i>&nbsp; Register</a>
+                                </div>
+
+                                <div class="login-form" style="position:relative;">
+                                    <div class="user icon ml-3">
+                                        <a style="color:white;" href="#"><i class="far fa-user"></i></a>
+                                    </div>
+                                    <div class="login container">
+                                        <form method="post" action="/loginonly">
+                                             {% csrf_token %}
+                                            <div class="form-group">
+                                                <strong>Username</strong>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" spellcheck="false" id="loginusername" class="form-control log bg-light" placeholder="Enter Username" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <strong>Password</strong>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control log bg-light" id="loginpassword" placeholder="Enter Password" required>
+                                            </div>
+                                            <div class="form-group">
+                                            <div class="custom-checkbox custom-control">
+
+                                                <input id="pk" type="checkbox" class="custom-control-input">
+                                                <label style="user-select: none; cursor:pointer" for="pk" class="custom-control-label">Remember me</label>
+
+                                            </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <button class="btn form-control d-flex align-items-center justify-content-center" type="submit">
+                                                    <span>SIGN IN</span>
+                                                </button>
+
+                                            </div>
+                                            <div class="register text-center" >
+                                                <a href="{% url 'signupPage' %}"> REGISTRATION</a>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+            {% endif %}
+
+
+
+
+
+
+<!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
         </div>
 
         <div class="menu" style="display: none;">

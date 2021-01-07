@@ -27,6 +27,16 @@ LOCATION_LIST = (
 )
 
 
+class user_details(models.Model):
+    """docstring for user_details."""
+
+
+    def __str__(self):
+        return self.user.username
+
+
+
+
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.IntegerField()
@@ -39,51 +49,12 @@ class Item(models.Model):
     picture_count = models.IntegerField()
     area = models.IntegerField(blank=True, null=True)
     date = models.DateField(blank=True, null=True)
-    rooms = models.IntegerField()
+    rooms = models.IntegerField(blank=True, null=True)
     Description = models.TextField(max_length=1000)
     location = models.CharField(choices=LOCATION_LIST, max_length=2, default='Kathmandu')
     map = models.CharField(max_length=150)
-    image = models.ImageField(default='defeult.jpg', upload_to='static/images')
+    image = models.ImageField(default='default.jpg', upload_to='static/images')
     objects = models.Manager()
 
     def __str__(self):
         return self.title
-
-
-def __str__(self):
-    return self.user.username
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    

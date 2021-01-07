@@ -32,18 +32,70 @@
       }
       </style>
 
+<div class="clearfix"></div>
 
-
- <section class="profile_section">
+ <section class="profile_section mt-5 mb-5">
    <div class="container">
-    <div class="profile_page">
-     <p>Username : {{ user.username|default:'Guest' }} </p>
-     <p>Name : {{ user.first_name}} {{ user.last_name  |default:'Guest' }} </p>
-     <p>Email : {{ user.email|default:'Guest email' }}</p>
-     <p>Last login : {{ user.last_login|default:'Guest email' }}</p>
-     <p>Joined date : {{ user.date_joined|default:'Guest email' }}</p>
 
-    </div>
+<h1 class="text-center mt-5 mb-5" style"  font-Family: 'Farro', sans-serif;">Personal information</h1>
+                      <table class="table">
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Username</td>
+                        <td>{{ user.username }}</td>
+                        <td><button type="button" class="btn btn-primary disabled" disabled>Change</button></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Name</td>
+                        <td>{{ user.first_name}} {{ user.last_name }} </td>
+                        <td><form class="form-inline my-2 my-lg-0">
+                              <input class="form-control mr-sm-2" type="text" placeholder="Full Name" >
+                              <button type="button" class="btn btn-primary">Change</button> </form></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Email</td>
+                        <td>{{ user.email }}</td>
+                        <td> <form class="form-inline my-2 my-lg-0">
+                              <input class="form-control mr-sm-2" type="email" placeholder="Email" >
+                              <button type="button" class="btn btn-primary">Change</button>
+                            </form> </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>Password</td>
+                        <td>**********</td>
+                        <td> <form class="form-inline my-2 my-lg-0" method="POST">
+                          {% csrf_token %}
+                            {{ form  }}
+                              <input class="form-control mr-sm-2" type="password" name="form" placeholder="**********" >
+                              <button type="submit" class="btn btn-primary">Change</button></form></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5</th>
+                        <td>Last login</td>
+                        <td>{{ user.last_login }} </td>
+                        <td><button type="button" class="btn btn-primary disabled" disabled>Change</button></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">6</th>
+                        <td>Joined date</td>
+                        <td>{{ user.date_joined }}</td>
+                        <td><button type="button" class="btn btn-primary disabled" disabled>Change</button></td>
+                      </tr>
+
+                      <style>
+                        .table td{
+                          font-weight: bold;
+                        }
+                      </style>
+
+
+                  </table>
+
+
+
    </div>
  </section>
 

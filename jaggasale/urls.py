@@ -1,6 +1,8 @@
 from django.urls import path
 from .views import HomeView
 from . import views
+from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 
 
@@ -13,7 +15,14 @@ urlpatterns = [
     path('news', views.news, name='news page'),
     path('contact', views.contact, name='contact page'),
     path('signup', views.handleSignup, name='handleSignup'),
-    path('loginonly', views.handleLogin, name='handleLogin'),
+    path('welcome', views.handleLogin, name='handleLogin'),
     path('logout', views.handleLogout, name='handleLogout'),
-    path('detail', views.handleDetails, name='detailed page')
+    path('change-password/',
+        auth_views.PasswordChangeView.as_view(
+            template_name='commons/change-password.html',
+            success_url = '/'
+        ),
+        name='change_password'
+    ),
+    path('detail/<int:id>', views.handleDetails, name='detailed page')
 ]
