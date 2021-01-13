@@ -1,7 +1,14 @@
-{% include 'header.html' %}
+
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}  Property - JaggaSale {% endblock %}
 
 
+
+{% block css%}
 <style>
+
+
     .header{
         box-shadow: 1px 1px 10px 1px grey;
     }
@@ -30,10 +37,11 @@
     .header .register a:hover{
         color:var(--sec-color)!important;
     }
-</style>
+    </style>
+ {% endblock %}
 
 <div class="clearfix"></div>
-
+{% block body %}
 <!--
 <section class="breadcrumbs">
     <div class="container py-3">
@@ -96,7 +104,7 @@
 
           <div class="col-lg-2 mt-3">
           <li>
-            <h4>Office Space at Baneshwor</h4>
+            <h4>{{object.title}}</h4>
           </li>
         </div>
         <div class="col-lg-2 mt-3 ">
@@ -685,11 +693,14 @@
 
 
 
-{% include 'footer.html' %}
+{% endblock %}
 
 
 
-<script>
+{% block externaljavascript %}
+
+
+
 $('#sadis-owl').owlCarousel({
   loop:true,
   margin:6,
@@ -710,6 +721,4 @@ $('#sadis-owl').owlCarousel({
   }
 })
 
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox-plus-jquery.min.js"></script>
+{% endblock %}

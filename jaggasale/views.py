@@ -45,6 +45,7 @@ def contact(request):
 
 
 def handleDetails(request, id):
+    #fetch the property using id
     return render(request, "details.html")
 
 # def handleDetails(request):

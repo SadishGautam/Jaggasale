@@ -23,7 +23,7 @@ urlpatterns = [
          ),
          name='change_password'
          ),
-    path('detail/<int:id>/', views.handleDetails, name='detailed page'),
+    path('property/<int:id>', views.handleDetails, name='detailed page'),
     #path('detail', views.handleDetails, name='detailed page'),
     path('kathmandu', views.locationKathmandu, name='Kathmandu'),
 ]

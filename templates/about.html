@@ -1,6 +1,9 @@
-{% include 'header.html' %}
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}  About - JaggaSale {% endblock %}
 
-<style>
+
+{% block css %}
   .header {
     box-shadow: 1px 1px 10px 1px grey;
   }
@@ -36,7 +39,9 @@
   .header .register a:hover {
     color: var(--sec-color) !important;
   }
-</style>
+ {% endblock %}
+
+{% block body %}
 
 <div class="clearfix"></div>
 
@@ -425,4 +430,4 @@
 </section>
 
 
-{% include 'footer.html' %}
+ {% endblock %}

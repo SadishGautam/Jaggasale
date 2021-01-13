@@ -34,6 +34,7 @@ class user_details(models.Model):
 
 
 class Item(models.Model):
+    
     title = models.CharField(max_length=100)
     price = models.IntegerField()
     discount_price = models.IntegerField(blank=True, null=True)

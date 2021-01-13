@@ -1,11 +1,11 @@
-
-
+{% extends 'basic.html' %}
 {% load static %}
+{% block title %}  Login/Signup - JaggaSale {% endblock %}
 
-  {% include 'header.html' %}
 
 
-<style>
+
+{% block css %}
     .header{
         box-shadow: 1px 1px 10px 1px grey;
     }
@@ -37,9 +37,11 @@
     section.form{
         font-family:'abel';
     }
-</style>
+{% endblock %}
 
 
+
+{% block body %}
  {% if user.is_authenticated %}
 
 
@@ -133,4 +135,4 @@
 
     {% endif %}
 
-    {% include 'footer.html' %}
+  {% endblock %}

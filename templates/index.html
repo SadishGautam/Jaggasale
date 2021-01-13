@@ -1,11 +1,12 @@
-{% include 'header.html' %}
+{% extends 'basic.html' %}
 
+{% block title %}  Home - JaggaSale {% endblock %}
 {% load static %}
 
 <!-- ----------------------------------------Start of banner section--------------------------- -->
 <!-- ----------------------------------------Coded by sadish--------------------------- -->
 
-{% block content %}
+{% block body %}
 
 
 
@@ -746,7 +747,7 @@
           <div class="img-box" style="height:210px">
             <img src="{{object.image.url}}" height="100%" width="100%">
           </div>
-          <a href="details.php">
+          <a href="property/{{object.id}}">
             <div class="img-overlay"></div>
           </a>
           <div class="badge badge1 px-2 py-1 badge-success">{{object.get_label_display}}</div>
@@ -758,7 +759,7 @@
         </div>
         <div class="container px-4">
           <div class="card-title mt-3">
-            <a href="details.php">{{object.title}}</a>
+            <a href="/property/{{object.id}}">{{object.title}}</a>
           </div>
           <div class="card-content mt-3">
             <div class="row room">
@@ -1199,7 +1200,7 @@
 
 
 
-{% endblock content %}
+{% endblock  %}
 <!-- --------------------------------------End of Our Partners------------------------------ -->
 
 {% include 'footer.html' %}
