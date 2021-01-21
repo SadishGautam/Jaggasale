@@ -2,7 +2,7 @@ from math import ceil
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .models import Item
+from .models import Item, Images
 from math import ceil
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -48,8 +48,26 @@ def handleDetails(request, id):
     #fetch the property using id
     propertyLists = Item.objects.all()
     propertyList = Item.objects.get(pk=id)
+    print(propertyList)
+    propertyImages = Images.objects.all()
+    propertyImage = Images.objects.get(pk=id)
+    print(propertyImage)
+    return render(request, "details.html", {'propertyList' : propertyList, 'propertyImage' : propertyImage})
 
-    return render(request, "details.html", {'propertyList' : propertyList})
+
+
+
+
+
+# def handleDetailsImages(request, id):
+#     propertyImages = Images.objects.all()
+#     propertyImage = Images.objects.get(pk=id)
+#     print(propertyImage)
+#     return render(request, 'details.html', { 'propertyImage' : propertyImage })
+
+
+
+
 
 def handleProperty(request):
     return render(request, "details.html")

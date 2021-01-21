@@ -18,10 +18,22 @@ class Contact(models.Model):
 
 class About_us(models.Model):
     title = models.CharField(max_length=30, default='Company History')
-    company_history = RichTextUploadingField()
-    office_location_headquarter = RichTextUploadingField()
-    office_location_lalitpur = RichTextUploadingField()
-    office_location_bhaktapur = RichTextUploadingField()
+    history_main_img =  models.ImageField(default='default.jpg', upload_to='static/images')
+    company_history_top_section = RichTextUploadingField(default='First paragraph here')
+    company_history_middle_section = RichTextUploadingField(default='Second paragraph here')
+    company_history_buttom_section = RichTextUploadingField(default='Third paragraph here')
+    office_location_headquarter_title = models.CharField(max_length=30, default='Headquarter')
+    office_location_headquarter_info = RichTextUploadingField( default='This branch info here')
+    office_location_branch_1_title = models.CharField(max_length=30, default='Lalitpur office')
+    office_location_branch_1_info = RichTextUploadingField( default='This branch info here')
+    office_location_branch_2_title = models.CharField(max_length=30, default='Bhaktapur office')
+    office_location_branch_2_info = RichTextUploadingField( default='This branch info here')
+    facebook_page = models.CharField(max_length=50, default='#')
+    twitter_page = models.CharField(max_length=50, default='#')
+    google_page = models.CharField(max_length=50, default='#')
+    youtube_page = models.CharField(max_length=50, default='#')
+    linkedin_page = models.CharField(max_length=50, default='#')
+    instagram_page = models.CharField(max_length=50, default='#')
 
 
     def __str__(self):

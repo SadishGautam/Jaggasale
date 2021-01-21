@@ -95,31 +95,28 @@
     <h2 class="pb-3" style="font-family:var(--pri-font);text-shadow:1px 1px 3px grey;">{{about_us.title}}</h2>
     <div class="row">
       <div class="col-sm-6 pt-5">
-        <img src="/static/photo/company.jpg" alt="company-history">
+        <img src="{{about_us.history_main_img.url}}" alt="company-history">
       </div>
 
       <div class="col-sm-6 pt-3">
         <div class="wrapper pb-3">
           <img class="img-fluid" src="/static/pics/logo.jpg" alt="logo"><span style="font-size:3em;text-shadow:1px 1px 3px grey;font-family:'Tangerine'">JaggaSale.com</span>
         </div>
-        <p class="font-weight-bold mt-4" style="letter-spacing: 2px;font-family:'abel';">At Property Real Estate Company, we believe that when it comes to finding a home
-           what’s outside the front door is just as important as what’s behind it.
+        <p class="font-weight-bold mt-4" style="letter-spacing: 2px;font-family:'abel';">{{about_us.company_history_top_section|safe}}
 
         </p>
         <br>
         <br>
 
         <p style="font-family:'roboto'" class="text-secondary">
-          That’s why we go beyond the typical listings, by sourcing insights straight from locals and offering over 34
-          neighborhood map overlays, to give people a deeper understanding of what living in a home and neighborhood is really like.
+          {{about_us.company_history_middle_section|safe}}
         </p>
 
 
 
 
         <p style="font-family:'roboto'" class="text-secondary">
-          We’re committed to helping them discover a place where they will love to live and where they will feel more connected
-          to the community and to each other. It’s why we strive every day to help build a more neighborly world.
+          {{about_us.company_history_buttom_section|safe}}
         </p>
         <div class="social-wrapper text-center">
           <div class="row my-4 text-center d-flex justify-content-center" style="font-family: 'abel'">
@@ -147,12 +144,12 @@
               <p class="">Follow us on : </p>
             </div>
             <div class="col-sm-8">
-              <i class="fab fa-facebook-f"></i>
-              <i class="fab fa-twitter"></i>
-              <i class="fab fa-google-plus-g"></i>
-              <i class="fab fa-youtube"></i>
-              <i class="fab fa-linkedin-in"></i>
-              <i class="fab fa-instagram"></i>
+              <a href="{{about_us.facebook_page}}"> <i class="fab fa-facebook-f"></i> </a>
+              <a href="{{about_us.twitter_page}}"> <i class="fab fa-twitter"></i> </a>
+              <a href="{{about_us.google_page}}"> <i class="fab fa-google-plus-g"></i> </a>
+              <a href="{{about_us.youtube_page}}"> <i class="fab fa-youtube"></i> </a>
+              <a href="{{about_us.linkedin_page}}"> <i class="fab fa-linkedin-in"></i> </a>
+              <a href="{{about_us.instagram_page}}"> <i class="fab fa-instagram"></i> </a>
             </div>
           </div>
         </div>
@@ -207,36 +204,29 @@
           <div class="tabs mt-5 ">
             <ul class="nav  mb-3" id="pills-tab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Headquarter</a>
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">{{about_us.office_location_headquarter_title}}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Lalitpur office</a>
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">{{about_us.office_location_branch_1_title}}</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Bhaktapur Office</a>
+                <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">{{about_us.office_location_branch_2_title}}</a>
               </li>
             </ul>
             <div style="font-family:'roboto'" class="tab-content pt-4" id="pills-tabContent">
-              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">Morbi mollis elit vitae elit molestie lobortis. Cras eu purus ipsum.
-                Aliquam et ullamcorper nisl. Nam sem justo, sagittis sit amet sem at, mollis congue eros. Quisque vel mattis eros. Proin euismod massa id est finibus,
-                rutrum ornare velit pellentesque. Ut arcu magna, interdum eget egestas eget, sagittis a libero.
-                Donec felis tellus, vehicula at purus condimentum,
+              <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">{{about_us.office_location_headquarter_info|safe}}
                 <br>
                 <br>
 
                 <p>Press & Media Inquiries: <a href="#"> info@jaggasale.com. </a> </p>
               </div>
-              <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">Morbi mollis elit vitae elit molestie lobortis. Cras eu purus ipsum.
-                Aliquam et ullamcorper nisl. Nam sem justo, sagittis sit amet sem at, mollis congue eros. Quisque vel mattis eros.
+              <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">{{about_us.office_location_branch_1_info|safe}}
                 <br>
                 <br>
                 <br>
                 <p>Press & Media Inquiries: <a href="#"> info@jaggasale.com. </a> </p>
               </div>
-              <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">Morbi mollis elit vitae elit molestie lobortis. Cras eu purus ipsum.
-                Aliquam et ullamcorper nisl. Nam sem justo, sagittis sit amet sem at, mollis congue eros. Quisque vel mattis eros. Proin euismod massa id est finibus,
-                rutrum ornare velit pellentesque. Ut arcu magna, interdum eget egestas eget, sagittis a libero.eget egestas eget, sagittis a libero.
-                Donec felis tellus.
+              <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">{{about_us.office_location_branch_2_info|safe}}
                 <br>
                 <br>
 
