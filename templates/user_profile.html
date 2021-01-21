@@ -1,0 +1,56 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} User profile - JaggaSale {% endblock %}
+{% block css %}
+  .header {
+    box-shadow: 1px 1px 10px 1px grey;
+  }
+
+  .header a.hm {
+    background: transparent;
+  }
+
+  .header a {
+    color: black !important;
+  }
+
+  .header .listing .list a,
+  .header .listing .refresh,
+  .header .listing .heart,
+  .header .listing .user {
+    border: 1px solid var(--pri-color);
+  }
+
+  .header .listing .list a:hover {
+    background: var(--pri-color);
+    color: white !important;
+  }
+
+  .header .menu #bars {
+    color: var(--pri-color) !important;
+  }
+
+  .header .register a {
+    color: var(--pri-color) !important;
+  }
+
+  .header .register a:hover {
+    color: var(--sec-color) !important;
+  }
+ {% endblock %}
+
+{% block body %}
+
+<div class="clearfix"></div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

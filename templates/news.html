@@ -1,38 +1,48 @@
-{% include 'header.html' %}
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} News - JaggaSale {% endblock %}
+{% block css %}
+  .header {
+    box-shadow: 1px 1px 10px 1px grey;
+  }
 
-<style>
-    .header{
-        box-shadow: 1px 1px 10px 1px grey;
-    }
-    .header a.hm{
-        background:transparent;
-    }
-    .header a{
-      color:black!important;
-    }
-    .header .listing .list a,
-    .header .listing .refresh,
-    .header .listing .heart,
-    .header .listing .user{
-        border: 1px solid var(--pri-color);
-    }
-    .header .listing .list a:hover{
-        background: var(--pri-color);
-        color:white!important;
-    }
-    .header .menu #bars{
-        color:var(--pri-color)!important;
-    }
-    .header .register a{
-        color:var(--pri-color)!important;
-    }
-    .header .register a:hover{
-        color:var(--sec-color)!important;
-    }
+  .header a.hm {
+    background: transparent;
+  }
 
-</style>
+  .header a {
+    color: black !important;
+  }
+
+  .header .listing .list a,
+  .header .listing .refresh,
+  .header .listing .heart,
+  .header .listing .user {
+    border: 1px solid var(--pri-color);
+  }
+
+  .header .listing .list a:hover {
+    background: var(--pri-color);
+    color: white !important;
+  }
+
+  .header .menu #bars {
+    color: var(--pri-color) !important;
+  }
+
+  .header .register a {
+    color: var(--pri-color) !important;
+  }
+
+  .header .register a:hover {
+    color: var(--sec-color) !important;
+  }
+ {% endblock %}
+
+{% block body %}
 
 <div class="clearfix"></div>
+
 
 <section class="breadcrumbs">
     <div class="container py-3">
@@ -162,4 +172,5 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox-plus-jquery.min.js"></script>
-{% include 'footer.html' %}
+
+{% endblock %}

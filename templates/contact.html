@@ -59,7 +59,7 @@
                         </div>
                         <div class="icon-text ml-4" >
                             <pre>Call US</pre>
-                            <strong><a href="tel:">+977 98134567890</a></strong>
+                            <strong><a href="tel:">{{ details.phone_number }}</a></strong>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                         </div>
                         <div class="icon-text ml-4" >
                             <pre>HAVE ANY QUESTIONS?</pre>
-                            <strong><a href="mailto:">puspa.dhungel @onlinezeal.com</a></strong>
+                            <strong><a href="mailto:">{{ details.email }}</a></strong>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="icon-text ml-4" >
                             <pre>Location</pre>
-                            <strong>Tinkune, KTM</strong>
+                            <strong>{{ details.location }}</strong>
                         </div>
                     </div>
                 </div>
@@ -93,8 +93,8 @@
                             <i class="far fa-2x fa-clock"></i>
                         </div>
                         <div class="icon-text ml-4" >
-                            <pre>Monday &ndash; Friday</pre>
-                            <strong>10:00AM &ndash; 6:00PM</strong>
+                            <pre>{{ details.office_days }}</pre>
+                            <strong>{{ details.office_time }}</strong>
 
 
                         </div>

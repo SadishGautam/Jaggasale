@@ -31,25 +31,28 @@ def profilepage(request):
 def userPropertyList(request):
     return render(request, 'userPropertyLists')
 
+#
+# def about(request):
+#     return render(request, "about.html")
 
-def about(request):
-    return render(request, "about.html")
-
-
-def news(request):
-    return render(request, "news.html")
-
-
-def contact(request):
-    return render(request, "contact.html")
+#
+# def news(request):
+#     return render(request, "news.html")
+#
+#
+# def contact(request):
+#     return render(request, "contact.html")
 
 
 def handleDetails(request, id):
     #fetch the property using id
-    return render(request, "details.html")
+    propertyLists = Item.objects.all()
+    propertyList = Item.objects.get(pk=id)
 
-# def handleDetails(request):
-#     return render(request, "details.html")
+    return render(request, "details.html", {'propertyList' : propertyList})
+
+def handleProperty(request):
+    return render(request, "details.html")
 
 def locationKathmandu(request):
     return render(request, "kathmandu.html")

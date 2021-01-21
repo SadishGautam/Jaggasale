@@ -92,18 +92,18 @@
 
 <section id="company-history">
   <div class="container pt-5 pb-5">
-    <h2 class="pb-3" style="font-family:var(--pri-font);text-shadow:1px 1px 3px grey;">Company History</h2>
+    <h2 class="pb-3" style="font-family:var(--pri-font);text-shadow:1px 1px 3px grey;">{{about_us.title}}</h2>
     <div class="row">
       <div class="col-sm-6 pt-5">
-        <img src="static/photo/company.jpg" alt="company-history">
+        <img src="/static/photo/company.jpg" alt="company-history">
       </div>
 
       <div class="col-sm-6 pt-3">
         <div class="wrapper pb-3">
-          <img class="img-fluid" src="pics/logo.jpg" alt="logo"><span style="font-size:3em;text-shadow:1px 1px 3px grey;font-family:'Tangerine'">JaggaSale.com</span>
+          <img class="img-fluid" src="/static/pics/logo.jpg" alt="logo"><span style="font-size:3em;text-shadow:1px 1px 3px grey;font-family:'Tangerine'">JaggaSale.com</span>
         </div>
-        <p class="font-weight-bold mt-4" style="letter-spacing: 2px;font-family:'abel';">At Property Real Estate Company, we believe that when it comes to finding a home what’s outside the front
-          door is just as important as what’s behind it.
+        <p class="font-weight-bold mt-4" style="letter-spacing: 2px;font-family:'abel';">At Property Real Estate Company, we believe that when it comes to finding a home
+           what’s outside the front door is just as important as what’s behind it.
 
         </p>
         <br>
@@ -169,13 +169,15 @@
     <h2 style="font-family:var(--pri-font); text-shadow: 1px 1px 3px grey;margin-bottom:20px;">Our Leadership</h2>
 
     <div class="row pt-4">
+      {% for obj in team %}
       <div class="col-sm-4">
+
         <div class="card">
-          <img data-mh="card-pic" class="card-img-top" src="static/photo/staff-1.jpg" alt="Our senior staff">
+          <img data-mh="card-pic" class="card-img-top" src="{{ obj.image.url }}" alt="Our senior staff">
           <div class="card-body">
-            <h4 class="card-title" style="font-family:'abel';">Rich Wacksman</h4>
-            <pre class="card-text">Co-Founder and Executive Chairman</pre>
-            <a href="#"> <i class="fab fa-facebook-f"></i> </a>
+            <h4 class="card-title" style="font-family:'abel';">{{ obj.name }}</h4>
+            <pre class="card-text">{{ obj.position }}</pre>
+            <a href="{{ obj.facebook }}"> <i class="fab fa-facebook-f"></i> </a>
             <a href="#"> <i class="fab fa-twitter"></i> </a>
             <a href="#"> <i class="fab fa-google-plus-g"></i> </a>
             <a href="#"> <i class="fab fa-linkedin-in"></i> </a>
@@ -184,95 +186,9 @@
           </div>
         </div>
       </div>
-
-      <div class="col-sm-4">
-        <div class="card">
-          <img data-mh="card-pic" class="card-img-top" src="static/photo/staff-2.jpg" alt="Our senior staff">
-          <div class="card-body">
-            <h4 class="card-title" style="font-family:'abel';">Jennifer Barton</h4>
-            <pre class="card-text">Senior Vice President, Product</pre>
-            <a href="#"> <i class="fab fa-facebook-f"></i> </a>
-            <a href="#"> <i class="fab fa-twitter"></i> </a>
-            <a href="#"> <i class="fab fa-google-plus-g"></i> </a>
-            <a href="#"> <i class="fab fa-linkedin-in"></i> </a>
-            <a href="#"> <i class="fab fa-instagram"></i> </a>
-            <a href="#"> <i class="far fa-envelope"></i> </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-4">
-        <div class="card">
-          <img data-mh="card-pic" class="card-img-top" src="static/photo/staff-3.jpg" alt="Our senior staff">
-          <div class="card-body">
-            <h4 class="card-title" style="font-family:'abel';">Nick Swift</h4>
-            <pre class="card-text">Chief Technology Officer</pre>
-            <a href="#"> <i class="fab fa-facebook-f"></i> </a>
-            <a href="#"> <i class="fab fa-twitter"></i> </a>
-            <a href="#"> <i class="fab fa-google-plus-g"></i> </a>
-            <a href="#"> <i class="fab fa-linkedin-in"></i> </a>
-            <a href="#"> <i class="fab fa-instagram"></i> </a>
-            <a href="#"> <i class="far fa-envelope"></i> </a>
-          </div>
-        </div>
-      </div>
-
+{% endfor %}
     </div>
 
-
-
-
-    <div class="row mt-4">
-      <div class="col-sm-4">
-        <div class="card">
-          <img data-mh="card-pic" class="card-img-top" src="static/photo/staff-4.jpg" alt="Our senior staff">
-          <div class="card-body">
-            <h4 class="card-title" style="font-family:'abel';">Kathleen Myers</h4>
-            <pre class="card-text">Chief Operating Officer</pre>
-            <a href="#"> <i class="fab fa-facebook-f"></i> </a>
-            <a href="#"> <i class="fab fa-twitter"></i> </a>
-            <a href="#"> <i class="fab fa-google-plus-g"></i> </a>
-            <a href="#"> <i class="fab fa-linkedin-in"></i> </a>
-            <a href="#"> <i class="fab fa-instagram"></i> </a>
-            <a href="#"> <i class="far fa-envelope"></i> </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-4">
-        <div class="card">
-          <img data-mh="card-pic" class="card-img-top" src="static/photo/staff-5.jpg" alt="Our senior staff">
-          <div class="card-body">
-            <h4 class="card-title" style="font-family:'abel';">Donald Lloyd</h4>
-            <pre class="card-text">Chief Analytics Officer</pre>
-            <a href="#"> <i class="fab fa-facebook-f"></i> </a>
-            <a href="#"> <i class="fab fa-twitter"></i> </a>
-            <a href="#"> <i class="fab fa-google-plus-g"></i> </a>
-            <a href="#"> <i class="fab fa-linkedin-in"></i> </a>
-            <a href="#"> <i class="fab fa-instagram"></i> </a>
-            <a href="#"> <i class="far fa-envelope"></i> </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-sm-4">
-        <div class="card">
-          <img data-mh="card-pic" class="card-img-top" src="static/photo/staff-6.jpg" alt="Our senior staff">
-          <div class="card-body">
-            <h4 class="card-title" style="font-family:'abel';">Amanda Reiter</h4>
-            <pre class="card-text">Chief Legal Officer</pre>
-            <a href="#"> <i class="fab fa-facebook-f"></i> </a>
-            <a href="#"> <i class="fab fa-twitter"></i> </a>
-            <a href="#"> <i class="fab fa-google-plus-g"></i> </a>
-            <a href="#"> <i class="fab fa-linkedin-in"></i> </a>
-            <a href="#"> <i class="fab fa-instagram"></i> </a>
-            <a href="#"> <i class="far fa-envelope"></i> </a>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
 
 
   </div>
@@ -348,7 +264,7 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-6">
-        <img src="static/photo/pet5.jpg" alt="cat">
+        <img src="/static/photo/pet5.jpg" alt="cat">
         <h1 class="font-weight-bold" style="font-family: 'tangerine';">Pets Friendly Office</h1>
       </div>
 
@@ -381,7 +297,7 @@
 
         <div class="card" style="overflow: hidden;">
           <div class="photo">
-            <img src="static/photo/pet3.jpg" alt="cat">
+            <img src="/static/photo/pet3.jpg" alt="cat">
           </div>
           <div class="overlay">
             <div class="text">
@@ -399,7 +315,7 @@
       <div class="col-sm-4">
         <div class="card" style="overflow: hidden;">
           <div class="photo">
-            <img src="static/photo/cat.jpg" alt="cat">
+            <img src="/static/photo/cat.jpg" alt="cat">
           </div>
           <div class="overlay">
             <div class="text">
@@ -414,7 +330,7 @@
       <div class="col-sm-4">
         <div class="card" style="overflow: hidden;">
           <div class="photo">
-            <img src="static/photo/pet2.jpg" alt="cat">
+            <img src="/static/photo/pet2.jpg" alt="cat">
           </div>
           <div class="overlay">
             <div class="text">
