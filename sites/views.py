@@ -33,11 +33,9 @@ def about_page(request):
 
 
 
-def user_profile(request):
-    return render(request, 'user_profile.html')
 
-def news(request):
-    return render(request, "news.html")
+# def news(request):
+#     return render(request, "news.html")
 
 
 # Create your views here.

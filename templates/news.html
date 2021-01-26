@@ -56,22 +56,29 @@
         <div class="row mb-5">
             <div class="col-lg-9">
                 <h1>News</h1>
+
+                {% for news in blog_news %}
                 <div class="row">
                     <div class="col-lg-4 col-md-4">
-                        <a href="news-detail1.php" class="card my-4">
-                            <img class="img-fluid" src="static/pics/11.jpg">
-                            <span>05 August, 2019</span>
+                        <a href="/news/{{news.id}}" class="card my-4">
+                            <img class="img-fluid" src="{{news.image.url}}">
+                            <span>{{news.date}}</span>
                         </a>
                     </div>
                     <div class="col-lg-8 col-md-8 my-4">
-                        <a class="news-title" href="news-detail1.php">Retail banks wake up to digital lending this year</a>
-                        <p class="my-2">Show pony game plan, close the loop so what do you feel you would bring to the table if you were hired for this position. Powerpoint Bunny shotgun approach, nor powerPointless. We just need to put these last issues to...</p>
+                        <a class="news-title" href="news/{{news.id}}">{{news.title}}</a>
+                        <p class="my-2">{{news.full_news|safe|truncatewords:30}}</p>
                         <div class="my-5">
                             <small class="admin">Posted by : <a href="news-detail1.php#admin">Admin</a></small>
                             <small class="category">Categories : <a href="in-the-news.php">In the news,</a><a href="real-estate.php"> Real Estate</a></small>
                         </div>
                     </div>
                 </div>
+
+                {%endfor%}
+
+
+                <!--
                 <div class="row">
                         <div class="col-lg-4 col-md-4">
                             <a href="news-detail2.php" class="card my-4">
@@ -119,7 +126,7 @@
                                         <small class="category">Categories : <a href="b-roll.php"> Images And B-Roll, Real Estate</a></small>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
             </div>
             <div class="col-lg-3">
                 <div class="aside">

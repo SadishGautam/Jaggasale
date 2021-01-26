@@ -11,7 +11,6 @@ from django.views.generic import DetailView, ListView
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-
 from .models import Item
 
 
@@ -39,7 +38,7 @@ def userPropertyList(request):
 # def news(request):
 #     return render(request, "news.html")
 #
-#
+#sadish
 # def contact(request):
 #     return render(request, "contact.html")
 
@@ -73,8 +72,18 @@ def handleProperty(request):
     return render(request, "details.html")
 
 def locationKathmandu(request):
-    return render(request, "kathmandu.html")
+    ktmProperties = Item.objects.all()
+    ktmProperty = Item.objects.filter(location='K')
+    print(ktmProperty)
+    return render(request, "kathmandu.html", {'ktmProperty' : ktmProperty})
 
+
+
+
+
+@login_required
+def Add_property_by_user(request):
+    return render(request, "Add_apartment.html")
 
 def handleSignup(request):
     if request.method == 'POST':

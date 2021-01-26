@@ -118,13 +118,15 @@
         </div>
         <div class="col-lg-7 col-md-12">
           <div class="row">
+            {% for property in ktmProperty %}
             <div class="col-lg-6 col-md-6 my-3">
+
               <div class="cards card my-3">
                 <img src="static/pics/news1.jpg" width="100%" height="250px">
                 <a class="overlay" href="details.php"></a>
                 <div class="img-content">
-                  <a style="color:white; text-decoration:none" href="details.php">Office Space In New Baneshwor</a>
-                  <p><strike class="mr-2 text-light">Rs. 5,50,000</strike> Rs. 4.50,000</p>
+                  <a class="font-weight-bold" style="color:black; text-decoration:none" href="details.php">{{property.title}}</a>
+                  <p><strike class="mr-2 text-light">{{property.discount_price}}</strike> {{property.discount_price}}</p>
                   <i class="fas fa-bed"></i> 4 Beds
                   <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
                   <i class="fas fa-ruler-combined"></i> 4210 sq.ft
@@ -141,7 +143,8 @@
                   <i class="fas fa-camera"></i> 15
                 </div>
               </div>
-              <div class="cards card my-3">
+
+              <!-- <div class="cards card my-3">
                 <img src="static/pics/news2.jpg" width="100%" height="250px">
                 <a class="overlay" href="details.php"></a>
                 <div class="img-content">
@@ -384,8 +387,9 @@
                 <div class="badge camera px-2 py-1">
                   <i class="fas fa-camera"></i> 15
                 </div>
-              </div>
+              </div> -->
             </div>
+            {% endfor %}
           </div>
         </div>
       </div>

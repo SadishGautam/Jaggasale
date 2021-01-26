@@ -1,0 +1,201 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} Add New Property - JaggaSale {% endblock %}
+
+
+
+{% block css%}
+<style>
+  .header {
+    box-shadow: 1px 1px 10px 1px grey;
+  }
+
+  .header a.hm {
+    background: transparent;
+  }
+
+  .header a {
+    color: black !important;
+  }
+
+  .header .listing .list a,
+  .header .listing .refresh,
+  .header .listing .heart,
+  .header .listing .user {
+    border: 1px solid var(--pri-color);
+  }
+
+  .header .listing .list a:hover {
+    background: var(--pri-color);
+    color: white !important;
+  }
+
+  .header .menu #bars {
+    color: var(--pri-color) !important;
+  }
+
+  .header .register a {
+    color: var(--pri-color) !important;
+  }
+
+  .header .register a:hover {
+    color: var(--sec-color) !important;
+  }
+</style>
+{% endblock %}
+
+
+
+{% block body %}
+<div class="clearfix"></div>
+
+<h2 class="text-center" style="font-family:var(--pri-font); text-shadow: 1px 1px 3px grey;margin-bottom:20px;">Add Your Property Here</h2>
+
+
+<section id="leadership">
+  <div class="container pb-5">
+    <h5 style="font-family:var(--pri-font); text-shadow: 1px 1px 3px grey;margin-bottom:20px;">Fill all the required fields</h5>
+
+
+<!-- Radio button for property type -->
+    <div class="select_property_type">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+        <label class="form-check-label" for="inlineRadio1">House</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+        <label class="form-check-label" for="inlineRadio2">Apartment</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+        <label class="form-check-label" for="inlineRadio3">Land</label>
+      </div>
+    </div>
+
+
+
+
+    <div class="add_property_title">
+      <div class="form" style="padding: 0px;">
+
+            <div class="first-form" style="background-color: #e4e6e6e8;  margin:10px 1px; padding: 0px;">
+                <p class="text-dark">Title</p>
+                <input spellcheck="false"  type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
+
+                <div class="row mt-4">
+                  <div class="col-lg-3">
+                    <p class="text-dark">Category</p>
+                    <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">Sell</option>
+                    <option value="2">Rent</option>
+
+                    </select>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <p class="text-dark">Location</p>
+                    <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">Kathmandu</option>
+                    <option value="2">lalitpur</option>
+                    <option value="3">Bhaktpur</option>
+                    <option value="3">Chitwan</option>
+                    </select>
+                  </div>
+
+                  <div class="col-lg-3">
+                    <p class="text-dark">Status</p>
+                    <select class="form-select" aria-label="Default select example">
+                    <option selected>Open this select menu</option>
+                    <option value="1">Active</option>
+                    <option value="2">Sold/Rented</option>
+
+                    </select>
+                  </div>
+
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-sm-6 mt-3">
+                      <div class="first-form" style="background-color: #e4e6e6e8;  margin:10px 1px; padding: 0px;">
+                          <p class="text-dark">Price</p>
+                          <input spellcheck="false"  type="text" class="form-control" id="title" name="title" placeholder="Enter title">
+                      </div>
+                    </div>
+
+                    <div class="col-sm-6 mt-3">
+                      <div class="first-form" style="background-color: #e4e6e6e8;  margin:10px 1px; padding: 0px;">
+                          <p class="text-dark">Discount Price / Final price</p>
+                          <input spellcheck="false"  type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="row">
+                    <div class="first-form col-sm-12" style="background-color: #e4e6e6e8;  margin:10px 10px; padding: 0px;">
+                        <p class="text-dark">Description</p>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                  </div>
+
+
+
+                  <div class="row">
+                    <div class="first-form col-sm-12" style="background-color: #e4e6e6e8;  margin:10px 10px; padding: 0px;">
+                        <p class="text-dark">Location</p>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                  </div>
+
+
+
+
+            </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+      <label class="form-check-label" for="inlineCheckbox1">House</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+      <label class="form-check-label" for="inlineCheckbox2">Apartment</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+      <label class="form-check-label" for="inlineCheckbox3">Land</label>
+    </div>
+
+
+
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+{% endblock%}

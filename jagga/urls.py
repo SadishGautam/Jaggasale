@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include('jaggasale.urls')),
     path('sites/', include('sites.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('blog/', include('blog.urls')),
 
 ]
 
