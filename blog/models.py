@@ -7,7 +7,6 @@ from six import python_2_unicode_compatible
 
 class Blog_News(models.Model):
     title = models.CharField(max_length=50, default='Blog title')
-    # author = models.ForeignKey('auth.User', verbose_name="Author", on_delete=models.CASCADE, default=1)
     full_news = RichTextUploadingField('Here you acn write full news')
     image = image = models.ImageField(default='default.jpg', upload_to='static/images/blog')
     date = date = models.DateField(blank=True, null=True)
