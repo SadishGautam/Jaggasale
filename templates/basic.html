@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="/static/css/register.css">
   <link rel="stylesheet" type="text/css" href="/static/css/footer.css">
   <link rel="stylesheet" type="text/css" href="/static/css/about.css">
-  <link rel="stylesheet" type="text/css"  href="/static/css/login.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/login.css">
 
 
   <!-- fonts -->
@@ -40,18 +40,23 @@
   <link rel="stylesheet" type="text/css" href="/static/css/owl.theme.default.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 
-  <title> {% block title %}    {% endblock %} </title>
+  <title> {% block title %} {% endblock %} </title>
 </head>
 
 <body>
 
-  <!-- ---------------------------Sadish Codes---------------------------  -->
+  <!-- Sadish Codes  -->
 
   <div class="container-fluid header pt-5 pb-5">
     <div class="row">
       <div class="col-lg-3 col-md-3 col-sm-12 ">
         <a href="{% url 'home' %}" style="padding-left:40px;color:white;text-decoration: none;display: inline-block;text-shadow:1px 1px 3px grey;font-family:'Tangerine'">
-          <h1 class="display-4">JaggaSale.com</h1>
+          <!-- <h1 class="display-4">JaggaSale.com</h1> -->
+          <div class="company_logo">
+            <img src="static/images/jagaa_sale_compress_logo.png" height="100px" width="auto" alt="">
+
+          </div>
+
         </a>
 
 
@@ -144,7 +149,7 @@
       <div class="col-lg-4 col-md-4 col-sm-12">
         <div class="listing mt-2 d-flex align-items-center">
           <div class="list ml-5">
-            <a href="{% url 'signupPage' %}"><i class="fas fa-home"></i>&nbsp; Register</a>
+            <a href="{% url 'signup' %}"><i class="fas fa-home"></i>&nbsp; Register</a>
           </div>
 
           <div class="login-form" style="position:relative;">
@@ -181,7 +186,7 @@
 
                 </div>
                 <div class="register text-center">
-                  <a href="{% url 'signupPage' %}"> REGISTRATION</a>
+                  <a href="{% url 'signup' %}"> REGISTRATION</a>
                 </div>
               </form>
             </div>
@@ -305,32 +310,19 @@
   </div>
 
 
-<style>
-  {% block css%}  {% endblock %}
-</style>
+  <style>
+    {% block css%}
+
+      {% endblock %}
+  </style>
 
 
 
 
-{% block body %}
+  {% block body %}
 
 
-{% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  {% endblock %}
 
 
 
@@ -454,16 +446,18 @@
   <script type="text/javascript" src="/static/js/custom.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox-plus-jquery.min.js"></script>
 
-<script>
-
-{% block externaljavascript %}
-
-
-{% endblock %}
-
-</script>
+  <script>
+    {
+      % block externaljavascript %
+    }
 
 
-  </body>
+    {
+      % endblock %
+    }
+  </script>
 
-  </html>
+
+</body>
+
+</html>

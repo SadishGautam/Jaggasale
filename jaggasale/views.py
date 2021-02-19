@@ -174,21 +174,3 @@ def handleLogout(request):
     logout(request)
     messages.success(request, "Logged out Successfully")
     return render(request, "index.html")
-
-
-# changing the user password via user
-@login_required
-def change_password(request):
-    if request.method == 'post':
-        form = PasswordChangeForm(request.user, request.POST)
-        if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, form.user)
-            messages.success(
-                request, 'Your password was updated successfully!')
-            return redirect('settings:password')
-        else:
-            messages.warning(request, 'Please correct the error below.')
-    else:
-        form = PasswordChangeForm(request.user)
-    return render(request, 'commons/change-password.html', {'form': form})

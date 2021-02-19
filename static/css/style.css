@@ -8,6 +8,7 @@
   --theme: #43c370;
 }
 
+
 img {
   object-fit: cover;
 }
@@ -57,6 +58,10 @@ input {
         transform: translate(-50%,-50%);
         width:100%;
     } */
+
+
+
+
   .contact-us .img-pushpa {
     display: none;
   }

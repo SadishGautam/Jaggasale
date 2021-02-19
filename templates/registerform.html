@@ -7,6 +7,7 @@
 
 {% block css %}
 .header{
+  background-color: #ffffff;
 box-shadow: 1px 1px 10px 1px grey;
 }
 .header a.hm{
@@ -44,28 +45,31 @@ font-family:'abel';
 {% block body %}
 {% if user.is_authenticated %}
 
-
-
 <div class="clearfix"></div>
+
+
 
 <h1 class="text-center mt-5 mb-5">You cannot access this page !</h1>
 
 
 {% else %}
 
-
+<div class="clearfix"></div>
 <section class="form">
   <div class="container">
     <div class="row">
 
 
 
-      <div class="col-md-3 "> </div>
+      <div class="col-md-2 "> </div>
       <!-- Registration part -->
 
-      <div class="col-md-6 clearfix" style="background: rgba(185, 184, 184, 0.192); margin-top: 100px; box-shadow: 5px 5px 10px 15px #d8d8d818;">
+      <div class="col-md-8 clearfix">
         <div class="second-form">
-          <h4>Registration</h4>
+          <!-- <h4>Registration</h4> -->
+          <div class="company_logo text-center mb-3">
+            <img src="static/images/jagaa_sale_compress_logo.png" height="100px" width="auto" alt="">
+          </div>
 
           <form action="/signup" method="post">
             {% csrf_token %}
@@ -88,19 +92,23 @@ font-family:'abel';
             <p>Re-enter Password</p>
             <input spellcheck="false" type="password" id="pass2" class="form-control" name="pass2" placeholder="Re-enter password" required>
 
-            <div class="but" style=" width=100%;">
-              <button class="btn" type="submit"> REGISTER </button>
+
+              <button class="btn form-control d-flex align-items-center justify-content-center mt-3" type="submit">
+                <span>Register</span>
+              </button>
+
+              <div class="create_new_account text-center mt-2">
+                <a href="{% url 'login' %}" class="text-center">Already have an account?</a>
+              </div>
 
 
 
-
-            </div>
           </form>
 
         </div>
       </div>
 
-      <div class="col-md-3 "> </div>
+      <div class="col-md-2 "> </div>
     </div>
   </div>
 </section>

@@ -1,12 +1,13 @@
 {% extends 'basic.html' %}
 {% load static %}
-{% block title %} Login/Signup - JaggaSale {% endblock %}
+{% block title %} Login - JaggaSale {% endblock %}
 
 
 
 
 {% block css %}
 .header{
+  background-color: #ffffff;
 box-shadow: 1px 1px 10px 1px grey;
 }
 .header a.hm{
@@ -44,15 +45,15 @@ font-family:'abel';
 {% block body %}
 {% if user.is_authenticated %}
 
-
-
 <div class="clearfix"></div>
+
+
+
 
 <h1 class="text-center mt-5 mb-5">You cannot access this page !</h1>
 
 
 {% else %}
-
 
 <section class="form ">
   <div class="container" id="Full_login_form">
@@ -60,11 +61,15 @@ font-family:'abel';
 
       <div class="col-md-3 "> </div>
 
+{% include  'alert.html' %}
+
       <div class="col-md-6 clearfix">
 
         <div class="first-form">
-          <h4 class="text-center">Sign in</h4>
-
+          <!-- <h4 class="text-center">Sign in</h4> -->
+          <div class="company_logo text-center mb-3">
+            <img src="static/images/jagaa_sale_compress_logo.png" height="100px" width="auto" alt="">
+          </div>
 
           <form action="/welcome" method="post">
             {% csrf_token %}
@@ -78,9 +83,18 @@ font-family:'abel';
             <div class="custom-control custom-checkbox">
               <input spellcheck="false" type="checkbox" class="custom-control-input" id="customCheck1">
               <label class="custom-control-label" for="customCheck1">Remember me</label>
+
+            </div>
+            <div class="text-right" style='margin-top:-10px;'>
+              <a href="#" class="text-right"> Forget password?</a>
+
+            </div>
+            <button class="btn form-control" type="submit"> SIGN IN </button>
+
+            <div class="create_new_account text-center mt-2">
+              <a href="{% url 'signup' %}" class="text-center">Create a new account</a>
             </div>
 
-            <button class="btn form-control" type="submit"> SIGN IN </button>
           </form>
         </div>
       </div>
