@@ -1,80 +1,364 @@
-
-{% extends 'basic.html' %}
+{% load hitcount_tags %}
 {% load static %}
-{% block title %}  {{ propertyList.title }} - JaggaSale {% endblock %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="static/cssbootstrap.min.css"> -->
+
+
+  <!-- css -->
+
+  <link rel="icon" href="/static/pics/home.ico">
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/ofc-detail1.css">
+  <link rel="stylesheet" href="/static/css/why-choose.css">
+  <link rel="stylesheet" href="/static/css/register.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/footer.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/about.css">
+
+
+  <!-- fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Farro&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Farro|Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Abel&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Tangerine&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+
+  <!-- carousel -->
+  <link rel="stylesheet" type="text/css" href="/static/css/owl-carousel.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/owl.theme.default.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+
+  <title> {% block title %} {% endblock %} </title>
+</head>
+
+<body>
+
+  <!-- ---------------------------Sadish Codes---------------------------  -->
+
+  <div class="container-fluid header pt-5 pb-5">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-12 ">
+        <a href="{% url 'home' %}" style="padding-left:40px;color:white;text-decoration: none;display: inline-block;text-shadow:1px 1px 3px grey;font-family:'Tangerine'">
+          <h1 class="display-4">JaggaSale.com</h1>
+        </a>
+
+
+      </div>
+      <div class="col-lg-5 col-md-5 col-sm-12 text-center">
+
+        <ul class="list-unstyled d-flex mt-3">
+          <li class="dropdown">
+            <a class="dropbtn hm" href="{% url 'home' %}">HOME</a>
+            <div class="dropdown-content">
+              <a href="{% url 'about us' %}">About</a>
+              <a href="{% url 'contact us' %}">Contact</a>
+              <a href="{% url 'news' %}">News</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="{% url 'Kathmandu' %}" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">KATHMANDU</a>
+            <div class="dropdown-content">
+              <a href="#">Baneshwor</a>
+              <a href="#">Sundhara</a>
+              <a href="#">Kalanki</a>
+              <a href="#">Gaushala</a>
+              <a href="#">Balaju</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="#" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">LALITPUR</a>
+            <div class="dropdown-content">
+              <a href="#">Patan</a>
+              <a href="#">Lagankhel</a>
+              <a href="#">Jawalakhel</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="#" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">BHAKTAPUR</a>
+            <div class="dropdown-content">
+              <a href="#">Siddhapokhari</a>
+              <a href="#">Jagati</a>
+              <a href="#">Suryabinayak</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="#" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">OTHERS</a>
+            <div class="dropdown-content">
+              <a href="#">Land</a>
+              <a href="#">Property</a>
+              <a href="#">Cars</a>
+            </div>
+          </li>
+        </ul>
+
+      </div>
 
 
 
-{% block css%}
-<style>
+      <!-- login/signup part in header -->
+      {% if user.is_authenticated %}
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="listing mt-2 d-flex align-items-center">
+          <div class="list ml-5">
+            <a href="{% url 'add property' %}"><i class="fas fa-home"></i>&nbsp; ADD LISTING</a>
+          </div>
+
+          <div class="login-form" style="position:relative;">
+            <div class="user icon ml-3">
+              <a style="color:white;" href="{% url 'user profile' %}"><i class="far fa-user"></i></a>
+            </div>
+            <div class="login container wish font-weight-bold">
+              <a href="{% url 'user profile' %}"> {{ user.first_name}} {{ user.last_name  |default:'Guest' }} </a>
+            </div>
+
+          </div>
+
+          <div class="wishlist" style="position:relative;">
+            <div class="heart icon ml-3">
+              <a style="color:white" href="#"><i class="far fa-heart"></i></a><span class="badge">0</span>
+            </div>
+
+          </div>
 
 
-    .header{
-        box-shadow: 1px 1px 10px 1px grey;
+          <div class="refresh ml-3">
+            <a style="color:white;" href="{% url 'handleLogout' %}"><i class="fas fa-sign-out-alt" style=" padding-left: 5px; padding-right: 5px;"></i></a>
+          </div>
+        </div>
+      </div>
+
+      {% else %}
+
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="listing mt-2 d-flex align-items-center">
+          <div class="list ml-5">
+            <a href="{% url 'signupPage' %}"><i class="fas fa-home"></i>&nbsp; Register</a>
+          </div>
+
+          <div class="login-form" style="position:relative;">
+            <div class="user icon ml-3">
+              <a style="color:white;" href="#"><i class="far fa-user"></i></a>
+            </div>
+            <div class="login container">
+              <form method="post" action="/loginonly">
+                {% csrf_token %}
+                <div class="form-group">
+                  <strong>Username</strong>
+                </div>
+                <div class="form-group">
+                  <input type="text" spellcheck="false" id="loginusername" class="form-control log bg-light" placeholder="Enter Username" required>
+                </div>
+                <div class="form-group">
+                  <strong>Password</strong>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control log bg-light" id="loginpassword" placeholder="Enter Password" required>
+                </div>
+                <div class="form-group">
+                  <div class="custom-checkbox custom-control">
+
+                    <input id="pk" type="checkbox" class="custom-control-input">
+                    <label style="user-select: none; cursor:pointer" for="pk" class="custom-control-label">Remember me</label>
+
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button class="btn form-control d-flex align-items-center justify-content-center" type="submit">
+                    <span>SIGN IN</span>
+                  </button>
+
+                </div>
+                <div class="register text-center">
+                  <a href="{% url 'signupPage' %}"> REGISTRATION</a>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      {% endif %}
+
+
+
+
+
+
+      <!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+    </div>
+
+    <div class="menu" style="display: none;">
+      <span id="bars" style="font-size:30px;cursor:pointer;color:white" onclick="openNav()">&#9776;</span>
+    </div>
+
+    <div id="myNav" class="overlay">
+      <div class="overlay-content">
+        <ul class="list-unstyled">
+          <li class="small-drop">
+            <div class="accordion">
+              <div class="card" style="background: var(--pri-color)">
+                <div class="card-header">
+                  <a href="{% url 'home' %}" style="color:white;text-decoration:none;">HOME</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="small-drop">
+            <div class="accordion" id="accordionExample">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    KATHMANDU<i style="float: right;" class="fas fa-chevron-down"></i>
+                  </a>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <a href="kathmandu.php">Baneshwor</a>
+                    <a href="#">Sundhara</a>
+                    <a href="#">Kalanki</a>
+                    <a href="#">Gaushala</a>
+                    <a href="#">Balaju</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="small-drop">
+            <div class="accordion" id="accordionExample">
+              <div class="card">
+                <div class="card-header" id="headingTwo">
+                  <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    LALITPUR<i style="float: right;" class="fas fa-chevron-down"></i>
+                  </a>
+                </div>
+
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <a href="#">Patan</a>
+                    <a href="#">Lagankhel</a>
+                    <a href="#">Jawalakhel</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="small-drop">
+            <div class="accordion" id="accordionExample">
+              <div class="card">
+                <div class="card-header" id="headingThree">
+                  <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    BHAKTAPUR<i style="float: right;" class="fas fa-chevron-down"></i>
+                  </a>
+                </div>
+
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <a href="#">Siddhapokhari</a>
+                    <a href="#">Jagati</a>
+                    <a href="#">Suryabinayak</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="small-drop">
+            <div class="accordion" id="accordionExample">
+              <div class="card">
+                <div class="card-header" id="headingFour">
+                  <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    OTHERS<i style="float: right;" class="fas fa-chevron-down"></i>
+                  </a>
+                </div>
+
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <a href="#">Land</a>
+                    <a href="#">Property</a>
+                    <a href="#">Cars</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <a href="javascript:void(0)" class="closenav" onclick="closeNav()"><i style="padding:0 10px" class="fas fa-times"></i></a>
+
+  </div>
+
+
+  <style>
+    .header {
+      box-shadow: 1px 1px 10px 1px grey;
     }
-    .header a.hm{
-        background:transparent;
+
+    .header a.hm {
+      background: transparent;
     }
-    .header a{
-      color:black!important;
+
+    .header a {
+      color: black !important;
     }
+
     .header .listing .list a,
     .header .listing .refresh,
     .header .listing .heart,
-    .header .listing .user{
-        border: 1px solid var(--pri-color);
+    .header .listing .user {
+      border: 1px solid var(--pri-color);
     }
-    .header .listing .list a:hover{
-        background: var(--pri-color);
-        color:white!important;
+
+    .header .listing .list a:hover {
+      background: var(--pri-color);
+      color: white !important;
     }
-    .header .menu #bars{
-        color:var(--pri-color)!important;
+
+    .header .menu #bars {
+      color: var(--pri-color) !important;
     }
-    .header .register a{
-        color:var(--pri-color)!important;
+
+    .header .register a {
+      color: var(--pri-color) !important;
     }
-    .header .register a:hover{
-        color:var(--sec-color)!important;
+
+    .header .register a:hover {
+      color: var(--sec-color) !important;
     }
-    </style>
- {% endblock %}
+  </style>
+
+  <div class="clearfix"></div>
 
 
-
-{% block body %}
-<div class="clearfix"></div>
-<!--
-<section class="breadcrumbs">
-    <div class="container py-3">
-        <p><a href="index.php">Home</a> &nbsp; <i class="fas fa-angle-right"></i> &nbsp;<a href="news.php">Featured properties</a> &nbsp; <i class="fas fa-angle-right"></i>&nbsp; Office Space At Baneshwor </p>
-
-    </div>
-</section> -->
-
-
-<!-- starting of details page top section below navbar -->
-
-<section class="sadis">
-
+  <section class="sadis">
     <section class="details-top-header">
       <div class="container">
         <div class="row list-unstyled">
-
-
-            <li class="lefting mt-3">
+          <li class="lefting mt-3">
             <p style="padding: 5px; background-color:rgba(67,195,112,1); padding: 3px 10px;">OFFICES</p>
           </li>
-
           <li class="mt-3">
             <p style="padding: 5px; background-color:rgb(219, 37, 37); padding: 3px 18px;">SOLD</p>
-         </li>
-
-         <li class="mt-3 ml-3 text-secondary">
-            <i class="fas fa-history"></i> &nbsp; 5 months ago | &nbsp;<i class="far fa-eye"></i> 102
-         </li>
-
-
+          </li>
+          <li class="mt-3 ml-3 text-secondary">
+            <i class="fas fa-history"></i> &nbsp; {{ propertyList.date|timesince }} ago &nbsp; | &nbsp;<i class="far fa-eye"></i> &nbsp; {% get_hit_count for propertyList %}
+          </li>
           <div class="print ml-auto d-flex mt-3 mb-2">
             <li>
               <i class="fas fa-envelope"></i> <a href="#"> EMAIL</a>
@@ -89,239 +373,192 @@
               <i class="fas fa-share-alt-square"></i> <a href="#"> SHARE</a>
             </li>
           </div>
-
-
         </div>
       </div>
     </section>
-
-
-
-
-  <!-- starting of slider section -->
 
     <section class="main-details-slider">
       <div class="container">
         <div class="row py-3 list-unstyled" style="font-family:'abel';">
-
           <div class="col-lg-2 mt-3">
-          <li>
-            <h4>{{ propertyList.title }}</h4>
-          </li>
-        </div>
-        <div class="col-lg-2 mt-3 ">
-
-        </div>
-
-        <div class="col-lg-5 mt-3 left-main-details">
-          <div class="left-main-details list-unstyled d-flex text-center">
             <li>
-                <i class="fas fa-bed"></i>
-              <span> <p  class="digit">  {{ propertyList.rooms }} </p>
-                     <p  class="type"> Rooms </p>
-              </span>
+              <h4>{{ propertyList.title }}</h4>
             </li>
-
-            <li>
-                <i class="fas fa-bath"></i>
-                <span> <p  class="digit">  3 </p>
-                       <p  class="type"> Baths </p>
+          </div>
+          <div class="col-lg-2 mt-3 ">
+          </div>
+          <div class="col-lg-5 mt-3 left-main-details">
+            <div class="left-main-details list-unstyled d-flex text-center">
+              <li>
+                <i class="fas fa-bed"></i>
+                <span>
+                  <p class="digit">  {{ propertyList.rooms }}  </p>
+                  <p class="type"> Rooms </p>
                 </span>
               </li>
-
               <li>
-                  <i class="fas fa-warehouse"></i>
-                  <span> <p  class="digit">  2 </p>
-                         <p  class="type"> Garage </p>
-                  </span>
-                </li>
-
-                <li>
-                    <i class="fas fa-ruler-combined"></i>
-                    <span> <p  class="digit">  3556 </p>
-                           <p  class="type"> Sq ft </p>
-                    </span>
-                  </li>
-          </div>
-        </div>
-
-
-        <div class="col-lg-3">
-          <div class="price list-unstyled d-flex mt-4 align-item-center text-center">
-            <li>
-              <div class="discount mt-3">
-                <span> <strike class="text-secondary"> <i class="fas fa-dollar-sign"></i>{{ propertyList.discount_price }} </strike> </span>
-              </div>
+                <i class="fas fa-bath"></i>
+                <span>
+                  <p class="digit"> 3 </p>
+                  <p class="type"> Baths </p>
+                </span>
               </li>
-
               <li>
-              <div class="regular mt-1">
-                  <span> <i class="fas fa-dollar-sign"></i>{{ propertyList.price }} </span>
+                <i class="fas fa-warehouse"></i>
+                <span>
+                  <p class="digit"> 2 </p>
+                  <p class="type"> Garage </p>
+                </span>
+              </li>
+              <li>
+                <i class="fas fa-ruler-combined"></i>
+                <span>
+                  <p class="digit"> 3556 </p>
+                  <p class="type"> Sq ft </p>
+                </span>
+              </li>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="price list-unstyled d-flex mt-4 align-item-center text-center">
+              <li>
+                <div class="discount mt-3">
+                  <span> <strike class="text-secondary"> <i class="fas fa-dollar-sign"></i>{{ propertyList.price }}</strike> </span>
                 </div>
-            </li>
+              </li>
+              <li>
+                <div class="regular mt-1">
+                  <span> <i class="fas fa-dollar-sign"></i>  {{ propertyList.discount_price }} </span>
+                </div>
+              </li>
+            </div>
           </div>
         </div>
 
-
-      </div>
-
-
-
-      <!-- slider part of the slider (Starting) -->
-
-      <div class="row">
-
+        <div class="row">
           <div class="col-lg-8">
-              <section class=" owl-sad mb-4">
-                  <div class="owl-carousel owl-theme" id="sadis-owl">
-                      <div class="item"><div class="img-box"><img src="{{ propertyList.image.url }}" class="img-fluid" alt="sadish"></div>
-                     </div>
-                      <div class="item"><div class="img-box"><img src="{{ propertyList.image.url }}" class="img-fluid" alt=""></div>
-                     </div>
-                      <div class="item"><div class="img-box"><img src="{{ propertyList.image.url }}" class="img-fluid" alt=""></div>
-                     </div>
-                    </div>
-
-                  </section>
-                  <div class="photo-numbering">
-                      <p><i class="fas fa-camera"></i> &nbsp <span class="photos-no"> 11</span></p>
-                    </div>
+            <section class=" owl-sad mb-4">
+              {% for img in propertyImages %}
+              <div class="owl-carousel owl-theme" id="sadis-owl">
+                <div class="item">
+                  <div class="img-box"><img src="{{ img.image.url }}" class="img-fluid" alt=""></div>
+                </div>
+                <div class="item">
+                  <div class="img-box"><img src="{{ img.image.url }}" class="img-fluid" alt=""></div>
+                </div>
+                <div class="item">
+                  <div class="img-box"><img src="{{ img.image.url }}" class="img-fluid" alt=""></div>
+                </div>
+              </div>
+              {% endfor %}
+            </section>
+            <div class="photo-numbering">
+              <p><i class="fas fa-camera"></i> &nbsp <span class="photos-no"> 11</span></p>
+            </div>
           </div>
 
-
-
-          <!-- <div class="side-bar-gallery"> -->
           <div class="col-lg-4">
-                        <div class="row">
-            <div class="column">
-                <a  href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt="">  </a>
-                  <a  href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt="">  </a>
-                    <a  href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt="">  </a>
-            </div>
-
-            <div class="column">
-                <a  href="photo/4.jpg" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt="">  </a>
-                  <a  href="photo/5.jpg" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt="">  </a>
-                    <a  href="photo/6.jpg" data-lightbox="roadtrip">  <img src="{{ propertyList.image.url }}" alt="">  </a>
-              </div>
-
+            <div class="row">
               <div class="column">
-                  <a  href="photo/7.jpg" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt="">  </a>
-                    <a  href="photo/8.jpg" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt="">  </a>
-                      <a  href="photo/9.jpg" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}g" alt="">  </a>
+                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
+                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
+                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
+              </div>
+              <div class="column">
+                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
+                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
+                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
+              </div>
+              <div class="column">
+                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
+                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
+                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
               </div>
             </div>
           </div>
-        <!-- </div> -->
 
-
-          </div>
-
-
-
+        </div>
       </div>
     </section>
 
-
-
-
-<!-- Starting of Description -->
-
-<section class="description">
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8">
-
-
-      <div class="main-description">
-        <h2 style="font-family:var(--pri-font);text-shadow: 1px 1px 5px grey;">Description</h2>
-        <br>
-        <p>
-
-
-            {{ propertyList.Description|safe }}
-        </p>
-
-      </div>
-      <hr>
-
-
-      <section class="location">
-        <p class="mb-4"> <strong style="font-family:var(--pri-font);text-shadow: 1px 1px 3px grey;font-size:25px;">Location</strong> <span style="float: right; margin-top: 10px; font-family:'abel';"><i class="fas fa-map-marker-alt" style="padding: 0 5px; color:rgba(35,77,212,1);"></i> Shantinagar, Tinkune, Kathmandu  </span> </p>
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d883.2729909228337!2d85.34842422924513!3d27.683552398925098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a18187378f%3A0x8ba2460dd7896e64!2sOnline+Zeal!5e0!3m2!1sen!2snp!4v1565328119719!5m2!1sen!2snp" width="100%" height="299" frameborder="0" style="border:0" allowfullscreen></iframe>
-
-      </section>
-      <hr>
-
-
-
-
-      <section class="features">
-        <h2 class="pb-4" style="font-family: var(--pri-font);text-shadow: 1px 1px 3px grey;">Facts and Features</h2>
-        <div class="row" style="font-family: 'abel';">
-          <div class="col-lg-3 col-md-3">
-            <div class="cnt d-flex">
-              <div>
-                <i class="fas mt-2 fa-home"></i>
-              </div>
-              <div class="text text-center ml-2 mt-2">
-                <p>STORIES <br> <strong> Multi-family</strong></p>
-              </div>
+    <section class="description">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="main-description">
+              <h2 style="font-family:var(--pri-font);text-shadow: 1px 1px 5px grey;">Description</h2>
+              <br>
+              <p>
+                {{ propertyList.Description|safe }}  </p>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-3">
-              <div class="cnt d-flex">
-                <div>
-                    <i class="fas mt-2 fa-temperature-high"></i>
-                </div>
-                <div class="text text-center ml-2 mt-2">
-                  <p>HEATING <br><strong> No</strong></p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div class="cnt d-flex">
-                  <div>
-                      <i class="fas mt-2 fa-fan"></i>
-                  </div>
-                  <div class="text text-center ml-2 mt-2">
-                    <p>COOLING <br><strong> No</strong></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-3">
+            <hr>
+            <section class="location">
+              <p class="mb-4"> <strong style="font-family:var(--pri-font);text-shadow: 1px 1px 3px grey;font-size:25px;">Location</strong> <span style="float: right; margin-top: 10px; font-family:'abel';"><i class="fas fa-map-marker-alt"
+                    style="padding: 0 5px; color:rgba(35,77,212,1);"></i> Shantinagar, Tinkune, Kathmandu </span> </p>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d883.2729909228337!2d85.34842422924513!3d27.683552398925098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a18187378f%3A0x8ba2460dd7896e64!2sOnline+Zeal!5e0!3m2!1sen!2snp!4v1565328119719!5m2!1sen!2snp"
+                width="100%" height="299" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </section>
+            <hr>
+            <section class="features">
+              <h2 class="pb-4" style="font-family: var(--pri-font);text-shadow: 1px 1px 3px grey;">Facts and Features</h2>
+              <div class="row" style="font-family: 'abel';">
+                <div class="col-lg-3 col-md-3">
                   <div class="cnt d-flex">
                     <div>
-                        <i class="far mt-2 fa-clock"></i>
+                      <i class="fas mt-2 fa-home"></i>
+                    </div>
+                    <div class="text text-center ml-2 mt-2">
+                      <p>STORIES <br> <strong> Multi-family</strong></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="cnt d-flex">
+                    <div>
+                      <i class="fas mt-2 fa-temperature-high"></i>
+                    </div>
+                    <div class="text text-center ml-2 mt-2">
+                      <p>HEATING <br><strong> No</strong></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="cnt d-flex">
+                    <div>
+                      <i class="fas mt-2 fa-fan"></i>
+                    </div>
+                    <div class="text text-center ml-2 mt-2">
+                      <p>COOLING <br><strong> No</strong></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="cnt d-flex">
+                    <div>
+                      <i class="far mt-2 fa-clock"></i>
                     </div>
                     <div class="text text-center ml-2 mt-2">
                       <p>YEAR BUILT <br><strong> Multi-family</strong></p>
                     </div>
                   </div>
                 </div>
-          </div>
-
-
-
-
-
-
-
-          <div class="row mt-3" style="font-family: 'abel';">
-              <div class="col-lg-3 col-md-3">
-                <div class="cnt d-flex">
-                  <div>
-                      <i class="fas mt-2 fa-warehouse"></i>
-                  </div>
-                  <div class="text text-center ml-2 mt-2">
-                    <p>GARAGE <br> <strong> 2</strong></p>
-                  </div>
-                </div>
               </div>
-              <div class="col-lg-3 col-md-3">
+              <div class="row mt-3" style="font-family: 'abel';">
+                <div class="col-lg-3 col-md-3">
                   <div class="cnt d-flex">
                     <div>
-                        <i class="fas mt-2 fa-swimming-pool"></i>
+                      <i class="fas mt-2 fa-warehouse"></i>
+                    </div>
+                    <div class="text text-center ml-2 mt-2">
+                      <p>GARAGE <br> <strong> 2</strong></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="cnt d-flex">
+                    <div>
+                      <i class="fas mt-2 fa-swimming-pool"></i>
                     </div>
                     <div class="text text-center ml-2 mt-2">
                       <p>SWIMMING <br><strong> No</strong></p>
@@ -329,387 +566,368 @@
                   </div>
                 </div>
                 <div class="col-lg-3 col-md-3">
-                    <div class="cnt d-flex">
-                      <div>
-                          <i class="fas mt-2 fa-tags"></i>
+                  <div class="cnt d-flex">
+                    <div>
+                      <i class="fas mt-2 fa-tags"></i>
+                    </div>
+                    <div class="text text-center ml-2 mt-2">
+                      <p>PRICE/SQ FT <br><strong> 342</strong></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-3">
+                  <div class="cnt d-flex">
+                    <div>
+                      <i class="far mt-2 fa-check-square"></i>
+                    </div>
+                    <div class="text text-center ml-2 mt-2">
+                      <p>STATUS <br><strong> Active</strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <hr>
+
+            <section class="apartments">
+              <h2 class="pb-4" style="font-family: var(--pri-font);text-shadow: 1px 1px 3px grey;">Apartments Amenities</h2>
+              <div class="border">
+                <div class="row" style="font-family:'abel'">
+                  <div class="col-lg-3 col-md-3">
+                    <i class="far fa-check-square"></i> Balcony
+                  </div>
+                  <div class="col-lg-3 col-md-3">
+                    <i class="far fa-check-square"></i> Basement
+                  </div>
+                  <div class="col-lg-3 col-md-3">
+                    <i class="far fa-check-square"></i> Dining Room
+                  </div>
+                  <div class="col-lg-3 col-md-3">
+                    <i class="far fa-check-square"></i> Dishwasher
+                  </div>
+                </div>
+                <div class="row mt-4" style="font-family:'abel'">
+                  <div class="col-lg-3 col-md-3">
+                    <i class="far fa-check-square"></i> Elevator
+                  </div>
+                  <div class="col-lg-3 col-md-3">
+                    <i class="far fa-check-square"></i>Gym
+                  </div>
+                  <div class="col-lg-3 col-md-3">
+                    <i class="far fa-check-square"></i> Family Room
+                  </div>
+                  <div class="col-lg-3 col-md-3">
+                    <i class="far fa-check-square"></i> Fireplace
+                  </div>
+                </div>
+            </section>
+
+            <section class="nearby">
+              <h2 class="pb-3" style="font-family: var(--pri-font);text-shadow: 1px 1px 3px grey;">What's Nearby?</h2>
+              <hr style=" border-top: 1.5px solid rgba(24, 22, 22, 0.986);margin: 20px 0 ;">
+              <span class="heading" style="font-family:'abel';"> <i class="fas fa-utensils"></i> Food </span>
+              <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
+              <div class="items">
+                <p>Da Munch Box <span>(0.00 mi) </span> <span style="float: right; ">14 REVIEWS
+                    <i class="far checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </span> </p>
+              </div>
+              <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
+              <div class="items">
+                <p>Hot Wing Truck <span>(0.00 mi) </span> <span style="float: right; ">8 REVIEWS
+                    <i class="far checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far   fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </span> </p>
+              </div>
+              <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
+              <div class="items">
+                <p>Tuggle Law <span>(0.00 mi) </span> <span style="float: right; ">10 REVIEWS
+                    <i class="far checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                  </span> </p>
+              </div>
+              <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
+              <div class="items">
+                <p>Sandwich Brothers <span>(0.00 mi) </span> <span style="float: right; ">5 REVIEWS
+                    <i class="far checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far   fa-star"></i>
+                    <i class="far  fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </span> </p>
+              </div>
+
+              <hr style=" border-top: 1.5px solid rgba(24, 22, 22, 0.986); margin: 50px 0;">
+              <span class="heading" style="font-family:'abel';"> <i class="fas fa-book-open"></i> Education
+              </span>
+              <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
+              <div class="items">
+                <p>Da Munch Box <span>(0.00 mi) </span> <span style="float: right; ">14 REVIEWS
+                    <i class="far checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </span> </p>
+              </div>
+              <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
+              <div class="items">
+                <p>Hot Wing Truck <span>(0.00 mi) </span> <span style="float: right; ">8 REVIEWS
+                    <i class="far checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far   fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </span> </p>
+              </div>
+              <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
+              <div class="items">
+                <p>Tuggle Law <span>(0.00 mi) </span> <span style="float: right; ">10 REVIEWS
+                    <i class="far checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                  </span> </p>
+              </div>
+
+
+              <hr style=" border-top: 1.5px solid rgba(24, 22, 22, 0.986);margin: 50px 0;">
+              <span class="heading" style="font-family:'abel';"> <i class="fas fa-cogs"></i> Homeservices </span>
+              <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
+              <div class="items">
+                <p>Da Munch Box <span>(0.00 mi) </span> <span style="float: right; ">14 REVIEWS
+                    <i class="far checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </span> </p>
+              </div>
+              <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
+              <div class="items">
+                <p>Hot Wing Truck <span>(0.00 mi) </span> <span style="float: right; ">8 REVIEWS
+                    <i class="far checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far   fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </span> </p>
+              </div>
+              <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
+              <div class="items">
+                <p>Tuggle Law <span>(0.00 mi) </span> <span style="float: right; ">10 REVIEWS
+                    <i class="far checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                    <i class="far  checked fa-star"></i>
+                  </span> </p>
+              </div>
+              <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
+            </section>
+            <section style="height:150px;"></section>
+
+          </div>
+          <div class="col-lg-4">
+            <div class="sticky sticky-top">
+              <div class="card" style="position: relative;">
+                <div class="card-title">
+                  <span class="call">Call : <strong class="phone">9813822002</strong> </span>
+                  <div class="wrapper ml-3">
+                    <img class="img-fluid" src="photo/owner-logo.png" alt="">
+                    <div class="hover-details w-100 bg-light p-3">
+                      <div class="wrap d-flex">
+                        <div class="details-wrapper">
+                          <img src="photo/owner-logo.png" alt="">
+                        </div>
+                        <div class="star ml-5 pt-2" style="font-size: 12px;">
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <i class="far fa-star"></i>
+                          <p style="font-size: 1.4em;">Reviews(0)</p>
+                        </div>
                       </div>
-                      <div class="text text-center ml-2 mt-2">
-                        <p>PRICE/SQ FT <br><strong> 342</strong></p>
+                      <div class="title mt-2" style="font-family:'abel';">
+                        <h3>RealState Company</h3>
+                      </div>
+                      <div class="container">
+                        <div class="call d-flex mt-3">
+                          <div class="icon">
+                            <i class="fas fa-mobile-alt"></i>
+                          </div>
+                          <div class="icon-text mt-1 ml-4">
+                            <pre>+977 9813822002</pre>
+                          </div>
+                        </div>
+                        <div class="call d-flex">
+                          <div class="icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                          </div>
+                          <div class="icon-text mt-1 ml-4">
+                            <pre>Tinkune, KTM</pre>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-3 col-md-3">
-                      <div class="cnt d-flex">
-                        <div>
-                            <i class="far mt-2 fa-check-square"></i>
-                        </div>
-                        <div class="text text-center ml-2 mt-2">
-                          <p>STATUS <br><strong> Active</strong></p>
-                        </div>
-                      </div>
-                    </div>
-          </div>
-
-
-
-      </section>
-      <hr>
-
-
-
-
-      <!-- Apartments Amenities -->
-
-      <section class="apartments">
-        <h2 class="pb-4" style="font-family: var(--pri-font);text-shadow: 1px 1px 3px grey;">Apartments Amenities</h2>
-        <div class="border">
-            <div class="row" style="font-family:'abel'">
-              <div class="col-lg-3 col-md-3">
-               <i class="far fa-check-square"></i> Balcony
-            </div>
-
-            <div class="col-lg-3 col-md-3">
-             <i class="far fa-check-square"></i> Basement
-            </div>
-
-              <div class="col-lg-3 col-md-3">
-               <i class="far fa-check-square"></i> Dining Room
-            </div>
-
-              <div class="col-lg-3 col-md-3">
-              <i class="far fa-check-square"></i> Dishwasher
-            </div>
-            </div>
-
-
-
-            <div class="row mt-4" style="font-family:'abel'">
-                <div class="col-lg-3 col-md-3">
-                 <i class="far fa-check-square"></i> Elevator
-              </div>
-
-              <div class="col-lg-3 col-md-3">
-               <i class="far fa-check-square"></i>Gym
-              </div>
-
-                <div class="col-lg-3 col-md-3">
-                 <i class="far fa-check-square"></i> Family Room
-              </div>
-
-                <div class="col-lg-3 col-md-3">
-                <i class="far fa-check-square"></i> Fireplace
-              </div>
-              </div>
-
-
-      </section>
-
-
-
-
-      <!-- What's Nearby? -->
-
-      <section class="nearby">
-        <h2 class="pb-3" style="font-family: var(--pri-font);text-shadow: 1px 1px 3px grey;">What's Nearby?</h2>
-        <hr style=" border-top: 1.5px solid rgba(24, 22, 22, 0.986);margin: 20px 0 ;">
-        <span class="heading"style="font-family:'abel';"> <i class="fas fa-utensils"></i> Food </span>
-        <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
-        <div class="items">
-           <p>Da Munch Box <span>(0.00 mi) </span> <span style="float: right; ">14 REVIEWS
-             <i class="far checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far fa-star"></i>
-                            </span> </p>
-
-        </div>
-
-        <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
-        <div class="items">
-           <p>Hot Wing Truck <span>(0.00 mi) </span> <span style="float: right; ">8 REVIEWS
-             <i class="far checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far   fa-star"></i>
-            <i class="far fa-star"></i>
-                            </span> </p>
-
-        </div>
-
-        <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
-        <div class="items">
-           <p>Tuggle Law <span>(0.00 mi) </span> <span style="float: right; ">10 REVIEWS
-             <i class="far checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-                            </span> </p>
-
-        </div>
-
-        <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
-        <div class="items">
-           <p>Sandwich Brothers <span>(0.00 mi) </span> <span style="float: right; ">5 REVIEWS
-             <i class="far checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far   fa-star"></i>
-            <i class="far  fa-star"></i>
-            <i class="far fa-star"></i>
-                            </span> </p>
-
-        </div>
-
-
-        <!-- Education part -->
-        <hr style=" border-top: 1.5px solid rgba(24, 22, 22, 0.986); margin: 50px 0;">
-        <span class="heading"style="font-family:'abel';"> <i class="fas fa-book-open"></i> Education
-        </span>
-        <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
-        <div class="items">
-           <p>Da Munch Box <span>(0.00 mi) </span> <span style="float: right; ">14 REVIEWS
-             <i class="far checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far fa-star"></i>
-                            </span> </p>
-
-        </div>
-
-        <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
-        <div class="items">
-           <p>Hot Wing Truck <span>(0.00 mi) </span> <span style="float: right; ">8 REVIEWS
-             <i class="far checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far   fa-star"></i>
-            <i class="far fa-star"></i>
-                            </span> </p>
-
-        </div>
-
-        <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
-        <div class="items">
-           <p>Tuggle Law <span>(0.00 mi) </span> <span style="float: right; ">10 REVIEWS
-             <i class="far checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-                            </span> </p>
-
-        </div>
-
-        <!-- <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
-        <div class="items">
-           <p>Sandwich Brothers <span>(0.00 mi) </span> <span style="float: right; ">5 REVIEWS
-             <i class="far checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far   fa-star"></i>
-            <i class="far  fa-star"></i>
-            <i class="far fa-star"></i>
-                            </span> </p>
-
-        </div> -->
-
-
-
-
-
-
-        <!-- Home services part -->
-        <hr style=" border-top: 1.5px solid rgba(24, 22, 22, 0.986);margin: 50px 0;">
-        <span class="heading" style="font-family:'abel';"> <i class="fas fa-cogs"></i> Homeservices </span>
-        <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
-        <div class="items">
-           <p>Da Munch Box <span>(0.00 mi) </span> <span style="float: right; ">14 REVIEWS
-             <i class="far checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far fa-star"></i>
-                            </span> </p>
-
-        </div>
-
-        <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
-        <div class="items">
-           <p>Hot Wing Truck <span>(0.00 mi) </span> <span style="float: right; ">8 REVIEWS
-             <i class="far checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far   fa-star"></i>
-            <i class="far fa-star"></i>
-                            </span> </p>
-
-        </div>
-
-        <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
-        <div class="items">
-           <p>Tuggle Law <span>(0.00 mi) </span> <span style="float: right; ">10 REVIEWS
-             <i class="far checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-            <i class="far  checked fa-star"></i>
-                            </span> </p>
-
-        </div>
-
-        <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
-
-
-
-
-      </section>
-
-
-<section style="height:150px;"></section>
-
-
-
-
-
-
-
-<!--
-      <div class="hover-details">
-
-        <div class="details-wrapper">
-        <img src="photo/owner-logo.png" alt="">
-      </div>
-      <i class="far fa-star"></i>
-      <i class="far fa-star"></i>
-      <i class="far fa-star"></i>
-      <i class="far fa-star"></i>
-      <i class="far fa-star"></i>
-      </div> -->
-
-
-
-
-
-
-
-
-    </div>
-
-    <div class="col-lg-4">
-        <div class="sticky sticky-top">
-
-      <div class="card" style="position: relative;">
-        <div class="card-title">
-
-            <span class="call">Call : <strong class="phone">9813822002</strong> </span>
-
-            <div class="wrapper ml-3">
-            <img class="img-fluid" src="{{ propertyList.images }}" alt="">
-
-            <div class="hover-details w-100 bg-light p-3">
-              <div class="wrap d-flex">
-                <div class="details-wrapper">
-                <img src="photo/owner-logo.png" alt="">
+                  <p> <span style="font-family:'abel'"><i class="fab fa-opencart mr-1" style="color:rgba(67,195,112,1);"></i> Sadish Gautam</span> </p>
                 </div>
-              <div class="star ml-5 pt-2" style="font-size: 12px;">
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-              <p style="font-size: 1.4em;">Reviews(0)</p>
+                <form>
+                  <p class="d-flex bg-light p-2">
+                    <i class="fas fa-user m-2" style="color: rgba(35,77,212,1);"></i>
+                    <input type="text" class="form-control" placeholder="First Name, Last Name" style="border:none;background:none; box-shadow: none;outline:none;" required>
+                  </p>
+                  <p class="d-flex bg-light p-2"> <i class="far fa-envelope m-2" style="color: rgba(35,77,212,1);"></i> <input type="email" class="form-control" required placeholder="Your Email"
+                      style="border:none;background:none; box-shadow: none;outline:none;"> </p>
+                  <p class="d-flex bg-light p-2"> <i class="fas fa-phone-alt m-2" style="color: rgba(35,77,212,1);"></i> <input type="text" class="form-control" required placeholder="Phone"
+                      style="border:none;background:none; box-shadow: none;outline:none;"> </p>
+                  <p> <textarea style="box-shadow:none; font-family:'abel';" placeholder="Feel free to message us" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> </p>
+                </form>
+                <button type="submit" class="contact btn text-white text-center">
+                  CONTACT PROPERTY</button>
+              </div>
             </div>
           </div>
-                <div class="title mt-2" style="font-family:'abel';">
-                    <h3>RealState Company</h3>
-                </div>
-                <div class="container">
-                <div class="call d-flex mt-3">
-                    <div class="icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="icon-text mt-1 ml-4" >
-                        <pre>+977 9813822002</pre>
+        </div>
+      </div>
+    </section>
 
-                    </div>
-                </div>
-                <div class="call d-flex">
-                    <div class="icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="icon-text mt-1 ml-4" >
-                        <pre>Tinkune, KTM</pre>
 
-                    </div>
+  </section>
+
+  <footer class="plain">
+    <div class="container">
+      <div class="row ql pt-5">
+        <div class="col-lg-3 col-md-6">
+          <div class="popular container">
+            <h5 class="text-white mb-4 font-weight-bold">Popular Searches</h5>
+            <ul class="list1 list-unstyled">
+              <li><a href="#">Appartment for Rent</a></li>
+              <li><a href="#">Appartment Low to High</a></li>
+              <li><a href="#">Offices for Buy</a></li>
+              <li><a href="#">Offices for Rent</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="hommarkets container">
+            <h5 class="text-white mb-4 font-weight-bold">Homepage Markets</h5>
+            <ul class="list1 list-unstyled">
+              <li><a href="#">Jadibuti Offices</a></li>
+              <li><a href="#">Sunrise Appartments</a></li>
+              <li><a href="#">Balkumari Townhome</a></li>
+              <li><a href="#">Tinkune Offices</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="quick">
+            <div class="container">
+              <h5 class="text-white mb-4 font-weight-bold">Quick Links</h5>
+              <ul class="list1 list-unstyled">
+                <li><a href="kathmandu.php">Kathmandu</a></li>
+                <li><a href="#">Lalitpur</a></li>
+                <li><a href="#">Bhaktapur</a></li>
+                <li><a href="#">Others</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="subscribe">
+            <div class="container">
+              <h5 class="text-white mb-4 font-weight-bold">Subscribe</h5>
+              <div class="form-group">
+                <div class="icon d-flex align-items-center justify-content-center bg-secondary">
+                  <span style="padding-left: 10px"><i class="fas fa-user text-white"></i></span>
+                  <input style="border:none;outline:none;box-shadow:none;color: white;" type="text" class="form-control bg-secondary" id="flname" placeholder="Full Name*" name="flname" autocomplete="off">
                 </div>
               </div>
+              <div class="form-group">
+                <div class="icon d-flex align-items-center justify-content-center bg-secondary">
+                  <span style="padding-left:10px; text-align:center;"><i class="fas fa-envelope text-white">
+                    </i></span>
+                  <input style="border: none; outline: none; box-shadow: none; color:white" type="email" class="form-control bg-secondary" id="email" placeholder="Enter email*" name="email" autocomplete="off">
+                </div>
+              </div>
+              <button style="font-family: 'abel'" type="submit" class="btn btn-primary form-control">Subscribe</button>
             </div>
-
-            </div>
-            <p> <span style="font-family:'abel'"><i class="fab fa-opencart mr-1" style="color:rgba(67,195,112,1);"></i> SADISH</span> </p>
+          </div>
         </div>
-
-        <form>
-           <p class="d-flex bg-light p-2">
-             <i class="fas fa-user m-2" style="color: rgba(35,77,212,1);"></i>
-             <input type="text" class="form-control" placeholder="First Name, Last Name" style="border:none;background:none; box-shadow: none;outline:none;" required>
-          </p>
-
-           <p class="d-flex bg-light p-2"> <i class="far fa-envelope m-2" style="color: rgba(35,77,212,1);"></i> <input type="email" class="form-control" required placeholder="Your Email" style="border:none;background:none; box-shadow: none;outline:none;"> </p>
-           <p class="d-flex bg-light p-2"> <i class="fas fa-phone-alt m-2" style="color: rgba(35,77,212,1);"></i> <input type="text" class="form-control" required placeholder="Phone" style="border:none;background:none; box-shadow: none;outline:none;"> </p>
-           <p> <textarea style="box-shadow:none; font-family:'abel';" placeholder="Feel free to message us" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> </p>
-        </form>
-        <button type="submit" class="contact btn text-white text-center">
-          CONTACT PROPERTY</button>
       </div>
+      <div class="foranchors mt-5">
+        <h6><a href="index.php">Home</a>|<a href="about.php">About Us</a>|<a href="contact.php">Contact Us</a>|
+          <a href="news.php">News</a>|<a href="wishlist.php">Wishlist</a>
+        </h6>
+      </div>
+      <hr size="30" class="w-100 mx-auto mt-5" style="padding:0.1px; background:grey;">
+      <div class="containerfooter text-white py-2">
+        <div class="wrap d-flex align-items-center justify-content-between mb-4" style="font-family: 'abel';flex-wrap:wrap">
+          <div class="copyright text-center my-2">
+            <span style="color:lightgray;">&copy; 2019 </span><a style="color: var(--pri-color);text-decoration:none;" href="index.php">JaggaSale</a><span style="color:lightgray;"> All rights reserve.
+            </span>
+          </div>
+          <div class="icons text-center my-2">
+            <span>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </span>
+          </div>
+          <div class="dsn text-center my-2">
+            <span>Designed & Developed by <a href="http://Sadish.com.np" target="blank" style="color: var(--sec-color);text-decoration: none;">Sadish Gautam</a></span>
+          </div>
         </div>
+      </div>
     </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>
 
 
+  <script type="36ca0483887fc711e1ef5a96-text/javascript" src="js/custom.js"></script>
+  <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="36ca0483887fc711e1ef5a96-|49" defer=""></script>
+</body>
 
-
-  </div>
-</div>
-</section>
-
-
-
-<!-- Ending of Description Section -->
-
-
-
-</section>
-
-
-
-
-{% endblock %}
-
-
-
-{% block externaljavascript %}
-
-
-
-$('#sadis-owl').owlCarousel({
-  loop:true,
-  margin:6,
-  nav:true,
-  autoplay: true,
-  autoplaySpeed:3000,
-  dots:false ,
-  responsive:{
-      0:{
-          items:1
+</html>
+<script type="36ca0483887fc711e1ef5a96-text/javascript">
+  $('#sadis-owl').owlCarousel({
+    loop: true,
+    margin: 6,
+    nav: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    dots: false,
+    responsive: {
+      0: {
+        items: 1
       },
-      600:{
-          items:1
+      600: {
+        items: 1
       },
-      1000:{
-          items:1
+      1000: {
+        items: 1
       }
-  }
-})
-
-{% endblock %}
+    }
+  })
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox-plus-jquery.min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>

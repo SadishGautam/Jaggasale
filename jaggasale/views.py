@@ -12,15 +12,32 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from .models import Item
+from django.shortcuts import get_object_or_404
+from hitcount.views import HitCountDetailView
+# from .filters import ItemFilter
 
 
 class HomeView(ListView):
     model = Item
+    # category = Item.objects.all()
+    # category_type = Item.objects.filter()
     template_name = 'index.html'
+
+# def Home(request):
+#     return render(request, "index.html")
 
 
 def signup(request):
     return render(request, "registerform.html")
+
+def Login(request):
+    return render(request, "login.html")
+
+
+
+
+
+
 
 
 def profilepage(request):
@@ -30,17 +47,7 @@ def profilepage(request):
 def userPropertyList(request):
     return render(request, 'userPropertyLists')
 
-#
-# def about(request):
-#     return render(request, "about.html")
 
-#
-# def news(request):
-#     return render(request, "news.html")
-#
-#sadish
-# def contact(request):
-#     return render(request, "contact.html")
 
 
 def handleDetails(request, id):
@@ -48,34 +55,47 @@ def handleDetails(request, id):
     propertyLists = Item.objects.all()
     propertyList = Item.objects.get(pk=id)
     print(propertyList)
-    propertyImages = Images.objects.all()
-    propertyImage = Images.objects.get(pk=id)
-    print(propertyImage)
-    return render(request, "details.html", {'propertyList' : propertyList, 'propertyImage' : propertyImage})
+    count_hit = True
+    # propertyImages = Images.objects.filter(imageitem_id= id)
+    propertyImages = Images.objects.filter(imageitem_id = id)
+    print(propertyImages)
+    contex = {'propertyList' : propertyList,
+            'propertyImages' : propertyImages
+            }
+    return render(request, "details.html", contex)
 
 
 
 
+def SearchResultsView(request):
+    query = request.GET.get('search', '')
+    Title = Item.objects.filter(title__icontains=query)
+    categories = Item.objects.filter(category)
+    contex = { 'Title': Title,
+                'categories': categories
 
-
-# def handleDetailsImages(request, id):
-#     propertyImages = Images.objects.all()
-#     propertyImage = Images.objects.get(pk=id)
-#     print(propertyImage)
-#     return render(request, 'details.html', { 'propertyImage' : propertyImage })
-
-
+    }
+    return render(request, 'search_results.html', contex)
 
 
 
 def handleProperty(request):
     return render(request, "details.html")
 
-def locationKathmandu(request):
-    ktmProperties = Item.objects.all()
-    ktmProperty = Item.objects.filter(location='K')
-    print(ktmProperty)
-    return render(request, "kathmandu.html", {'ktmProperty' : ktmProperty})
+
+
+
+def location_properties_by_cities(request):
+    query = request.GET.get('q')
+    Properties_by_cities = Item.objects.all()
+    cities = Item.objects.filter(location = query)
+    return render(request, "location.html", {'cities' : cities})
+
+
+def locationProperties(request):
+    Properties_by_cities = Item.objects.all()
+    cities = Item.objects.filter(location='K')
+    return render(request, "kathmandu.html", {'cities' : cities})
 
 
 
@@ -159,7 +179,7 @@ def handleLogout(request):
 # changing the user password via user
 @login_required
 def change_password(request):
-    if request.method == 'POST':
+    if request.method == 'post':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             form.save()

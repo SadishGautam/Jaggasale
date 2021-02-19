@@ -12,11 +12,18 @@ html {
 --------------*/
 .form {
   padding: 100px 0px;
+
 }
+
+
+
+
 
 .first-form {
   background: var(--pri-color);
   padding: 40px;
+  margin-top: 80px !important;
+  box-shadow: 5px 5px 10px 5px rgba(167, 164, 164, 0.151) !important;
 }
 
 .form .first-form h4 {

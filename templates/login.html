@@ -1,0 +1,96 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} Login/Signup - JaggaSale {% endblock %}
+
+
+
+
+{% block css %}
+.header{
+box-shadow: 1px 1px 10px 1px grey;
+}
+.header a.hm{
+background:transparent;
+}
+.header a{
+color:black!important;
+}
+.header .listing .list a,
+.header .listing .refresh,
+.header .listing .heart,
+.header .listing .user{
+border: 1px solid var(--pri-color);
+}
+.header .listing .list a:hover{
+background: var(--pri-color);
+color:white!important;
+}
+.header .menu #bars{
+color:var(--pri-color)!important;
+}
+.header .register a{
+color:var(--pri-color)!important;
+}
+.header .register a:hover{
+color:var(--sec-color)!important;
+}
+section.form{
+font-family:'abel';
+}
+{% endblock %}
+
+
+
+{% block body %}
+{% if user.is_authenticated %}
+
+
+
+<div class="clearfix"></div>
+
+<h1 class="text-center mt-5 mb-5">You cannot access this page !</h1>
+
+
+{% else %}
+
+
+<section class="form ">
+  <div class="container" id="Full_login_form">
+    <div class="row mt-5">
+
+      <div class="col-md-3 "> </div>
+
+      <div class="col-md-6 clearfix">
+
+        <div class="first-form">
+          <h4 class="text-center">Sign in</h4>
+
+
+          <form action="/welcome" method="post">
+            {% csrf_token %}
+            <p>Username</p>
+            <input spellcheck="false" type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Enter username" required>
+
+            <p>Password</p>
+            <input spellcheck="false" type="password" class="form-control" id="loginpassword" name="loginpassword" placeholder="Enter password" required>
+
+
+            <div class="custom-control custom-checkbox">
+              <input spellcheck="false" type="checkbox" class="custom-control-input" id="customCheck1">
+              <label class="custom-control-label" for="customCheck1">Remember me</label>
+            </div>
+
+            <button class="btn form-control" type="submit"> SIGN IN </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-3 "> </div>
+
+    </div>
+  </div>
+</section>
+
+{% endif %}
+
+{% endblock %}

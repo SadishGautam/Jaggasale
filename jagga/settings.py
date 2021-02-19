@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'sites',
     'blog',
     'hitcount',
+    # 'django_filters',
 
 
 
