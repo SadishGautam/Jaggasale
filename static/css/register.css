@@ -113,7 +113,7 @@ html {
 
 .form .second-form .form-control {
   border-radius: 0;
-  padding: 25px 10px;
+  /* padding: 25px 10px; */
   box-shadow: none;
   margin-bottom: 20px;
   border: none;

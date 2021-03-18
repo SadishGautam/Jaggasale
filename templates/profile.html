@@ -80,10 +80,10 @@
                         <th scope="row">4</th>
                         <td>Password</td>
                         <td>**********</td>
-                        <td> <form class="form-inline my-2 my-lg-0" method="POST">
-                          {% csrf_token %}
+                        <td>
 
-                              <button type="submit" class="btn btn-primary">Change</button></form></td>
+
+                              <a href='{%url 'reset_password'%}' class="btn btn-primary">Change</a></td>
                       </tr>
                       <tr>
                         <th scope="row">5</th>

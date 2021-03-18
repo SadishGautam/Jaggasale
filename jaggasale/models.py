@@ -59,7 +59,7 @@ class Item(models.Model):
         choices=LABEL_LIST, max_length=2, default='Active')
     sold_or_rent = models.CharField(
         choices=PROPERTY_FOR, max_length=4, default='SOLD')
-    picture_count = models.IntegerField()
+    picture_count = models.IntegerField(blank=True, null=True)
     area = models.IntegerField(blank=True, null=True)
     owner_name = models.CharField(max_length=30)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+9779812345678'. Up to 14 digits allowed.")

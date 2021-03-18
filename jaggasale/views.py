@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Item
 from django.shortcuts import get_object_or_404
 from hitcount.views import HitCountDetailView
+from .forms import HouseForm
 # from .filters import ItemFilter
 
 
@@ -25,6 +26,15 @@ class HomeView(ListView):
 
 # def Home(request):
 #     return render(request, "index.html")
+
+def handler404(request, exception):
+    context = {}
+    response = render(request, "404.html", context=context)
+    response.status_code = 404
+    return response
+
+
+
 
 
 def signup(request):
@@ -70,12 +80,30 @@ def handleDetails(request, id):
 def SearchResultsView(request):
     query = request.GET.get('search', '')
     Title = Item.objects.filter(title__icontains=query)
-    categories = Item.objects.filter(category)
+    # categories = Item.objects.filter(category)
     contex = { 'Title': Title,
-                'categories': categories
+                # 'categories': categories
 
     }
     return render(request, 'search_results.html', contex)
+
+
+def SearchFilter(request):
+    if request.method == "POST":
+        minprice = request.POST.get('minprice')
+        maxprice = request.POST.get('maxprice')
+        print('maxprice')
+        filtered_search = Item.objects.raw('select id, title, price from jaggasale_item where price between "'+minprice+'" and "'+maxprice+'"')
+        return render(request, 'search_results.html', {'filtered_search': filtered_search})
+
+    else:
+        Title = Item.objects.all()
+
+        contex = { 'Title': Title,
+                    # 'categories': categories
+
+        }
+        return render(request, 'search_results.html', contex)
 
 
 
@@ -103,10 +131,29 @@ def locationProperties(request):
 
 @login_required
 def Add_property_by_user(request):
-    return render(request, "Add_apartment.html")
+    form = HouseForm(request.POST or None)
+    if request.method == "POST":
+        form = HouseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "saved")
+
+          # else:
+          #     form = HouseForm()
+          #     messages.error(request, "Invalid email or password")
+    return render(request, "Add_apartment.html", {'form': form})
+
+
+
+
+
+
 
 def handleSignup(request):
+    print("signup handle success")
     if request.method == 'POST':
+        print("signup handle")
+
         # Get the POST parameters
         fname = request.POST['fname']
         lname = request.POST['lname']
@@ -116,19 +163,19 @@ def handleSignup(request):
         pass2 = request.POST['pass2']
 
         # Check for validation
-        if len(username) > 6:
+        if len(username) > 3:
             messages.error(
-                request, 'Username must be at least 6 character long')
-            return HttpResponse('username must be 6 character long')
+                request, 'Username must be at least 3 character long')
+            # return HttpResponse('username must be 3 character long')
 
         if not username.isalnum():
             messages.error(
                 request, 'Username should only contain letters and numbers')
-            return HttpResponse('username format error')
+            # return HttpResponse('username format error')
 
         if pass1 != pass2:
             messages.error(request, 'Password do not match')
-            return HttpResponse('password donot match')
+            # return HttpResponse('password donot match')
 
         # Create the user
         myuser = User.objects.create_user(username, email, pass1)
@@ -163,7 +210,8 @@ def handleLogin(request):
         else:
             messages.error(request, "Invalid email or password")
             print("login failed")
-            return redirect('news page')
+            return render(request, "login.html")
+
 
     return HttpResponse('404 - Not Found')
 
@@ -174,3 +222,19 @@ def handleLogout(request):
     logout(request)
     messages.success(request, "Logged out Successfully")
     return render(request, "index.html")
+
+
+# Starting of adding property by user
+
+
+
+
+
+
+
+
+
+
+
+
+    # Ending of adding property by user

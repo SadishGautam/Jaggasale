@@ -6,11 +6,11 @@
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <!-- <link rel="stylesheet" href="static/cssbootstrap.min.css"> -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
   <!-- css -->
@@ -22,7 +22,8 @@
   <link rel="stylesheet" href="/static/css/register.css">
   <link rel="stylesheet" type="text/css" href="/static/css/footer.css">
   <link rel="stylesheet" type="text/css" href="/static/css/about.css">
-  <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/static/css/login.css"> -->
+  <link rel="stylesheet" type="text/css" href="/static/css/Add_apartment.css">
 
 
   <!-- fonts -->
@@ -149,7 +150,7 @@
       <div class="col-lg-4 col-md-4 col-sm-12">
         <div class="listing mt-2 d-flex align-items-center">
           <div class="list ml-5">
-            <a href="{% url 'signup' %}"><i class="fas fa-home"></i>&nbsp; Register</a>
+            <a href="http://127.0.0.1:8000/loginSignup" ><i class="fas fa-home"></i>&nbsp; Register</a>
           </div>
 
           <div class="login-form" style="position:relative;">
@@ -157,19 +158,19 @@
               <a style="color:white;" href="#"><i class="far fa-user"></i></a>
             </div>
             <div class="login container">
-              <form method="post" action="/loginonly">
+              <form method="post" action="/welcome">
                 {% csrf_token %}
                 <div class="form-group">
                   <strong>Username</strong>
                 </div>
                 <div class="form-group">
-                  <input type="text" spellcheck="false" id="loginusername" class="form-control log bg-light" placeholder="Enter Username" required>
+                  <input type="text" spellcheck="false" id="loginusername" name="loginusername" class="form-control log bg-light" placeholder="Enter Username" required>
                 </div>
                 <div class="form-group">
                   <strong>Password</strong>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control log bg-light" id="loginpassword" placeholder="Enter Password" required>
+                  <input type="password" class="form-control log bg-light" id="loginpassword" placeholder="Enter Password" name="loginpassword" required>
                 </div>
                 <div class="form-group">
                   <div class="custom-checkbox custom-control">
@@ -186,7 +187,7 @@
 
                 </div>
                 <div class="register text-center">
-                  <a href="{% url 'signup' %}"> REGISTRATION</a>
+                  <a href="http://127.0.0.1:8000/loginSignup"> REGISTRATION</a>
                 </div>
               </form>
             </div>
@@ -317,7 +318,7 @@
   </style>
 
 
-
+<div class="lds-hourglass"></div>
 
   {% block body %}
 
@@ -434,28 +435,17 @@
   <!-- --------------------Sadish Codes----------------------- -->
 
 
-
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
-  <!-- <script type="text/javascript" src="js/bootstrap.min.js"></script> -->
-  <!-- <script type="text/javascript" src="js/all.js"></script> -->
-  {% load static %}
   <script type="text/javascript" src="/static/js/custom.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox-plus-jquery.min.js"></script>
 
-  <script>
-    {
-      % block externaljavascript %
-    }
+  {% load static %}
 
 
-    {
-      % endblock %
-    }
-  </script>
 
 
 </body>

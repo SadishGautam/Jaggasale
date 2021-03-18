@@ -49,145 +49,540 @@
 {% block body %}
 <div class="clearfix"></div>
 
-<h2 class="text-center" style="font-family:var(--pri-font); text-shadow: 1px 1px 3px grey;margin-bottom:20px;">Add Your Property Here</h2>
+<!-- <h2 class="text-center" style="font-family:var(--pri-font); text-shadow: 1px 1px 3px grey;margin-bottom:20px;">Add Your Property Here</h2> -->
 
 
-<section id="leadership">
+<section id="Adding_property">
+  <h2 class="text-center pt-5" style="font-family:var(--pri-font); text-shadow: 1px 1px 3px grey;margin-bottom:20px;">Add Your Property Here</h2>
   <div class="container pb-5">
     <h5 style="font-family:var(--pri-font); text-shadow: 1px 1px 3px grey;margin-bottom:20px;">Fill all the required fields</h5>
 
+    <div class="add_property_container_box">
+      <ul class="nav nav-pills text-center  mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">House</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Apartment</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Land</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        {% include  'alert.html' %}
+        <!-- Start adding Home section -->
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+          <form method="post">
+            {% csrf_token %}
+              {{ form.as_p }}
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input class="form-control" name="title" type="text" placeholder="Property Title">
+                </div>
+              </div><!-- ending of column  -->
 
-<!-- Radio button for property type -->
-    <div class="select_property_type">
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-        <label class="form-check-label" for="inlineRadio1">House</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-        <label class="form-check-label" for="inlineRadio2">Apartment</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-        <label class="form-check-label" for="inlineRadio3">Land</label>
-      </div>
-    </div>
-
-
-
-
-    <div class="add_property_title">
-      <div class="form" style="padding: 0px;">
-
-            <div class="first-form" style="background-color: #e4e6e6e8;  margin:10px 1px; padding: 0px;">
-                <p class="text-dark">Title</p>
-                <input spellcheck="false"  type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
-
-                <div class="row mt-4">
-                  <div class="col-lg-3">
-                    <p class="text-dark">Category</p>
-                    <select class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">Sell</option>
-                    <option value="2">Rent</option>
-
-                    </select>
-                  </div>
-
-                  <div class="col-lg-3">
-                    <p class="text-dark">Location</p>
-                    <select class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">Kathmandu</option>
-                    <option value="2">lalitpur</option>
-                    <option value="3">Bhaktpur</option>
-                    <option value="3">Chitwan</option>
-                    </select>
-                  </div>
-
-                  <div class="col-lg-3">
-                    <p class="text-dark">Status</p>
-                    <select class="form-select" aria-label="Default select example">
-                    <option selected>Open this select menu</option>
-                    <option value="1">Active</option>
-                    <option value="2">Sold/Rented</option>
-
-                    </select>
-                  </div>
-
-                  </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Location</label>
+                  <select class="form-control" name="location">
+                    <option selected>Kathmandu</option>
+                    <option>Bhaktapur</option>
+                    <option>Lalitpur</option>
+                  </select>
+                </div>
+              </div><!-- ending of column  -->
 
 
-                  <div class="row">
-                    <div class="col-sm-6 mt-3">
-                      <div class="first-form" style="background-color: #e4e6e6e8;  margin:10px 1px; padding: 0px;">
-                          <p class="text-dark">Price</p>
-                          <input spellcheck="false"  type="text" class="form-control" id="title" name="title" placeholder="Enter title">
-                      </div>
-                    </div>
-
-                    <div class="col-sm-6 mt-3">
-                      <div class="first-form" style="background-color: #e4e6e6e8;  margin:10px 1px; padding: 0px;">
-                          <p class="text-dark">Discount Price / Final price</p>
-                          <input spellcheck="false"  type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
-                      </div>
-                    </div>
-                  </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Area(Sq ft)</label>
+                  <input class="form-control" name="area" type="number" min="0" placeholder="Area(Sq ft)">
+                </div>
+              </div><!-- ending of column  -->
+            </div><!-- ending of row  -->
 
 
 
 
-                  <div class="row">
-                    <div class="first-form col-sm-12" style="background-color: #e4e6e6e8;  margin:10px 10px; padding: 0px;">
-                        <p class="text-dark">Description</p>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                  </div>
+            <!-- Starting of second row -->
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Rooms</label>
+                  <input class="form-control" name="rooms" type="number" min="0" placeholder="No. of Rooms">
+                </div>
+              </div><!-- ending of column  -->
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Bathrooms</label>
+                  <input class="form-control" name="bathrooms" type="number" min="0" placeholder="No. of Bathrooms">
+                </div>
+              </div><!-- ending of column  -->
+
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Floors</label>
+                  <input class="form-control" name="floors" type="number" min="0" placeholder="No. of Floors">
+                </div>
+              </div><!-- ending of column  -->
+            </div><!-- ending of row  -->
 
 
 
-                  <div class="row">
-                    <div class="first-form col-sm-12" style="background-color: #e4e6e6e8;  margin:10px 10px; padding: 0px;">
-                        <p class="text-dark">Location</p>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                  </div>
 
-
-
-
+            <!-- Description text -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="Description">Description</label>
+                  <textarea class="form-control name="description" shadow-none" id="Description" rows="5"></textarea>
+                </div>
+              </div>
             </div>
 
+
+
+
+            <!-- Starting of custom checkbox -->
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Parking">
+                  <label class="custom-control-label" for="Parking">Parking</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Garden">
+                  <label class="custom-control-label" for="Garden">Garden</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Drinage">
+                  <label class="custom-control-label" for="Drinage">Drinage</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Balcony">
+                  <label class="custom-control-label" for="Balcony">Balcony</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row mt-2">
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Hall">
+                  <label class="custom-control-label" for="Hall">Hall room</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Dining">
+                  <label class="custom-control-label" for="Dining">Dining Room</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Elevator">
+                  <label class="custom-control-label" for="Elevator">Elevator</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Water">
+                  <label class="custom-control-label" for="Water">Water</label>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+            <div class="row mt-4">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Discount Price (If any)</label>
+                  <input class="form-control" name="discount_price" type="number" min="0" placeholder="Discount price">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Final Price</label>
+                  <input class="form-control" name="final_price" type="number" min="0" placeholder="Final Price of property">
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Image Upload Section -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="customFile" multiple>
+                  <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row ">
+              <div class="form-group  mt-3 ml-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- Ending of adding home section -->
+
+
+
+
+        <!-- Astaring of adding Apartment section -->
+        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+          <form>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input class="form-control" type="text" placeholder="Property Title">
+                </div>
+              </div><!-- ending of column  -->
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Location</label>
+                  <select class="form-control">
+                    <option selected>Kathmandu</option>
+                    <option>Bhaktapur</option>
+                    <option>Lalitpur</option>
+                  </select>
+                </div>
+              </div><!-- ending of column  -->
+
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Built Date</label>
+                  <input class="form-control" type="date" placeholder="Area(Sq ft)">
+                </div>
+              </div><!-- ending of column  -->
+            </div><!-- ending of row  -->
+
+
+
+
+            <!-- Starting of second row -->
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Rooms</label>
+                  <input class="form-control" type="number" min="0" placeholder="No. of Rooms">
+                </div>
+              </div><!-- ending of column  -->
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Bathrooms</label>
+                  <input class="form-control" type="number" min="0" placeholder="No. of Bathrooms">
+                </div>
+              </div><!-- ending of column  -->
+
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Area Face</label>
+                  <select class="form-control">
+                    <option selected>East</option>
+                    <option>West</option>
+                    <option>North</option>
+                    <option>South</option>
+                  </select>
+                </div>
+              </div><!-- ending of column  -->
+            </div><!-- ending of row  -->
+
+
+
+
+            <!-- Description text -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="Description">Description</label>
+                  <textarea class="form-control shadow-none" id="Description" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <!-- Starting of custom checkbox -->
+            <div class="row">
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Parking">
+                  <label class="custom-control-label" for="Parking">Parking</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Electricity">
+                  <label class="custom-control-label" for="Electricity">Electricity Backup</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Drinage">
+                  <label class="custom-control-label" for="Drinage">Drinage</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Security">
+                  <label class="custom-control-label" for="Security">Security Staff</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row mt-2">
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Lift">
+                  <label class="custom-control-label" for="Lift">Lift</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Dining">
+                  <label class="custom-control-label" for="Dining">Dining Room</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Kids">
+                  <label class="custom-control-label" for="Kids">Kids playground</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Water">
+                  <label class="custom-control-label" for="Water">Water Supply</label>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+            <div class="row mt-4">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Discount Price (If any)</label>
+                  <input class="form-control" type="number" min="0" placeholder="Discount price">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Final Price</label>
+                  <input class="form-control" type="number" min="0" placeholder="Final Price of property">
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Image Upload Section -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="customFile" multiple>
+                  <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row ">
+              <div class="form-group  mt-3 ml-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!-- Ending of adding Apartment section -->
+
+
+
+
+
+        <!-- staring of adding Land section -->
+        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+          <form>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input class="form-control" type="text" placeholder="Property Title">
+                </div>
+              </div><!-- ending of column  -->
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Location</label>
+                  <select class="form-control">
+                    <option selected>Kathmandu</option>
+                    <option>Bhaktapur</option>
+                    <option>Lalitpur</option>
+                  </select>
+                </div>
+              </div><!-- ending of column  -->
+
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Total area (Aana)</label>
+                  <input class="form-control" type="number" placeholder="Aana">
+                </div>
+              </div><!-- ending of column  -->
+            </div><!-- ending of row  -->
+
+
+
+
+
+            <!-- Description text -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="Description">Description</label>
+                  <textarea class="form-control shadow-none" id="Description" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <!-- Starting of custom checkbox -->
+
+            <div class="row ">
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Electricity">
+                  <label class="custom-control-label" for="Electricity">Electricity Pole</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Drinage">
+                  <label class="custom-control-label" for="Drinage">Drinage</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Road">
+                  <label class="custom-control-label" for="Road">Road</label>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="Water">
+                  <label class="custom-control-label" for="Water">Water Supply</label>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+            <div class="row mt-4">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Road type</label>
+                  <select class="form-control">
+                    <option selected>Gravelled</option>
+                    <option>Paved</option>
+                    <option>Black Topped</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Price</label>
+                  <input class="form-control" type="number" min="0" placeholder="Final Price of property">
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Image Upload Section -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="customFile" multiple>
+                  <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row ">
+              <div class="form-group  mt-3 ml-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+        <!-- Ending of adding Land section -->
       </div>
     </div>
 
 
-
-
-
-
-
-
-
-
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-      <label class="form-check-label" for="inlineCheckbox1">House</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-      <label class="form-check-label" for="inlineCheckbox2">Apartment</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-      <label class="form-check-label" for="inlineCheckbox3">Land</label>
-    </div>
 
 
 
 
   </div>
 </section>
+
 
 
 

@@ -6,6 +6,11 @@ from django.conf.urls.static import static
 from jaggasale import views
 from django.contrib.auth import views as auth_views
 
+
+handler404 = 'jaggasale.views.handler404'
+# handler500 = 'jaggasale.views.handler500'
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('jaggasale.urls')),
@@ -31,28 +36,28 @@ urlpatterns = [
          auth_views.PasswordResetCompleteView.as_view(
              ),
          name="password_reset_complete"),
+    
 
 
-    #
     #
     # path('reset_password/',
     #      auth_views.PasswordResetView.as_view(
-    #          template_name="accounts/password_reset.html"),
+    #          template_name="password_reset/password_reset.html"),
     #      name="reset_password"),
     #
     # path('reset_password_sent/',
     #      auth_views.PasswordResetDoneView.as_view(
-    #          template_name="accounts/password_reset_sent.html"),
+    #          template_name="password_reset/password_reset_sent.html"),
     #      name="password_reset_done"),
     #
     # path('reset/<uidb64>/<token>/',
     #      auth_views.PasswordResetConfirmView.as_view(
-    #          template_name="accounts/password_reset_form.html"),
+    #          template_name="password_reset/password_reset_form.html"),
     #      name="password_reset_confirm"),
     #
     # path('reset_password_complete/',
     #      auth_views.PasswordResetCompleteView.as_view(
-    #          template_name="accounts/password_reset_done.html"),
+    #          template_name="password_reset/password_reset_done.html"),
     #      name="password_reset_complete"),
 
 

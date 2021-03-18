@@ -87,7 +87,7 @@ $("#advanced2").click(function() {
 
 // -------------------Buy Price Range-----------------
 // --------------------------sadish Codes-----------------------
-
+//
 var slider = document.getElementById("customRange1");
 var output = document.getElementById("demo1");
 output.innerHTML = slider.value;
@@ -106,26 +106,26 @@ sliders.oninput = function() {
 
 // -------------------Rent Price Range-----------------
 // --------------------------sadish Codes-----------------------
-
-var sliders1 = document.getElementById("customRange5");
-var outputs1 = document.getElementById("demo5");
-outputs1.innerHTML = sliders1.value;
-
-sliders1.oninput = function() {
-  outputs1.innerHTML = this.value;
-}
-
-var sliders2 = document.getElementById("customRange6");
-var outputs2 = document.getElementById("demo6");
-outputs2.innerHTML = sliders2.value;
-
-sliders2.oninput = function() {
-  outputs2.innerHTML = this.value;
-}
+//
+// var sliders1 = document.getElementById("customRange5");
+// var outputs1 = document.getElementById("demo5");
+// outputs1.innerHTML = sliders1.value;
+//
+// sliders1.oninput = function() {
+//   outputs1.innerHTML = this.value;
+// }
+//
+// var sliders2 = document.getElementById("customRange6");
+// var outputs2 = document.getElementById("demo6");
+// outputs2.innerHTML = sliders2.value;
+//
+// sliders2.oninput = function() {
+//   outputs2.innerHTML = this.value;
+// }
 
 // -------------------Sold Price Range-----------------
 // --------------------------sadish Codes-----------------------
-
+//
 var sliders7 = document.getElementById("customRange9");
 var outputs7 = document.getElementById("demo9");
 outputs7.innerHTML = sliders7.value;
@@ -184,21 +184,21 @@ slider6.oninput = function() {
 // ------------------------ Sold Square Feet Range----------------------
 // --------------------------sadish Codes-----------------------
 
-var slider9 = document.getElementById("customRange7");
-var output9 = document.getElementById("demo7");
-output9.innerHTML = slider9.value;
-
-slider9.oninput = function() {
-  output9.innerHTML = this.value;
-}
-
-var slider10 = document.getElementById("customRange8");
-var output10 = document.getElementById("demo8");
-output10.innerHTML = slider10.value;
-
-slider10.oninput = function() {
-  output10.innerHTML = this.value;
-}
+// var slider9 = document.getElementById("customRange7");
+// var output9 = document.getElementById("demo7");
+// output9.innerHTML = slider9.value;
+//
+// slider9.oninput = function() {
+//   output9.innerHTML = this.value;
+// }
+//
+// var slider10 = document.getElementById("customRange8");
+// var output10 = document.getElementById("demo8");
+// output10.innerHTML = slider10.value;
+//
+// slider10.oninput = function() {
+//   output10.innerHTML = this.value;
+// }
 // ---------------------------Home-Heart--------------------
 // --------------------------sadish Codes-----------------------
 
@@ -329,10 +329,10 @@ $('#owl-featured-property').owlCarousel({
       items: 1
     },
     600: {
-      items: 3
+      items: 2
     },
     1000: {
-      items: 5
+      items: 3
     }
   }
 });
@@ -413,4 +413,4 @@ $('#sadis-owl').owlCarousel({
           items:1
       }
   }
-}); 
+});

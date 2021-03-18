@@ -8,11 +8,13 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    path('signup', views.signup, name='signup'),
+    path('loginSignup', views.signup, name='signup'),
     path('login', views.Login, name='login'),
     path('profile', views.profilepage, name='user profile'),
     path('userPropertyList', views.userPropertyList, name="user property lists"),
     path('search/', views.SearchResultsView, name='property_search'),
+    path('searchfilter', views.SearchFilter, name='Searchfilter'),
+
     path('signup', views.handleSignup, name='handleSignup'),
     path('welcome', views.handleLogin, name='handleLogin'),
     path('logout', views.handleLogout, name='handleLogout'),

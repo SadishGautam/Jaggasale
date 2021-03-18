@@ -43,9 +43,6 @@ INSTALLED_APPS = [
     'blog',
     'hitcount',
     # 'django_filters',
-
-
-
 ]
 
 MIDDLEWARE = [
@@ -166,7 +163,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'thesadishgautam@gmail.com'
-EMAIL_HOST_PASSWORD = 'JaggaSale123'
+EMAIL_HOST_PASSWORD = 'Jaggasale123'
 
 
 from django.contrib.messages import constants as messages
