@@ -10,7 +10,7 @@ from hitcount.models import HitCountMixin, HitCount
 from django.contrib.contenttypes.fields import GenericRelation
 from six import python_2_unicode_compatible
 # from django.shortcuts import get_object_or_404
-
+from django.utils import timezone
 
 CATEGORY_LIST = (
     ('H', 'House'),
@@ -62,22 +62,29 @@ class Item(models.Model):
     picture_count = models.IntegerField(blank=True, null=True)
     area = models.IntegerField(blank=True, null=True)
     owner_name = models.CharField(max_length=30)
+
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+9779812345678'. Up to 14 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=15, blank=False, default='+977 9845900495')
+    phone_number = models.CharField(validators=[phone_regex], max_length=10, blank=False, default='')
     date = models.DateField(blank=True, null=True)
     rooms = models.IntegerField(blank=True, null=True)
+    bathrooms = models.IntegerField(blank=True, null=True)
+    floors = models.IntegerField(blank=True, null=True)
+
     Description = RichTextUploadingField()
     location = models.CharField(
-        choices=LOCATION_LIST, max_length=2, default='Kathmandu')
+        choices=LOCATION_LIST, max_length=2)
     map = models.CharField(max_length=150,blank=True, null=True)
-    date = date = models.DateField(blank=True, null=True)
+    date = date = models.DateField(blank=True, null=True, default=timezone.now)
     hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
     related_query_name='hit_count_generic_relation')
-    image = models.ImageField(default='default.jpg', upload_to='static/images')
+    image = models.ImageField( upload_to='static/images')
     objects = models.Manager()
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+     return reverse('CRUD_Item:Item_edit', kwargs={'pk': self.pk})
 
     def image_tag(self):
         return mark_safe('<img src="{}" width="100" height="90" />'.format(self.image.url))
@@ -90,8 +97,8 @@ class Item(models.Model):
 class Images(models.Model):
     imageitem = models.ForeignKey(Item, on_delete=models.CASCADE)
     title = models.CharField(max_length=30, blank=True)
-    image= models.ImageField(blank= True, upload_to='static/images')
+    images= models.ImageField(blank= True, upload_to='static/images')
 
 
     def __str__(self):
-        return self.title
+        return self.images

@@ -44,6 +44,7 @@
 </style>
 {% endblock %}
 
+<!-- <input class="form-control" name="title" type="text" placeholder="Property Title"> -->
 
 
 {% block body %}
@@ -73,25 +74,25 @@
         {% include  'alert.html' %}
         <!-- Start adding Home section -->
         <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-          <form method="post">
+          <form method="post" enctype='multipart/form-data'>
             {% csrf_token %}
-              {{ form.as_p }}
+
             <div class="row">
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Title</label>
-                  <input class="form-control" name="title" type="text" placeholder="Property Title">
+                  <br>
+                  {{ form.title }}
+                  <!-- {{ form.title.errors }} -->
                 </div>
               </div><!-- ending of column  -->
 
               <div class="col-sm-4">
                 <div class="form-group">
-                  <label>Location</label>
-                  <select class="form-control" name="location">
-                    <option selected>Kathmandu</option>
-                    <option>Bhaktapur</option>
-                    <option>Lalitpur</option>
-                  </select>
+                  <label">Location</label>
+                    <br>
+                    {{ form.location }}
+                    <!-- {{ form.location.errors }} -->
                 </div>
               </div><!-- ending of column  -->
 
@@ -99,7 +100,9 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Area(Sq ft)</label>
-                  <input class="form-control" name="area" type="number" min="0" placeholder="Area(Sq ft)">
+                  <br>
+                  {{ form.area }}
+                  {{ form.area.errors }}
                 </div>
               </div><!-- ending of column  -->
             </div><!-- ending of row  -->
@@ -112,14 +115,18 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Rooms</label>
-                  <input class="form-control" name="rooms" type="number" min="0" placeholder="No. of Rooms">
+                  <br>
+                  {{ form.rooms }}
+                  {{ form.rooms.errors }}
                 </div>
               </div><!-- ending of column  -->
 
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Bathrooms</label>
-                  <input class="form-control" name="bathrooms" type="number" min="0" placeholder="No. of Bathrooms">
+                  <br>
+                  {{ form.bathrooms }}
+                  {{ form.bathrooms.errors }}
                 </div>
               </div><!-- ending of column  -->
 
@@ -127,7 +134,9 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Floors</label>
-                  <input class="form-control" name="floors" type="number" min="0" placeholder="No. of Floors">
+                  <br>
+                  {{ form.floors }}
+                  {{ form.floors.errors }}
                 </div>
               </div><!-- ending of column  -->
             </div><!-- ending of row  -->
@@ -140,7 +149,10 @@
               <div class="col-sm-12">
                 <div class="form-group">
                   <label for="Description">Description</label>
-                  <textarea class="form-control name="description" shadow-none" id="Description" rows="5"></textarea>
+                  <br>
+                  {{ form.Description }}
+                  {{ form.description.errors }}
+                  <!-- <textarea class="form-control name="description" shadow-none" id="Description" rows="5"></textarea> -->
                 </div>
               </div>
             </div>
@@ -218,15 +230,19 @@
             <div class="row mt-4">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label>Discount Price (If any)</label>
-                  <input class="form-control" name="discount_price" type="number" min="0" placeholder="Discount price">
+                  <label>Phone Number</label>
+                  <br>
+                  {{ form.phone_number }}
+                  <!-- {{ form.phone_number.errors }} -->
                 </div>
               </div>
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label>Final Price</label>
-                  <input class="form-control" name="final_price" type="number" min="0" placeholder="Final Price of property">
+                  <label>Price</label>
+                  <br>
+                  {{ form.price }}
+                  <!-- {{ form.price.errors }} -->
                 </div>
               </div>
             </div>
@@ -236,8 +252,8 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="customFile" multiple>
-                  <label class="custom-file-label" for="customFile">Choose file</label>
+                  {{ form.image }}
+                  {{ form.image.errors }}
                 </div>
               </div>
             </div>
@@ -250,6 +266,14 @@
               </div>
             </div>
           </form>
+
+
+          <!-- <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                  {{ form.as_p}}
+                  <button type="submit">Save</button>
+                </form> -->
+
+
         </div>
         <!-- Ending of adding home section -->
 
@@ -582,7 +606,6 @@
 
   </div>
 </section>
-
 
 
 

@@ -11,6 +11,7 @@ urlpatterns = [
     path('loginSignup', views.signup, name='signup'),
     path('login', views.Login, name='login'),
     path('profile', views.profilepage, name='user profile'),
+    # path('profile', views.user_profile, name='user_profile'),
     path('userPropertyList', views.userPropertyList, name="user property lists"),
     path('search/', views.SearchResultsView, name='property_search'),
     path('searchfilter', views.SearchFilter, name='Searchfilter'),

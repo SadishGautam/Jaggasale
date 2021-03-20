@@ -11,7 +11,6 @@ from django.views.generic import DetailView, ListView
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
-from .models import Item
 from django.shortcuts import get_object_or_404
 from hitcount.views import HitCountDetailView
 from .forms import HouseForm
@@ -43,6 +42,15 @@ def signup(request):
 def Login(request):
     return render(request, "login.html")
 
+
+
+
+
+# ----------------user profile
+# def user_profile(request):
+#     user = request.user
+#     user_posts = Items.objects.filter(editor=user)
+#     return render(request, 'profile.html', {user_posts': user_posts})
 
 
 
@@ -127,20 +135,25 @@ def locationProperties(request):
 
 
 
-
+IMAGE_FILE_TYPES = [ 'jpg', 'jpeg']
 
 @login_required
 def Add_property_by_user(request):
-    form = HouseForm(request.POST or None)
+    form = HouseForm(request.POST or None, request.FILES)
     if request.method == "POST":
-        form = HouseForm(request.POST)
+
         if form.is_valid():
             form.save()
             messages.success(request, "saved")
+            # Item.image = request.FILES['image']
+            # file_type = Item.image.split('.')[-1]
+            # file_type = file_type.lower()
+            # if file_type not in IMAGE_FILE_TYPES:
+            #     messages.error(request, "Please Upload png, jpg or jpeg image only")
 
-          # else:
-          #     form = HouseForm()
-          #     messages.error(request, "Invalid email or password")
+         # else:
+         #     form = HouseForm()
+         #     messages.error(request, "Invalid email or password")
     return render(request, "Add_apartment.html", {'form': form})
 
 
@@ -225,7 +238,19 @@ def handleLogout(request):
 
 
 # Starting of adding property by user
-
+# @login_required
+# def property_create(request):
+#     if request.method == 'POST':
+#         form = HouseForm(request.POST, request.FILES)
+#
+#         if form.is_valid():
+#             House = form.save(commit=False)
+#             House.user = request.user
+#             House.category = request.category
+#             House.save()
+#             return redirect('CRUD_Item:Item_edit')
+#     return render(request, 'Add_apartment.html', {'form': form})
+#
 
 
 
