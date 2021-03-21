@@ -62,14 +62,12 @@ class Item(models.Model):
     picture_count = models.IntegerField(blank=True, null=True)
     area = models.IntegerField(blank=True, null=True)
     owner_name = models.CharField(max_length=30)
-
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+9779812345678'. Up to 14 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=10, blank=False, default='')
     date = models.DateField(blank=True, null=True)
     rooms = models.IntegerField(blank=True, null=True)
     bathrooms = models.IntegerField(blank=True, null=True)
     floors = models.IntegerField(blank=True, null=True)
-
     Description = RichTextUploadingField()
     location = models.CharField(
         choices=LOCATION_LIST, max_length=2)
@@ -77,6 +75,27 @@ class Item(models.Model):
     date = date = models.DateField(blank=True, null=True, default=timezone.now)
     hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
     related_query_name='hit_count_generic_relation')
+
+
+# checkbox items
+    have_parking = models.BooleanField("Parking", default=False)
+    have_garden = models.BooleanField("garden", default=False)
+    have_drinage = models.BooleanField("drinage", default=False)
+    have_balcony = models.BooleanField("balcony", default=False)
+    have_hallRoom = models.BooleanField("hallRoom", default=False)
+    have_diningRoom = models.BooleanField("diningRoom", default=False)
+    have_elevator = models.BooleanField("elevator", default=False)
+    have_water = models.BooleanField("water", default=False)
+    have_electricityBackup = models.BooleanField("electricityBackup", default=False)
+    have_securityStaff = models.BooleanField("securityStaff", default=False)
+    have_lift = models.BooleanField("lift", default=False)
+    have_kidsPlayground = models.BooleanField("kidsPlayground", default=False)
+    have_electricityPole = models.BooleanField("electricityPole", default=False)
+    have_road = models.BooleanField("road", default=False)
+    have_waterSupply = models.BooleanField("waterSupply", default=False)
+
+
+
     image = models.ImageField( upload_to='static/images')
     objects = models.Manager()
 
@@ -91,6 +110,9 @@ class Item(models.Model):
 
     image_tag.short_description = 'Image'
 
+
+# class PropertyFeatureCheckbox(models.Model):
+#
 
 
 

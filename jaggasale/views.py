@@ -135,7 +135,7 @@ def locationProperties(request):
 
 
 
-IMAGE_FILE_TYPES = [ 'jpg', 'jpeg']
+
 
 @login_required
 def Add_property_by_user(request):
@@ -145,11 +145,6 @@ def Add_property_by_user(request):
         if form.is_valid():
             form.save()
             messages.success(request, "saved")
-            # Item.image = request.FILES['image']
-            # file_type = Item.image.split('.')[-1]
-            # file_type = file_type.lower()
-            # if file_type not in IMAGE_FILE_TYPES:
-            #     messages.error(request, "Please Upload png, jpg or jpeg image only")
 
          # else:
          #     form = HouseForm()

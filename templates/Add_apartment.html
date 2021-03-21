@@ -147,13 +147,17 @@
             <!-- Description text -->
             <div class="row">
               <div class="col-sm-12">
-                <div class="form-group">
+                <div class="form-group" id="id_description_box">
                   <label for="Description">Description</label>
                   <br>
                   {{ form.Description }}
                   {{ form.description.errors }}
+
                   <!-- <textarea class="form-control name="description" shadow-none" id="Description" rows="5"></textarea> -->
                 </div>
+                <script>
+
+                </script>
               </div>
             </div>
 
@@ -164,62 +168,108 @@
             <div class="row">
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Parking">
-                  <label class="custom-control-label" for="Parking">Parking</label>
+                  <!-- <input type="checkbox" class="custom-control-input" id="Parking"> -->
+                  {{form.have_parking}}
+                  <label class="custom-control-label" for="id_have_parking">Parking</label>
                 </div>
               </div>
 
-              <div class="col-sm-3">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Garden">
-                  <label class="custom-control-label" for="Garden">Garden</label>
-                </div>
-              </div>
+              <script>
+                let have_parking = document.querySelector("#id_have_parking");
+                have_parking.classList.add("custom-control-input");
+              </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Drinage">
-                  <label class="custom-control-label" for="Drinage">Drinage</label>
+
+                  <!-- <input type="checkbox" class="custom-control-input" id="Garden"> -->
+                  {{form.have_garden}}
+                  <label class="custom-control-label" for="id_have_garden">Garden</label>
                 </div>
               </div>
+              <script>
+                let garden = document.querySelector("#id_have_garden");
+                garden.classList.add("custom-control-input");
+              </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Balcony">
-                  <label class="custom-control-label" for="Balcony">Balcony</label>
+                  <!-- <input type="checkbox" class="custom-control-input" id="Drinage"> -->
+                  {{form.have_drinage}}
+
+                  <label class="custom-control-label" for="id_have_drinage">Drinage</label>
                 </div>
               </div>
+              <script>
+                let Drinage = document.querySelector("#id_have_drinage");
+                Drinage.classList.add("custom-control-input");
+              </script>
+
+              <div class="col-sm-3">
+                <div class="custom-control custom-checkbox">
+                  <!-- <input type="checkbox" class="custom-control-input" id="Balcony"> -->
+                  {{form.have_balcony}}
+
+                  <label class="custom-control-label" for="id_have_balcony">Balcony</label>
+                </div>
+              </div>
+              <script>
+                let have_balcony = document.querySelector("#id_have_balcony");
+                have_balcony.classList.add("custom-control-input");
+              </script>
             </div>
 
 
             <div class="row mt-2">
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Hall">
-                  <label class="custom-control-label" for="Hall">Hall room</label>
+                  <!-- <input type="checkbox" class="custom-control-input" id="Hall"> -->
+                  {{form.have_hallRoom}}
+                  <label class="custom-control-label" for="id_have_hallRoom">Hall room</label>
                 </div>
               </div>
+              <script>
+                let have_hallRoom = document.querySelector("#id_have_hallRoom");
+                have_hallRoom.classList.add("custom-control-input");
+              </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Dining">
-                  <label class="custom-control-label" for="Dining">Dining Room</label>
+                  <!-- <input type="checkbox" class="custom-control-input" id="Dining"> -->
+                  {{form.have_diningRoom}}
+
+                  <label class="custom-control-label" for="id_have_diningRoom">Dining Room</label>
                 </div>
               </div>
+              <script>
+                let have_diningRoom = document.querySelector("#id_have_diningRoom");
+                have_diningRoom.classList.add("custom-control-input");
+              </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Elevator">
-                  <label class="custom-control-label" for="Elevator">Elevator</label>
+                  <!-- <input type="checkbox" class="custom-control-input" id="Elevator"> -->
+                  {{form.have_elevator}}
+                  <label class="custom-control-label" for="id_have_elevator">Elevator</label>
                 </div>
               </div>
+              <script>
+                let have_elevator = document.querySelector("#id_have_elevator");
+                have_elevator.classList.add("custom-control-input");
+              </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Water">
-                  <label class="custom-control-label" for="Water">Water</label>
+                  <!-- <input type="checkbox" class="custom-control-input" id="Water"> -->
+                  {{form.have_water}}
+
+                  <label class="custom-control-label" for="id_have_water">Water</label>
                 </div>
               </div>
+              <script>
+                let have_water = document.querySelector("#id_have_water");
+                have_water.classList.add("custom-control-input");
+              </script>
             </div>
 
 

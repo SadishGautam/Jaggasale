@@ -1,45 +1,45 @@
 {% extends 'basic.html' %}
 {% load static %}
-{% block title %}  About - JaggaSale {% endblock %}
+{% block title %} About - JaggaSale {% endblock %}
 
 
 {% block css %}
-  .header {
-    box-shadow: 1px 1px 10px 1px grey;
-  }
+.header {
+box-shadow: 1px 1px 10px 1px grey;
+}
 
-  .header a.hm {
-    background: transparent;
-  }
+.header a.hm {
+background: transparent;
+}
 
-  .header a {
-    color: black !important;
-  }
+.header a {
+color: black !important;
+}
 
-  .header .listing .list a,
-  .header .listing .refresh,
-  .header .listing .heart,
-  .header .listing .user {
-    border: 1px solid var(--pri-color);
-  }
+.header .listing .list a,
+.header .listing .refresh,
+.header .listing .heart,
+.header .listing .user {
+border: 1px solid var(--pri-color);
+}
 
-  .header .listing .list a:hover {
-    background: var(--pri-color);
-    color: white !important;
-  }
+.header .listing .list a:hover {
+background: var(--pri-color);
+color: white !important;
+}
 
-  .header .menu #bars {
-    color: var(--pri-color) !important;
-  }
+.header .menu #bars {
+color: var(--pri-color) !important;
+}
 
-  .header .register a {
-    color: var(--pri-color) !important;
-  }
+.header .register a {
+color: var(--pri-color) !important;
+}
 
-  .header .register a:hover {
-    color: var(--sec-color) !important;
-  }
- {% endblock %}
+.header .register a:hover {
+color: var(--sec-color) !important;
+}
+{% endblock %}
 
 {% block body %}
 
@@ -47,125 +47,189 @@
 
 
 
+<section id="Adding_property">
+  <h2 class="text-center pt-5" style="font-family:var(--pri-font); text-shadow: 1px 1px 3px grey;margin-bottom:20px;">Hello {{user}}</h2>
+  <div class="container pb-5">
+    <!-- <h5 style="font-family:var(--pri-font); text-shadow: 1px 1px 3px grey;margin-bottom:20px;">Fill all the required fields</h5> -->
 
- <section class="profile_section mt-5 mb-5">
-   <div class="container">
+    <div class="add_property_container_box">
+      <ul class="nav nav-pills text-center  mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-property-tab" data-toggle="pill" href="#pills-property" role="tab" aria-controls="pills-property" aria-selected="false">My Properties</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Land</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        {% include  'alert.html' %}
+        <!-- Start adding Home section -->
+        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
 
-<h1 class="text-center mt-5 mb-5" style"  font-Family: 'Farro', sans-serif;">Personal information</h1>
-                      <table class="table">
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Username</td>
-                        <td>{{ user.username }}</td>
-                        <td><button type="button" class="btn btn-primary disabled" disabled>Change</button></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Name</td>
-                        <td>{{ user.first_name}} {{ user.last_name }} </td>
-                        <td><form class="form-inline my-2 my-lg-0">
-                              <input class="form-control mr-sm-2" type="text" placeholder="Full Name" >
-                              <button type="button" class="btn btn-primary">Change</button> </form></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Email</td>
-                        <td>{{ user.email }}</td>
-                        <td> <form class="form-inline my-2 my-lg-0">
-                              <input class="form-control mr-sm-2" type="email" placeholder="Email" >
-                              <button type="button" class="btn btn-primary">Change</button>
-                            </form> </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4</th>
-                        <td>Password</td>
-                        <td>**********</td>
-                        <td>
+          <section class="profile_section mt-5 mb-5">
+            <div class="container">
 
-
-                              <a href='{%url 'reset_password'%}' class="btn btn-primary">Change</a></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">5</th>
-                        <td>Last login</td>
-                        <td>{{ user.last_login }} </td>
-                        <td><button type="button" class="btn btn-primary disabled" disabled>Change</button></td>
-                      </tr>
-                      <tr>
-                        <th scope="row">6</th>
-                        <td>Joined date</td>
-                        <td>{{ user.date_joined }}</td>
-                        <td><button type="button" class="btn btn-primary disabled" disabled>Change</button></td>
-                      </tr>
-
-                      <style>
-                        .table td{
-                          font-weight: bold;
-                        }
-                      </style>
-
-
-                  </table>
-
-
-
-   </div>
+              <h3 class="text-center mb-5" style="font-family:var(--pri-font); text-shadow: 1px 1px 3px grey;margin-bottom:20px;">Personal Information</h3>
+              <table class="table">
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Username</td>
+                  <td>{{ user.username }}</td>
+                  <td><button type="button" class="btn btn-primary disabled" disabled>Change</button></td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Name</td>
+                  <td>{{ user.first_name}} {{ user.last_name }} </td>
+                  <td>
+                    <form class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2" type="text" placeholder="Full Name">
+                      <button type="button" class="btn btn-primary">Change</button>
+                    </form>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Email</td>
+                  <td>{{ user.email }}</td>
+                  <td>
+                    <form class="form-inline my-2 my-lg-0">
+                      <input class="form-control mr-sm-2" type="email" placeholder="Email">
+                      <button type="button" class="btn btn-primary">Change</button>
+                    </form>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>Password</td>
+                  <td>**********</td>
+                  <td>
 
 
+                    <a href='{%url 'reset_password'%}' class="btn btn-primary">Change</a>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>Last login</td>
+                  <td>{{ user.last_login }} </td>
+                  <td><button type="button" class="btn btn-primary disabled" disabled>Change</button></td>
+                </tr>
+                <tr>
+                  <th scope="row">6</th>
+                  <td>Joined date</td>
+                  <td>{{ user.date_joined }}</td>
+                  <td><button type="button" class="btn btn-primary disabled" disabled>Change</button></td>
+                </tr>
+
+                <style>
+                  .table td {
+                    font-weight: bold;
+                  }
+                </style>
+
+
+              </table>
+            </div>
+          </section>
 
 
 
 
-<!-- ---------------------------------- -->
-<!-- 
-<div class="container">
-  <div id="owl-sold-property" class="owl-carousel owl-theme">
-    {% for object in user_posts %}
-    {% if object.category == "H" %}
-    <div class="item sold-item">
-      <div class="card mb-5" style="padding:15px;">
-        <div class="card-img" style="position: relative;overflow:hidden;">
-          <div class="img-box">
-            <img src="{{object.image.url}}" height="230px">
-          </div>
-          <a href="">
-            <div class="img-overlay"></div>
-          </a>
-          <div class="badge badge1 px-2 py-1 badge-danger">SOLD</div>
-          <div class="badge badge2 px-2 py-1"><i class="fas fa-camera"></i> 15</div>
-          <div class="home-heart">
-            <i id="home4" class="fas mx-1 py-2 fa-home"></i>
-            <i id="heart4" class="fas mx-1 py-2 fa-heart"></i>
-          </div>
+
         </div>
+        <!-- Ending of profile section -->
 
-        <div class="card-title mt-3">
-          <a href="/property/{{i.id}}">{{object.title}}</a>
-        </div>
-        <div class="car-footer">
-          <strike>Rs. 34,00,000/mo</strike> <br> <span style="color:black;font-weight:bold;">Rs. 2,80,000/mo</span>
-        </div>
-        <hr style="border-top:.5px solid lightgrey">
-        <div class="card-content d-flex" style="justify-content: space-between">
-          <div class="bed room">
-            <i class="fas fa-bed"></i> 5
-          </div>
-          <div class="bath room">
-            <i class="fas fa-bath"></i> 2
-          </div>
-          <div class="year room">
-            <i class="fas fa-clock"></i> 2019
-          </div>
-        </div>
 
+
+
+        <!-- Astaring of adding Apartment section -->
+        <div class="tab-pane fade" id="pills-property" role="tabpanel" aria-labelledby="pills-property-tab">
+
+          <div class="row">
+            <div class="col-sm-4">
+
+
+
+              <div class="card">
+                <div class="card-img" style="position: relative;overflow:hidden;">
+                  <div class="img-box" style="height:210px">
+                    <img src="/media/static/images/pexels-pixabay-210617.jpg" height="100%" width="100%">
+                  </div>
+                  <a href="">
+                    <div class="img-overlay"></div>
+                  </a>
+                  <div class="badge badge1 px-2 py-1 badge-success">ACTIVE</div>
+                  <div class="badge badge2 px-2 py-1"><i class="fas fa-camera"></i> 08</div>
+                  <div class="home-heart">
+                    <i id="home3" class="fas mx-1 py-2 fa-home"></i>
+                    <i id="heart3" class="fas mx-1 py-2 fa-heart"></i>
+                  </div>
+                </div>
+                <div class="container px-4">
+                  <div class="card-title mt-3">
+                    <a href="#">Office Space At Koteshwor</a>
+                  </div>
+                  <div class="card-content mt-3">
+                    <div class="row room">
+                      <div class="col-lg-6">
+                        <p><i class="fas fa-home"></i> Served</p>
+                      </div>
+                      <div class="col-lg-6">
+                        <p><i class="fas fa-ruler-combined"></i> 2000 sq ft</p>
+                      </div>
+                      <div class="col-lg-6">
+                        <p><i class="fas fa-bed"></i> 20 Rooms</p>
+                      </div>
+                      <div class="col-lg-6">
+                        <p> <i class="fas fa-clock"></i> 2019</p>
+                      </div>
+                    </div>
+                    <hr style="border-top:.5px solid lightgrey">
+                    <div class="car-footer pb-4">
+                      <strike>Rs. 50,000/mo</strike> <span style="color:black;font-weight:bold;" class="ml-3">Rs. 35,000/mo</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
+
+
+
+
+
+        </div>
+        <!-- Ending of adding Apartment section -->
+
+
+
+
+
+        <!-- staring of adding Land section -->
+        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+          <div class="row">
+
+          </div>Hello
+
+        </div>
+        <!-- Ending of adding Land section -->
       </div>
     </div>
-    {% endif %}
-    {% endfor %}
+
+
+
+
+
 
   </div>
-</div>
- -->
+</section>
 
 
 
@@ -174,11 +238,4 @@
 
 
 
-
-
-
- </section>
-
-
-
- {% endblock %}
+{% endblock %}

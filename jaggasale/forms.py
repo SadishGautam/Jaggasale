@@ -1,5 +1,5 @@
 from django import forms
-from .models import Item
+from .models import Item, Images
 
 LOCATION_LIST = (
     ('K', 'Kathmandu'),
@@ -13,21 +13,27 @@ LOCATION_LIST = (
 class HouseForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['title','location', 'area', 'rooms', 'bathrooms', 'floors', 'Description',  'price', 'phone_number', 'image',  ]
+        fields = ['title', 'location', 'area', 'rooms', 'bathrooms',
+                  'floors', 'Description',  'price', 'phone_number',
+                  'have_parking', 'have_garden', 'have_drinage', 'have_balcony',
+                  'have_hallRoom','have_diningRoom', 'have_elevator', 'have_water',
+                  'have_electricityBackup', 'have_securityStaff',
+                  'have_lift', 'have_kidsPlayground', 'have_electricityPole',
+                  'have_road', 'have_waterSupply', 'image', ]
+
+
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Title', 'class': 'form-control'}),
-            'location': forms.Select(attrs={ 'class': 'form-control mt-1', 'type': 'number'}),
-            'area': forms.TextInput(attrs={'placeholder': 'Area', 'class': 'form-control'}),
-            'rooms': forms.TextInput(attrs={'placeholder': 'Rooms', 'class': 'form-control'}),
-            'bathrooms': forms.TextInput(attrs={'placeholder': 'Bathrooms', 'class': 'form-control'}),
-            'floors': forms.TextInput(attrs={'placeholder': 'Floors', 'class': 'form-control'}),
-            'Description': forms.TextInput(attrs={'placeholder': 'Description', 'class': 'from-control', 'rows': '5'}),
-            'price': forms.TextInput(attrs={'placeholder': 'Price', 'class': 'form-control'}),
+            'location': forms.Select(attrs={'class': 'form-control mt-1', 'type': 'number'}),
+            'area': forms.NumberInput(attrs={'placeholder': 'Area', 'class': 'form-control', 'min': 0}),
+            'rooms': forms.NumberInput(attrs={'placeholder': 'Rooms', 'class': 'form-control', 'min': 1}),
+            'bathrooms': forms.NumberInput(attrs={'placeholder': 'Bathrooms', 'class': 'form-control', 'min': 1}),
+            'floors': forms.NumberInput(attrs={'placeholder': 'Floors', 'class': 'form-control', 'min': 1}),
+            'Description': forms.TextInput(attrs={'placeholder': 'Description', 'class': 'from-control', 'rows': 5, 'cols': '100'}),
+            'price': forms.NumberInput(attrs={'placeholder': 'Price', 'class': 'form-control', 'min': 1}),
             'phone_number': forms.TextInput(attrs={'placeholder': 'Phone number', 'class': 'form-control'}),
 
         }
-
-
 
         # exclude = ('label', 'email', 'slug', 'category','sold_or_rent', 'picture_count', 'owner_name', 'phone_number', 'date', 'location', 'map', 'image')
         # title = forms.CharField(max_length=50)
