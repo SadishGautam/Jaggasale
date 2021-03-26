@@ -19,12 +19,8 @@ from .forms import HouseForm
 
 class HomeView(ListView):
     model = Item
-    # category = Item.objects.all()
-    # category_type = Item.objects.filter()
     template_name = 'index.html'
 
-# def Home(request):
-#     return render(request, "index.html")
 
 def handler404(request, exception):
     context = {}
@@ -55,16 +51,25 @@ def Login(request):
 
 
 
-
-
-
+@login_required
 def profilepage(request):
-    return render(request, 'profile.html')
+    # user_property = Item.objects.filter(user=request.user)
+    return render(request, 'profile.html',
+    # {'user_property': user_property}
+    )
+
+#
+# def profilepage(ListView):
+#     model = Item
+#     template_name = 'profile.html'
+#     context_object_name = 'user_property'
+#
+#     def get_queryset(self):
+#         return self.Item.objects.all().filter(user=self.request.user)
 
 
 def userPropertyList(request):
     return render(request, 'userPropertyLists')
-
 
 
 
@@ -100,7 +105,9 @@ def SearchFilter(request):
     if request.method == "POST":
         minprice = request.POST.get('minprice')
         maxprice = request.POST.get('maxprice')
-        print('maxprice')
+        print(minprice)
+        print(maxprice)
+
         filtered_search = Item.objects.raw('select id, title, price from jaggasale_item where price between "'+minprice+'" and "'+maxprice+'"')
         return render(request, 'search_results.html', {'filtered_search': filtered_search})
 
@@ -143,12 +150,17 @@ def Add_property_by_user(request):
     if request.method == "POST":
 
         if form.is_valid():
-            form.save()
+            saving =  form.save(commit=False)
+            print(request.user)
+            saving.user = request.user
+
+            saving.save()
+            # response.user.HouseForm.add(form)
             messages.success(request, "saved")
 
-         # else:
-         #     form = HouseForm()
-         #     messages.error(request, "Invalid email or password")
+        # else:
+        #      form = HouseForm()
+        #      messages.error(request, "Property cannot be saved")
     return render(request, "Add_apartment.html", {'form': form})
 
 
@@ -230,31 +242,3 @@ def handleLogout(request):
     logout(request)
     messages.success(request, "Logged out Successfully")
     return render(request, "index.html")
-
-
-# Starting of adding property by user
-# @login_required
-# def property_create(request):
-#     if request.method == 'POST':
-#         form = HouseForm(request.POST, request.FILES)
-#
-#         if form.is_valid():
-#             House = form.save(commit=False)
-#             House.user = request.user
-#             House.category = request.category
-#             House.save()
-#             return redirect('CRUD_Item:Item_edit')
-#     return render(request, 'Add_apartment.html', {'form': form})
-#
-
-
-
-
-
-
-
-
-
-
-
-    # Ending of adding property by user

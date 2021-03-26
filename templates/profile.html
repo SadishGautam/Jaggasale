@@ -145,10 +145,10 @@ color: var(--sec-color) !important;
 
 
 
-
+{% if user.is_authenticated %}
         <!-- Astaring of adding Apartment section -->
         <div class="tab-pane fade" id="pills-property" role="tabpanel" aria-labelledby="pills-property-tab">
-
+{% for property in user_property %}
           <div class="row">
             <div class="col-sm-4">
 
@@ -171,7 +171,7 @@ color: var(--sec-color) !important;
                 </div>
                 <div class="container px-4">
                   <div class="card-title mt-3">
-                    <a href="#">Office Space At Koteshwor</a>
+                    <a href="#">{property.title}</a>
                   </div>
                   <div class="card-content mt-3">
                     <div class="row room">
@@ -203,9 +203,10 @@ color: var(--sec-color) !important;
 
 
 
-
+{% endfor %}
 
         </div>
+        {% endif %}
         <!-- Ending of adding Apartment section -->
 
 

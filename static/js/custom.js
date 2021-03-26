@@ -127,24 +127,29 @@ sliders.oninput = function() {
 // --------------------------sadish Codes-----------------------
 //
 var sliders7 = document.getElementById("customRange9");
-var outputs7 = document.getElementById("demo9");
-outputs7.innerHTML = sliders7.value;
+if(sliders7.length){
+  var outputs7 = document.getElementById("demo9");
+  outputs7.innerHTML = sliders7.value;
 
-sliders7.oninput = function() {
-  outputs7.innerHTML = this.value;
+  sliders7.oninput = function() {
+    outputs7.innerHTML = this.value;
+  }
+
 }
 
 var sliders8 = document.getElementById("customRange10");
+if(sliders8.length){
 var outputs8 = document.getElementById("demo10");
 outputs8.innerHTML = sliders8.value;
 
 sliders8.oninput = function() {
   outputs8.innerHTML = this.value;
 }
+}
 
 
 // ------------------------ Buy Square Feet Range----------------------
-// --------------------------sadish Codes-----------------------
+// -if(sliders7.length){-------------------------sadish Codes-----------------------
 
 var slider3 = document.getElementById("customRange3");
 var output3 = document.getElementById("demo3");

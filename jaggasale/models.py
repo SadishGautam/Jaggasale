@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from django.utils.safestring import mark_safe
@@ -48,6 +49,7 @@ class user_details(models.Model):
 
 
 class Item(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     price = models.IntegerField()
     email = models.EmailField(max_length=70, null=True, blank=True, unique=True)

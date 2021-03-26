@@ -13,7 +13,9 @@ LOCATION_LIST = (
 class HouseForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ['title', 'location', 'area', 'rooms', 'bathrooms',
+        fields = [
+        # 'user',
+        'title', 'location', 'area', 'rooms', 'bathrooms',
                   'floors', 'Description',  'price', 'phone_number',
                   'have_parking', 'have_garden', 'have_drinage', 'have_balcony',
                   'have_hallRoom','have_diningRoom', 'have_elevator', 'have_water',

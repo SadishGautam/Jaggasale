@@ -74,9 +74,9 @@
         {% csrf_token %}
       <div class="price input-box">
         <button class="btn dropdown-toggle" data-toggle="dropdown">
-          Price: Rs. <span id="demo1"></span>
+          Price: Rs. <span id="demo1" name="demo1"></span>
           &ndash;
-          Rs. <span id="demo2"></span>
+          Rs. <span id="demo2"  name="demo1"></span>
         </button>
         <div class="dropdown-menu p-3" style="z-index:1">
           Min Price: <input type="range" class="custom-range" name="minprice" min="10000" max="100000" value="50000" id="customRange1">
@@ -84,11 +84,13 @@
           Max Price: <input type="range" class="custom-range" name="maxprice" min="100000" max="1000000" value="800000" id="customRange2">
         </div>
       </div>
-      <button type="submit" class="btn search" name="button" value="search"> SEARCH</button>
+      <button type="submit" class="btn search" name="button" value="psearch"> SEARCH</button>
       <!-- <div class="btn search">
         SEARCH
       </div> -->
       </form>
+
+
       <!-- <div class="location">
         <a style="font-family:'abel';color:var(--pri-color);" href="new-home.php">View all Land & Property</a>
       </div> -->
