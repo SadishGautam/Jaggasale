@@ -53,10 +53,13 @@ def Login(request):
 
 @login_required
 def profilepage(request):
-    # user_property = Item.objects.filter(user=request.user)
+    user_property = Item.objects.filter(user=request.user,)
     return render(request, 'profile.html',
-    # {'user_property': user_property}
+    {'user_property': user_property}
     )
+
+@login_required
+
 
 #
 # def profilepage(ListView):
@@ -158,10 +161,11 @@ def Add_property_by_user(request):
             # response.user.HouseForm.add(form)
             messages.success(request, "saved")
 
-        # else:
-        #      form = HouseForm()
-        #      messages.error(request, "Property cannot be saved")
+        else:
+             form = HouseForm()
+             messages.error(request, "Property cannot be saved")
     return render(request, "Add_apartment.html", {'form': form})
+
 
 
 
