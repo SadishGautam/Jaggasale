@@ -1,0 +1,74 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} Login - JaggaSale {% endblock %}
+
+
+
+
+{% block css %}
+.header{
+  background-color: #ffffff;
+box-shadow: 1px 1px 10px 1px grey;
+}
+.header a.hm{
+background:transparent;
+}
+.header a{
+color:black!important;
+}
+.header .listing .list a,
+.header .listing .refresh,
+.header .listing .heart,
+.header .listing .user{
+border: 1px solid var(--pri-color);
+}
+.header .listing .list a:hover{
+background: var(--pri-color);
+color:white!important;
+}
+.header .menu #bars{
+color:var(--pri-color)!important;
+}
+.header .register a{
+color:var(--pri-color)!important;
+}
+.header .register a:hover{
+color:var(--sec-color)!important;
+}
+section.form{
+font-family:'abel';
+}
+{% endblock %}
+
+
+
+{% block body %}
+
+
+<div class="clearfix"></div>
+
+
+<section class="update-form ">
+  <div class="container">
+    <div class="row mt-5">
+
+      <div class="col-md-3 "> </div>
+
+{% include  'alert.html' %}
+
+      <div class="col-md-6 clearfix">
+
+        <form action="" method="post">{% csrf_token %}
+              {{ edit_form.as_table  }}
+              <input type="submit" value="update" />
+          </form>
+
+      <div class="col-md-3 "> </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+{% endblock %}

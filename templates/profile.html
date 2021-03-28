@@ -168,7 +168,7 @@ color: var(--sec-color) !important;
                 </div>
                 <div class="container px-4">
                   <div class="card-title mt-3">
-                    <a href="{{property.title}}">{{property.title|slice:"0:20"}}...</a>
+                    <a href="{{property.title}}">{{property.title|slice:"0:18"}}...</a>
                   </div>
                   <div class="card-content mt-3">
 
@@ -179,10 +179,10 @@ color: var(--sec-color) !important;
                   </div>
                   <div class="row room">
                     <div class="col-lg-6">
-                      <a href="#"> <p><i class="fa fa-bars"></i> Edit</p> </a>
+                      <a href="update/{{property.id}}" style="color: #43c370 !important"> <p><i class="fa fa-bars"></i> Edit</p> </a>
                     </div>
                     <div class="col-lg-6">
-                      <a href="#">   <p><i class="fa fa-trash"></i> Delete</p> </a>
+                      <a href="delete/{{property.id}}" style="color: #c73a38 !important">   <p><i class="fa fa-trash"></i> Delete</p> </a>
                     </div>
                     <!-- <div class="col-lg-6">
                       <p><i class="fas fa-bed"></i> 20 Rooms</p>
@@ -201,30 +201,17 @@ color: var(--sec-color) !important;
         <!-- Ending of adding Apartment section -->
 
 <style media="screen">
-  .ml-3, .mx-3 {
-    margin-left: 0rem!important;
-}
-
-
-.px-4 {
-     padding-left: 9px !important;
-     padding-right: 9px !important;
-
-}
-
-a{
-  margin-left: 0rem!important;
-  text-decoration: none !important;
-  color: black;
-  font-weight: bold;
-  letter-spacing: 1px;
-  font-family: 'Abel', 'sans-serif';
-  font-size: 1.25em;
-  transition: .5s;
-  text
+  .card a{
+    text-decoration: none !important;
+    color: black !important;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-family: 'Abel', 'sans-serif';
+    font-size: 1.2em;
+    transition: .5s;
   }
-
-
 </style>
 
 

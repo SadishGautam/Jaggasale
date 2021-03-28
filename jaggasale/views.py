@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .models import Item, Images
 from math import ceil
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views import generic
 from django.views.generic import DetailView, ListView
@@ -13,7 +14,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from hitcount.views import HitCountDetailView
-from .forms import HouseForm
+from .forms import HouseForm, AdditionalImages
+from django.forms import modelformset_factory
 # from .filters import ItemFilter
 
 
@@ -29,11 +31,9 @@ def handler404(request, exception):
     return response
 
 
-
-
-
 def signup(request):
     return render(request, "registerform.html")
+
 
 def Login(request):
     return render(request, "login.html")
@@ -41,66 +41,121 @@ def Login(request):
 
 
 
-
-# ----------------user profile
-# def user_profile(request):
-#     user = request.user
-#     user_posts = Items.objects.filter(editor=user)
-#     return render(request, 'profile.html', {user_posts': user_posts})
-
-
-
-
+# showing users property in profile page
 @login_required
 def profilepage(request):
-    user_property = Item.objects.filter(user=request.user,)
+    user_property = Item.objects.filter(user=request.user)
+
     return render(request, 'profile.html',
-    {'user_property': user_property}
-    )
+                  {'user_property': user_property}
+                  )
+
+
+# Adding property by user
+@login_required
+def Add_property_by_user(request):
+    # AdditionalImagesSet = modelformset_factory(Images,
+    #                                     form=AdditionalImages, extra=3)
+    form = HouseForm(request.POST or None, request.FILES)
+    img_form = AdditionalImages(request.POST or None, request.FILES)
+    count = Item.objects.filter(user=request.user).count()
+    print(count)
+
+    if request.method == "POST":
+
+        if form.is_valid():
+            saving = form.save(commit=False)
+            print(request.user)
+            saving.user = request.user
+
+            saving.save()
+            # response.user.HouseForm.add(form)
+            messages.success(request, "saved")
+
+        if img_form.is_valid():
+            saving = img_form.save(commit=False)
+            print(request.user)
+            saving.user = request.user
+
+            saving.save()
+            # response.user.HouseForm.add(form)
+            messages.success(request, "saved")
+
+        else:
+            form = HouseForm()
+            img_form = AdditionalImages(queryset=Images.objects.none())
+            messages.error(request, "Property cannot be saved")
+    return render(request, "Add_apartment.html", {'form': form, 'img_form': img_form, 'count': count})
+
+
+
+
+# Deleting property by user
 
 @login_required
+def delete_property(request, id):
+    id = int(id)
+    try:
+        user_property = Item.objects.filter(user=request.user)
+        del_property = Item.objects.get(pk=id)
+    except Item.DoesNotExist:
+        messages.success(request, "Error in deleting property")
+    del_property.delete()
+    print("deleted")
+    messages.success(request, "Property deleted successfully")
+    return render(request, 'profile.html',{'del_property': del_property})
 
 
-#
-# def profilepage(ListView):
-#     model = Item
-#     template_name = 'profile.html'
-#     context_object_name = 'user_property'
-#
-#     def get_queryset(self):
-#         return self.Item.objects.all().filter(user=self.request.user)
+# Updating property by user
+@login_required
+def update_property(request, id):
+    user_property = Item.objects.filter(user=request.user)
+    edit_property = Item.objects.get(pk=id)
+    edit_form = HouseForm(request.POST or None, request.FILES, instance = edit_property)
+
+    # edit_form = HouseForm(request.POST or None, instance = edit_property)
+    if edit_form.is_valid():
+        saving = edit_form.save()
+        print(request.user)
+
+
+    contex = {'user_property': user_property,
+              'edit_property': edit_property,
+              'edit_form': edit_form
+              }
+    messages.success(request, "Property Updated successfully")
+    return render(request, 'updateform/update.html',contex)
+
+
 
 
 def userPropertyList(request):
     return render(request, 'userPropertyLists')
 
-
-
+# Property detail page
 def handleDetails(request, id):
-    #fetch the property using id
+    # fetch the property using id
     propertyLists = Item.objects.all()
     propertyList = Item.objects.get(pk=id)
     print(propertyList)
     count_hit = True
     # propertyImages = Images.objects.filter(imageitem_id= id)
-    propertyImages = Images.objects.filter(imageitem_id = id)
+    propertyImages = Images.objects.filter(imageitem_id=id)
     print(propertyImages)
-    contex = {'propertyList' : propertyList,
-            'propertyImages' : propertyImages
-            }
+    contex = {'propertyList': propertyList,
+              'propertyImages': propertyImages
+              }
     return render(request, "details.html", contex)
 
-
-
-
+# Search page
 def SearchResultsView(request):
     query = request.GET.get('search', '')
     Title = Item.objects.filter(title__icontains=query)
     # categories = Item.objects.filter(category)
-    contex = { 'Title': Title,
-                # 'categories': categories
+    contex = {'Title': Title,
+              # 'categories': categories
 
-    }
+              }
     return render(request, 'search_results.html', contex)
 
 
@@ -111,66 +166,35 @@ def SearchFilter(request):
         print(minprice)
         print(maxprice)
 
-        filtered_search = Item.objects.raw('select id, title, price from jaggasale_item where price between "'+minprice+'" and "'+maxprice+'"')
+        filtered_search = Item.objects.raw(
+            'select id, title, price from jaggasale_item where price between "' + minprice + '" and "' + maxprice + '"')
         return render(request, 'search_results.html', {'filtered_search': filtered_search})
 
     else:
         Title = Item.objects.all()
 
-        contex = { 'Title': Title,
-                    # 'categories': categories
+        contex = {'Title': Title,
+                  # 'categories': categories
 
-        }
+                  }
         return render(request, 'search_results.html', contex)
-
 
 
 def handleProperty(request):
     return render(request, "details.html")
 
 
-
-
 def location_properties_by_cities(request):
     query = request.GET.get('q')
     Properties_by_cities = Item.objects.all()
-    cities = Item.objects.filter(location = query)
-    return render(request, "location.html", {'cities' : cities})
+    cities = Item.objects.filter(location=query)
+    return render(request, "location.html", {'cities': cities})
 
 
 def locationProperties(request):
     Properties_by_cities = Item.objects.all()
     cities = Item.objects.filter(location='K')
-    return render(request, "kathmandu.html", {'cities' : cities})
-
-
-
-
-
-@login_required
-def Add_property_by_user(request):
-    form = HouseForm(request.POST or None, request.FILES)
-    if request.method == "POST":
-
-        if form.is_valid():
-            saving =  form.save(commit=False)
-            print(request.user)
-            saving.user = request.user
-
-            saving.save()
-            # response.user.HouseForm.add(form)
-            messages.success(request, "saved")
-
-        else:
-             form = HouseForm()
-             messages.error(request, "Property cannot be saved")
-    return render(request, "Add_apartment.html", {'form': form})
-
-
-
-
-
-
+    return render(request, "kathmandu.html", {'cities': cities})
 
 
 def handleSignup(request):
@@ -229,13 +253,12 @@ def handleLogin(request):
             login(request, user)
             messages.success(request, "Logged in Successfully")
             print("login success")
-            return render(request, "index.html")
+            return HttpResponseRedirect("/")
 # if user doesnot exists
         else:
             messages.error(request, "Invalid email or password")
             print("login failed")
             return render(request, "login.html")
-
 
     return HttpResponse('404 - Not Found')
 
@@ -245,4 +268,4 @@ def handleLogin(request):
 def handleLogout(request):
     logout(request)
     messages.success(request, "Logged out Successfully")
-    return render(request, "index.html")
+    return HttpResponseRedirect("/")

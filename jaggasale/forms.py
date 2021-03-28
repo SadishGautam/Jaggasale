@@ -37,6 +37,12 @@ class HouseForm(forms.ModelForm):
 
         }
 
+class AdditionalImages(forms.ModelForm):
+    class Meta:
+        model = Images
+        extra = 3
+        fields = ['title','images',]
+
         # exclude = ('label', 'email', 'slug', 'category','sold_or_rent', 'picture_count', 'owner_name', 'phone_number', 'date', 'location', 'map', 'image')
         # title = forms.CharField(max_length=50)
         # location = forms.CharField(

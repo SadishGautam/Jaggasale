@@ -125,4 +125,4 @@ class Images(models.Model):
 
 
     def __str__(self):
-        return self.images
+        return self.title
