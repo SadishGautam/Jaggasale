@@ -14,9 +14,14 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from hitcount.views import HitCountDetailView
-from .forms import HouseForm, AdditionalImages
+from .forms import HouseForm
 from django.forms import modelformset_factory
+
+from django.core.mail import send_mail, BadHeaderError
+from .forms import ContactForm
 # from .filters import ItemFilter
+
+
 
 
 class HomeView(ListView):
@@ -42,7 +47,7 @@ def Login(request):
 
 
 # showing users property in profile page
-@login_required
+@login_required(login_url="/login")
 def profilepage(request):
     user_property = Item.objects.filter(user=request.user)
 
@@ -52,47 +57,31 @@ def profilepage(request):
 
 
 # Adding property by user
-@login_required
+@login_required(login_url="/login")
 def Add_property_by_user(request):
-    # AdditionalImagesSet = modelformset_factory(Images,
-    #                                     form=AdditionalImages, extra=3)
     form = HouseForm(request.POST or None, request.FILES)
-    img_form = AdditionalImages(request.POST or None, request.FILES)
+    # form = HouseForm(initial={'category': 'House'})
+    # img_form = AdditionalImages(request.POST or None, request.FILES)
     count = Item.objects.filter(user=request.user).count()
-    print(count)
-
     if request.method == "POST":
-
         if form.is_valid():
             saving = form.save(commit=False)
             print(request.user)
             saving.user = request.user
-
             saving.save()
             # response.user.HouseForm.add(form)
             messages.success(request, "saved")
-
-        if img_form.is_valid():
-            saving = img_form.save(commit=False)
-            print(request.user)
-            saving.user = request.user
-
-            saving.save()
-            # response.user.HouseForm.add(form)
-            messages.success(request, "saved")
-
         else:
             form = HouseForm()
-            img_form = AdditionalImages(queryset=Images.objects.none())
             messages.error(request, "Property cannot be saved")
-    return render(request, "Add_apartment.html", {'form': form, 'img_form': img_form, 'count': count})
+    return render(request, "Add_apartment.html", {'form': form, 'count': count})
 
 
 
 
 # Deleting property by user
 
-@login_required
+@login_required(login_url="/login")
 def delete_property(request, id):
     id = int(id)
     try:
@@ -103,11 +92,12 @@ def delete_property(request, id):
     del_property.delete()
     print("deleted")
     messages.success(request, "Property deleted successfully")
-    return render(request, 'profile.html',{'del_property': del_property})
+    return HttpResponseRedirect("/",{'del_property': del_property})
+    # return render(request, 'profile.html',{'del_property': del_property})
 
 
 # Updating property by user
-@login_required
+@login_required(login_url="/login")
 def update_property(request, id):
     user_property = Item.objects.filter(user=request.user)
     edit_property = Item.objects.get(pk=id)
@@ -132,6 +122,11 @@ def update_property(request, id):
 def userPropertyList(request):
     return render(request, 'userPropertyLists')
 
+
+
+
+
+
 # Property detail page
 def handleDetails(request, id):
     # fetch the property using id
@@ -142,10 +137,57 @@ def handleDetails(request, id):
     # propertyImages = Images.objects.filter(imageitem_id= id)
     propertyImages = Images.objects.filter(imageitem_id=id)
     print(propertyImages)
+
+
+
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            full_name = form.cleaned_data['full_name']
+            from_email = form.cleaned_data['from_email']
+            phone = form.cleaned_data['phone']
+            message = form.cleaned_data['message']
+
+
+
+            try:
+                send_mail(full_name, message, from_email, ['sadish.gautam09@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return HttpResponse('Success! Thank you for your message.')
     contex = {'propertyList': propertyList,
-              'propertyImages': propertyImages
+              'propertyImages': propertyImages,
+              'form': form
               }
     return render(request, "details.html", contex)
+
+def contactView(request):
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['sadish.gautam09@gmail.com'])
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return HttpResponse('Success! Thank you for your message.')
+    return render(request, "email.html", {'form': form})
+
+def successView(request):
+    return HttpResponse('Success! Thank you for your message.')
+
+
+
+
+
+
+
 
 # Search page
 def SearchResultsView(request):

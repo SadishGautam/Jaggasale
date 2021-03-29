@@ -9,13 +9,21 @@ LOCATION_LIST = (
 
 )
 
+CATEGORY_LIST = (
+    ('H', 'House'),
+    ('A', 'Apartment'),
+    ('L', 'Land'),
+
+)
+
+
 
 class HouseForm(forms.ModelForm):
     class Meta:
         model = Item
+        # category = forms.IntegerField(widget=forms.HiddenInput(), initial=123)
         fields = [
-        # 'user',
-        'title', 'location', 'area', 'rooms', 'bathrooms',
+        'title', 'location', 'area',  'rooms', 'bathrooms',
                   'floors', 'Description',  'price', 'phone_number',
                   'have_parking', 'have_garden', 'have_drinage', 'have_balcony',
                   'have_hallRoom','have_diningRoom', 'have_elevator', 'have_water',
@@ -27,6 +35,7 @@ class HouseForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Title', 'class': 'form-control'}),
             'location': forms.Select(attrs={'class': 'form-control mt-1', 'type': 'number'}),
+            # 'category' : forms.TypedChoiceField(choices=formfields.State, initial='House'),
             'area': forms.NumberInput(attrs={'placeholder': 'Area', 'class': 'form-control', 'min': 0}),
             'rooms': forms.NumberInput(attrs={'placeholder': 'Rooms', 'class': 'form-control', 'min': 1}),
             'bathrooms': forms.NumberInput(attrs={'placeholder': 'Bathrooms', 'class': 'form-control', 'min': 1}),
@@ -37,11 +46,18 @@ class HouseForm(forms.ModelForm):
 
         }
 
-class AdditionalImages(forms.ModelForm):
-    class Meta:
-        model = Images
-        extra = 3
-        fields = ['title','images',]
+
+class ContactForm(forms.Form):
+    full_name = forms.CharField(required=True,widget= forms.TextInput (attrs={'class':'form-control','id':'fullname_id', 'placeholder':"First Name, Last Name",  'style':"border:none;background:none; box-shadow: none;outline:none;"}))
+    from_email = forms.EmailField(required=True,widget= forms.TextInput (attrs={'class':'form-control','id':'email_id', 'placeholder':"Your Email",  'style':"border:none;background:none; box-shadow: none;outline:none;"}))
+    phone = forms.CharField(required=True,widget= forms.TextInput (attrs={'class':'form-control','id':'phone_id', 'placeholder':"Phone",  'style':"border:none;background:none; box-shadow: none;outline:none;"}))
+    message = forms.CharField(required=True,widget= forms.Textarea (attrs={'class':'form-control','id':'message_id', 'placeholder':"Feel free to message us", 'rows': '3',  'style':"border:none;background: #f8f9fa !important; box-shadow: none;outline:none;  font-family:'abel';"}))
+
+# class AdditionalImages(forms.ModelForm):
+#     class Meta:
+#         model = Images
+#         extra = 3
+#         fields = ['title','images',]
 
         # exclude = ('label', 'email', 'slug', 'category','sold_or_rent', 'picture_count', 'owner_name', 'phone_number', 'date', 'location', 'map', 'image')
         # title = forms.CharField(max_length=50)

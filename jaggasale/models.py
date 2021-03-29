@@ -56,7 +56,7 @@ class Item(models.Model):
     discount_price = models.IntegerField(blank=True, null=True)
     slug = models.SlugField()
     category = models.CharField(
-        choices=CATEGORY_LIST, max_length=2, default='Error fetching category')
+        choices=CATEGORY_LIST, max_length=2, default='House')
     label = models.CharField(
         choices=LABEL_LIST, max_length=2, default='Active')
     sold_or_rent = models.CharField(
@@ -113,8 +113,10 @@ class Item(models.Model):
     image_tag.short_description = 'Image'
 
 
-# class PropertyFeatureCheckbox(models.Model):
+# class Propertyreturn render(request, "/")FeatureCheckbox(models.Model):
 #
+
+
 
 
 

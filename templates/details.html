@@ -361,21 +361,57 @@
           </li>
           <div class="print ml-auto d-flex mt-3 mb-2">
             <li>
-              <i class="fas fa-envelope"></i> <a href="#"> EMAIL</a>
+              <i class="fas fa-envelope"></i> <a href="mailto:{{ user.email }}"> EMAIL</a>
             </li>
             <li>
-              <i class="fas fa-print"></i> <a href="#"> PRINT</a>
+              <i class="fas fa-print"></i> <a href="javascript:window.print()"> PRINT</a>
             </li>
             <li>
               <a href="#"> <i class="far fa-heart"></i> <a href="#"> SAVE</a></a>
             </li>
             <li>
-              <i class="fas fa-share-alt-square"></i> <a href="#"> SHARE</a>
+              <i class="fas fa-share-alt-square"></i> <a href="#" onclick="copyToClipboard()" data-toggle="modal" data-target="#exampleModalCenter" > SHARE</a>
             </li>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success" id="exampleModalLongTitle">Link copied successfully</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-secondary">
+        The link of this property has been copied successfully.
+        Now, you can share this property in  different social media like facebook, Twitter, Instagram etc.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
           </div>
         </div>
       </div>
     </section>
+
+    <script>
+      function copyToClipboard(text) {
+      var inputc = document.body.appendChild(document.createElement("input"));
+      inputc.value = window.location.href;
+      inputc.focus();
+      inputc.select();
+      document.execCommand('copy');
+      inputc.parentNode.removeChild(inputc);
+
+      }
+      </script>
+
 
     <section class="main-details-slider">
       <div class="container">
@@ -423,12 +459,12 @@
             <div class="price list-unstyled d-flex mt-4 align-item-center text-center">
               <li>
                 <div class="discount mt-3">
-                  <span> <strike class="text-secondary"> <i class="fas fa-dollar-sign"></i>{{ propertyList.price }}</strike> </span>
+                  <span> <strike class="text-secondary"> <i class="fas fa-dollar-sign"></i>{{ propertyList.discount_price }}</strike> </span>
                 </div>
               </li>
               <li>
                 <div class="regular mt-1">
-                  <span> <i class="fas fa-dollar-sign"></i>  {{ propertyList.discount_price }} </span>
+                  <span> <i class="fas fa-dollar-sign"></i>  {{ propertyList.price  }} </span>
                 </div>
               </li>
             </div>
@@ -785,19 +821,36 @@
                   </div>
                   <p> <span style="font-family:'abel'"><i class="fab fa-opencart mr-1" style="color:rgba(67,195,112,1);"></i> Sadish Gautam</span> </p>
                 </div>
-                <form>
+
+
+                <form method="post">
+                      {% csrf_token %}
+
                   <p class="d-flex bg-light p-2">
                     <i class="fas fa-user m-2" style="color: rgba(35,77,212,1);"></i>
-                    <input type="text" class="form-control" placeholder="First Name, Last Name" style="border:none;background:none; box-shadow: none;outline:none;" required>
+                    <!-- <input type="text" class="form-control" placeholder="First Name, Last Name" style="border:none;background:none; box-shadow: none;outline:none;" required> -->
+                    {{ form.full_name }}
                   </p>
-                  <p class="d-flex bg-light p-2"> <i class="far fa-envelope m-2" style="color: rgba(35,77,212,1);"></i> <input type="email" class="form-control" required placeholder="Your Email"
-                      style="border:none;background:none; box-shadow: none;outline:none;"> </p>
-                  <p class="d-flex bg-light p-2"> <i class="fas fa-phone-alt m-2" style="color: rgba(35,77,212,1);"></i> <input type="text" class="form-control" required placeholder="Phone"
-                      style="border:none;background:none; box-shadow: none;outline:none;"> </p>
-                  <p> <textarea style="box-shadow:none; font-family:'abel';" placeholder="Feel free to message us" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> </p>
-                </form>
-                <button type="submit" class="contact btn text-white text-center">
+                  <p class="d-flex bg-light p-2"> <i class="far fa-envelope m-2" style="color: rgba(35,77,212,1);"></i>
+                     <!-- <input type="email" class="form-control" required placeholder="Your Email"
+                      style="border:none;background:none; box-shadow: none;outline:none;"> -->
+                        {{ form.from_email }}
+                     </p>
+                  <p class="d-flex bg-light p-2"> <i class="fas fa-phone-alt m-2" style="color: rgba(35,77,212,1);"></i>
+                    <!-- <input type="text" class="form-control" required placeholder="Phone"
+                      style="border:none;background:none; box-shadow: none;outline:none;"> -->
+                        {{ form.phone }}
+                    </p>
+                  <p>
+                    <!-- <textarea style="box-shadow:none; font-family:'abel';" placeholder="Feel free to message us" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
+                    {{ form.message }}
+                  </p>
+
+                <button type="submit" class="contact btn text-white text-center w-100">
                   CONTACT PROPERTY</button>
+                  </form>
+
+
               </div>
             </div>
           </div>

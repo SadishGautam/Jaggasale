@@ -5,6 +5,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 
+from .views import contactView, successView
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
@@ -16,7 +17,6 @@ urlpatterns = [
     path('userPropertyList', views.userPropertyList, name="user property lists"),
     path('search/', views.SearchResultsView, name='property_search'),
     path('searchfilter', views.SearchFilter, name='Searchfilter'),
-
     path('signup', views.handleSignup, name='handleSignup'),
     path('welcome', views.handleLogin, name='handleLogin'),
     path('logout', views.handleLogout, name='handleLogout'),
@@ -28,6 +28,9 @@ urlpatterns = [
     # path('location', views.locationProperties, name='Kathmandu'),
     path('location/<str:city>', views.location_properties_by_cities,
          name='location_properties_by_cities'),
+
+    path('email/', views.contactView, name='contact-owner'),
+    path('message-success/', views.successView, name='message-success'),
 
 
 
