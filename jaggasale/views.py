@@ -60,8 +60,6 @@ def profilepage(request):
 @login_required(login_url="/login")
 def Add_property_by_user(request):
     form = HouseForm(request.POST or None, request.FILES)
-    # form = HouseForm(initial={'category': 'House'})
-    # img_form = AdditionalImages(request.POST or None, request.FILES)
     count = Item.objects.filter(user=request.user).count()
     if request.method == "POST":
         if form.is_valid():
@@ -71,8 +69,9 @@ def Add_property_by_user(request):
             saving.save()
             # response.user.HouseForm.add(form)
             messages.success(request, "saved")
-        else:
             form = HouseForm()
+        else:
+            # form = HouseForm()
             messages.error(request, "Property cannot be saved")
     return render(request, "Add_apartment.html", {'form': form, 'count': count})
 

@@ -84,6 +84,22 @@
             <div class="row">
               <div class="col-sm-4">
                 <div class="form-group">
+
+                      <!-- (Startig) selecting House as default category from javascript -->
+                      {{ form.category }}
+
+                      <script>
+                        (function() {
+                            var id_category = document.getElementById('id_category').value = 'H';
+                          })();
+                      </script>
+                      <style>
+                        #id_category{
+                          display: none !important;
+                        }
+                      </style>
+                      <!-- (Ending) selecting House as default category from javascript -->
+
                   <label>Title</label>
                   <br>
                   {{ form.title }}

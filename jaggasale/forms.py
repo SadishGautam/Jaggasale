@@ -19,11 +19,13 @@ CATEGORY_LIST = (
 
 
 class HouseForm(forms.ModelForm):
+
     class Meta:
         model = Item
+
         # category = forms.IntegerField(widget=forms.HiddenInput(), initial=123)
         fields = [
-        'title', 'location', 'area',  'rooms', 'bathrooms',
+        'title', 'location', 'area', 'category',  'rooms', 'bathrooms',
                   'floors', 'Description',  'price', 'phone_number',
                   'have_parking', 'have_garden', 'have_drinage', 'have_balcony',
                   'have_hallRoom','have_diningRoom', 'have_elevator', 'have_water',
@@ -32,10 +34,10 @@ class HouseForm(forms.ModelForm):
                   'have_road', 'have_waterSupply', 'image', ]
 
 
+
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Title', 'class': 'form-control'}),
             'location': forms.Select(attrs={'class': 'form-control mt-1', 'type': 'number'}),
-            # 'category' : forms.TypedChoiceField(choices=formfields.State, initial='House'),
             'area': forms.NumberInput(attrs={'placeholder': 'Area', 'class': 'form-control', 'min': 0}),
             'rooms': forms.NumberInput(attrs={'placeholder': 'Rooms', 'class': 'form-control', 'min': 1}),
             'bathrooms': forms.NumberInput(attrs={'placeholder': 'Bathrooms', 'class': 'form-control', 'min': 1}),
@@ -45,6 +47,7 @@ class HouseForm(forms.ModelForm):
             'phone_number': forms.TextInput(attrs={'placeholder': 'Phone number', 'class': 'form-control'}),
 
         }
+        
 
 
 class ContactForm(forms.Form):
