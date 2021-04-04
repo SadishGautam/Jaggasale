@@ -40,6 +40,10 @@
   <link rel="stylesheet" type="text/css" href="/static/css/owl.theme.default.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+
+
   <title> {% block title %} hero {% endblock %} </title>
 </head>
 
@@ -156,7 +160,7 @@
               <a style="color:white;" href="#"><i class="far fa-user"></i></a>
             </div>
             <div class="login container">
-              <form method="post" action="/loginonly">
+              <form method="post" action="/welcome">
                 {% csrf_token %}
                 <div class="form-group">
                   <strong>Username</strong>
@@ -185,7 +189,7 @@
 
                 </div>
                 <div class="register text-center">
-                  <a href="{% url 'signup' %}"> REGISTRATION</a>
+                  <a href="http://127.0.0.1:8000/loginSignup"> REGISTRATION</a>
                 </div>
               </form>
             </div>
@@ -374,30 +378,30 @@
               <a href="#"> <i class="far fa-heart"></i> <a href="#"> SAVE</a></a>
             </li>
             <li>
-              <i class="fas fa-share-alt-square"></i> <a href="#" onclick="copyToClipboard()" data-toggle="modal" data-target="#exampleModalCenter" > SHARE</a>
+              <i class="fas fa-share-alt-square"></i> <a href="#" onclick="copyToClipboard()" data-toggle="modal" data-target="#exampleModalCenter"> SHARE</a>
             </li>
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-success" id="exampleModalLongTitle">Link copied successfully</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-secondary">
-        The link of this property has been copied successfully.
-        Now, you can share this property in  different social media like facebook, Twitter, Instagram etc.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-success" id="exampleModalLongTitle">Link copied successfully</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body text-secondary">
+                    The link of this property has been copied successfully.
+                    Now, you can share this property in different social media like facebook, Twitter, Instagram etc.
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
           </div>
         </div>
@@ -406,15 +410,15 @@
 
     <script>
       function copyToClipboard(text) {
-      var inputc = document.body.appendChild(document.createElement("input"));
-      inputc.value = window.location.href;
-      inputc.focus();
-      inputc.select();
-      document.execCommand('copy');
-      inputc.parentNode.removeChild(inputc);
+        var inputc = document.body.appendChild(document.createElement("input"));
+        inputc.value = window.location.href;
+        inputc.focus();
+        inputc.select();
+        document.execCommand('copy');
+        inputc.parentNode.removeChild(inputc);
 
       }
-      </script>
+    </script>
 
 
     <section class="main-details-slider">
@@ -429,10 +433,11 @@
           </div>
           <div class="col-lg-5 mt-3 left-main-details">
             <div class="left-main-details list-unstyled d-flex text-center">
+
               <li>
                 <i class="fas fa-bed"></i>
                 <span>
-                  <p class="digit">  {{ propertyList.rooms }}  </p>
+                  <p class="digit"> {{ propertyList.rooms }} </p>
                   <p class="type"> Rooms </p>
                 </span>
               </li>
@@ -457,6 +462,7 @@
                   <p class="type"> Sq ft </p>
                 </span>
               </li>
+
             </div>
           </div>
           <div class="col-lg-3">
@@ -468,7 +474,7 @@
               </li>
               <li>
                 <div class="regular mt-1">
-                  <span> <i class="fas fa-dollar-sign"></i>  {{ propertyList.price  }} </span>
+                  <span> <i class="fas fa-dollar-sign"></i> {{ propertyList.price  }} </span>
                 </div>
               </li>
             </div>
@@ -529,15 +535,51 @@
               <h2 style="font-family:var(--pri-font);text-shadow: 1px 1px 5px grey;">Description</h2>
               <br>
               <p>
-                {{ propertyList.Description|safe }}  </p>
+                {{ propertyList.Description|safe }}
+              </p>
             </div>
             <hr>
             <section class="location">
               <p class="mb-4"> <strong style="font-family:var(--pri-font);text-shadow: 1px 1px 3px grey;font-size:25px;">Location</strong> <span style="float: right; margin-top: 10px; font-family:'abel';"><i class="fas fa-map-marker-alt"
                     style="padding: 0 5px; color:rgba(35,77,212,1);"></i> Shantinagar, Tinkune, Kathmandu </span> </p>
-              <iframe
+              <!-- <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d883.2729909228337!2d85.34842422924513!3d27.683552398925098!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a18187378f%3A0x8ba2460dd7896e64!2sOnline+Zeal!5e0!3m2!1sen!2snp!4v1565328119719!5m2!1sen!2snp"
-                width="100%" height="299" frameborder="0" style="border:0" allowfullscreen></iframe>
+                width="100%" height="299" frameborder="0" style="border:0" allowfullscreen></iframe> -->
+
+
+              <style media="screen">
+                #map {
+                  height: 350px;
+                  width: 100%;
+                }
+
+
+              </style>
+
+              <div id="map"></div>
+
+
+                <script>
+                  mapboxgl.accessToken = 'pk.eyJ1Ijoic2FkaXNoMDkiLCJhIjoiY2ttdGUwMDRvMHF0ejJ3czFidGZidTBscCJ9.qesxX1VtX3mGwc5HBKeyGg';
+                var map = new mapboxgl.Map({
+                  container: 'map',
+                  style: 'mapbox://styles/mapbox/streets-v11',
+                  center: [{{ propertyList.Longitude }}, {{ propertyList.Latitude }}],
+                  zoom: 8
+                });
+
+                // Create a default Marker and add it to the map.
+                var marker1 = new mapboxgl.Marker()
+                  .setLngLat([{{ propertyList.Longitude }}, {{ propertyList.Latitude }}])
+                  .addTo(map);
+
+
+              </script>
+
+
+
+
+
             </section>
             <hr>
             <section class="features">
@@ -785,11 +827,11 @@
                 <div class="card-title">
                   <span class="call">Call : <strong class="phone">9813822002</strong> </span>
                   <div class="wrapper ml-3">
-                    <img class="img-fluid" src="photo/owner-logo.png" alt="">
+                    <img class="img-fluid" src="/static/photo/owner-logo.png" alt="">
                     <div class="hover-details w-100 bg-light p-3">
                       <div class="wrap d-flex">
                         <div class="details-wrapper">
-                          <img src="photo/owner-logo.png" alt="">
+                          <img src="/static/photo/owner-logo.png" alt="">
                         </div>
                         <div class="star ml-5 pt-2" style="font-size: 12px;">
                           <i class="far fa-star"></i>
@@ -828,7 +870,7 @@
 
 
                 <form method="post">
-                      {% csrf_token %}
+                  {% csrf_token %}
 
                   <p class="d-flex bg-light p-2">
                     <i class="fas fa-user m-2" style="color: rgba(35,77,212,1);"></i>
@@ -836,23 +878,23 @@
                     {{ form.full_name }}
                   </p>
                   <p class="d-flex bg-light p-2"> <i class="far fa-envelope m-2" style="color: rgba(35,77,212,1);"></i>
-                     <!-- <input type="email" class="form-control" required placeholder="Your Email"
+                    <!-- <input type="email" class="form-control" required placeholder="Your Email"
                       style="border:none;background:none; box-shadow: none;outline:none;"> -->
-                        {{ form.from_email }}
-                     </p>
+                    {{ form.from_email }}
+                  </p>
                   <p class="d-flex bg-light p-2"> <i class="fas fa-phone-alt m-2" style="color: rgba(35,77,212,1);"></i>
                     <!-- <input type="text" class="form-control" required placeholder="Phone"
                       style="border:none;background:none; box-shadow: none;outline:none;"> -->
-                        {{ form.phone }}
-                    </p>
+                    {{ form.phone }}
+                  </p>
                   <p>
                     <!-- <textarea style="box-shadow:none; font-family:'abel';" placeholder="Feel free to message us" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea> -->
                     {{ form.message }}
                   </p>
 
-                <button type="submit" class="contact btn text-white text-center w-100">
-                  CONTACT PROPERTY</button>
-                  </form>
+                  <button type="submit" class="contact btn text-white text-center w-100">
+                    CONTACT PROPERTY</button>
+                </form>
 
 
               </div>
@@ -961,7 +1003,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>
 
 
-  <script type="36ca0483887fc711e1ef5a96-text/javascript" src="js/custom.js"></script>
+  <script type="36ca0483887fc711e1ef5a96-text/javascript" src="/static/js/custom.js"></script>
   <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="36ca0483887fc711e1ef5a96-|49" defer=""></script>
 </body>
 

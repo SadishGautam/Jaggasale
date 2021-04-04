@@ -14,14 +14,12 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from hitcount.views import HitCountDetailView
-from .forms import HouseForm
+from .forms import HouseForm  # ApartmentForm
 from django.forms import modelformset_factory
 
 from django.core.mail import send_mail, BadHeaderError
 from .forms import ContactForm
 # from .filters import ItemFilter
-
-
 
 
 class HomeView(ListView):
@@ -44,8 +42,6 @@ def Login(request):
     return render(request, "login.html")
 
 
-
-
 # showing users property in profile page
 @login_required(login_url="/login")
 def profilepage(request):
@@ -56,7 +52,7 @@ def profilepage(request):
                   )
 
 
-# Adding property by user
+# Adding House property by user
 @login_required(login_url="/login")
 def Add_property_by_user(request):
     form = HouseForm(request.POST or None, request.FILES)
@@ -65,6 +61,10 @@ def Add_property_by_user(request):
         if form.is_valid():
             saving = form.save(commit=False)
             print(request.user)
+            # saving.Latitude =  request.POST['Latitude']
+            # saving.Longitude =  request.POST['Longitude']
+            # print(Latitude)
+            # print(Longitude)
             saving.user = request.user
             saving.save()
             # response.user.HouseForm.add(form)
@@ -76,6 +76,23 @@ def Add_property_by_user(request):
     return render(request, "Add_apartment.html", {'form': form, 'count': count})
 
 
+# Adding Apartment property by user
+# @login_required(login_url="/login")
+# def Add_property_by_user(request):
+#     form = ApartmentForm(request.POST or None, request.FILES)
+#     if request.method == "POST":
+#         if form.is_valid():
+#             saving = form.save(commit=False)
+#             print(request.user)
+#             saving.user = request.user
+#             saving.save()
+#             # response.user.HouseForm.add(form)
+#             messages.success(request, "saved")
+#             form = ApartmentForm()
+#         else:
+#             # form = HouseForm()
+#             messages.error(request, "Property cannot be saved")
+#     return render(request, "Add_apartment.html", {'form': form})
 
 
 # Deleting property by user
@@ -91,7 +108,7 @@ def delete_property(request, id):
     del_property.delete()
     print("deleted")
     messages.success(request, "Property deleted successfully")
-    return HttpResponseRedirect("/",{'del_property': del_property})
+    return HttpResponseRedirect("/", {'del_property': del_property})
     # return render(request, 'profile.html',{'del_property': del_property})
 
 
@@ -100,30 +117,24 @@ def delete_property(request, id):
 def update_property(request, id):
     user_property = Item.objects.filter(user=request.user)
     edit_property = Item.objects.get(pk=id)
-    edit_form = HouseForm(request.POST or None, request.FILES, instance = edit_property)
+    edit_form = HouseForm(request.POST or None,
+                          request.FILES, instance=edit_property)
 
     # edit_form = HouseForm(request.POST or None, instance = edit_property)
     if edit_form.is_valid():
         saving = edit_form.save()
         print(request.user)
 
-
     contex = {'user_property': user_property,
               'edit_property': edit_property,
               'edit_form': edit_form
               }
     messages.success(request, "Property Updated successfully")
-    return render(request, 'updateform/update.html',contex)
-
-
+    return render(request, 'updateform/update.html', contex)
 
 
 def userPropertyList(request):
     return render(request, 'userPropertyLists')
-
-
-
-
 
 
 # Property detail page
@@ -137,8 +148,6 @@ def handleDetails(request, id):
     propertyImages = Images.objects.filter(imageitem_id=id)
     print(propertyImages)
 
-
-
     if request.method == 'GET':
         form = ContactForm()
     else:
@@ -149,10 +158,9 @@ def handleDetails(request, id):
             phone = form.cleaned_data['phone']
             message = form.cleaned_data['message']
 
-
-
             try:
-                send_mail(full_name, message, from_email, ['sadish.gautam09@gmail.com'])
+                send_mail(full_name, message, from_email,
+                          ['sadish.gautam09@gmail.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return HttpResponse('Success! Thank you for your message.')
@@ -161,6 +169,7 @@ def handleDetails(request, id):
               'form': form
               }
     return render(request, "details.html", contex)
+
 
 def contactView(request):
     if request.method == 'GET':
@@ -172,20 +181,16 @@ def contactView(request):
             from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
             try:
-                send_mail(subject, message, from_email, ['sadish.gautam09@gmail.com'])
+                send_mail(subject, message, from_email,
+                          ['sadish.gautam09@gmail.com'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return HttpResponse('Success! Thank you for your message.')
     return render(request, "email.html", {'form': form})
 
+
 def successView(request):
     return HttpResponse('Success! Thank you for your message.')
-
-
-
-
-
-
 
 
 # Search page
@@ -232,10 +237,28 @@ def location_properties_by_cities(request):
     return render(request, "location.html", {'cities': cities})
 
 
-def locationProperties(request):
+def Kathmandu(request):
     Properties_by_cities = Item.objects.all()
     cities = Item.objects.filter(location='K')
-    return render(request, "kathmandu.html", {'cities': cities})
+    return render(request, "location/kathmandu.html", {'cities': cities})
+
+
+def Lalitpur(request):
+    Properties_by_cities = Item.objects.all()
+    cities = Item.objects.filter(location='L')
+    return render(request, "location/kathmandu.html", {'cities': cities})
+
+
+def Bhaktapur(request):
+    Properties_by_cities = Item.objects.all()
+    cities = Item.objects.filter(location='B')
+    return render(request, "location/kathmandu.html", {'cities': cities})
+
+
+def Chitwan(request):
+    Properties_by_cities = Item.objects.all()
+    cities = Item.objects.filter(location='C')
+    return render(request, "location/kathmandu.html", {'cities': cities})
 
 
 def handleSignup(request):

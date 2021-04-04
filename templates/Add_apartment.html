@@ -85,20 +85,20 @@
               <div class="col-sm-4">
                 <div class="form-group">
 
-                      <!-- (Startig) selecting House as default category from javascript -->
-                      {{ form.category }}
+                  <!-- (Startig) selecting House as default category from javascript -->
+                  {{ form.category }}
 
-                      <script>
-                        (function() {
-                            var id_category = document.getElementById('id_category').value = 'H';
-                          })();
-                      </script>
-                      <style>
-                        #id_category{
-                          display: none !important;
-                        }
-                      </style>
-                      <!-- (Ending) selecting House as default category from javascript -->
+                  <script>
+                    (function() {
+                      var id_category = document.getElementById('id_category').value = 'H';
+                    })();
+                  </script>
+                  <style>
+                    #id_category {
+                      display: none !important;
+                    }
+                  </style>
+                  <!-- (Ending) selecting House as default category from javascript -->
 
                   <label>Title</label>
                   <br>
@@ -175,9 +175,7 @@
 
                   <!-- <textarea class="form-control name="description" shadow-none" id="Description" rows="5"></textarea> -->
                 </div>
-                <script>
 
-                </script>
               </div>
             </div>
 
@@ -292,7 +290,69 @@
               </script>
             </div>
 
+            <div class="row mt-3">
+              <div class="col-sm-12">
+                <div id="map"></div>
+                <pre id="coordinates" class="coordinates"></pre>
 
+                <script>
+                  mapboxgl.accessToken = 'pk.eyJ1Ijoic2FkaXNoMDkiLCJhIjoiY2ttdGUwMDRvMHF0ejJ3czFidGZidTBscCJ9.qesxX1VtX3mGwc5HBKeyGg';
+                  var coordinates = document.getElementById('coordinates');
+                  var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [85.323177540036, 27.67488957525255],
+                    zoom: 11
+                  });
+
+                  var marker = new mapboxgl.Marker({
+                      draggable: true
+                    })
+                    .setLngLat([85.323177540036, 27.67488957525255])
+                    .addTo(map);
+
+                  function onDragEnd() {
+                    var lngLat = marker.getLngLat();
+                    coordinates.style.display = 'block';
+                    coordinates.innerHTML =
+                      'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+                      let Longitude = lngLat.lng;
+                      let Latitude = lngLat.lat;
+
+                      document.getElementById("id_Latitude").value=Latitude;
+                      document.getElementById("id_Longitude").value=Longitude;
+
+                  }
+
+
+                    marker.on('dragend', onDragEnd);
+
+                </script>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Latitude</label>
+                  <br>
+                  {{ form.Latitude }}
+
+                  <script>
+                    alert(Latitude)
+                  </script>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Longitude</label>
+                  <br>
+                  {{ form.Longitude }}
+                  <!-- {{ form.price.errors }} -->
+                </div>
+              </div>
+            </div>
 
 
 
@@ -336,39 +396,49 @@
               </div>
             </div>
           </form>
-
-
-          <!-- <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
-                  {{ form.as_p}}
-                  <button type="submit">Save</button>
-                </form> -->
-
-
         </div>
         <!-- Ending of adding home section -->
 
 
 
 
-        <!-- Astaring of adding Apartment section -->
+        <!-- staring of adding Apartment section -->
         <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-          <form>
+          <form method="post" enctype='multipart/form-data'>
+            {% csrf_token %}
             <div class="row">
               <div class="col-sm-4">
                 <div class="form-group">
+
+                  <!-- (Startig) selecting House as default category from javascript -->
+                  {{ form.category }}
+
+                  <script>
+                    (function() {
+                      var id_category = document.getElementById('id_category').value = 'A';
+                    })();
+                  </script>
+                  <style>
+                    #id_category {
+                      display: none !important;
+                    }
+                  </style>
+                  <!-- (Ending) selecting House as default category from javascript -->
+
+
                   <label>Title</label>
-                  <input class="form-control" type="text" placeholder="Property Title">
+                  <!-- <input class="form-control" type="text" placeholder="Property Title"> -->
+                  <br>
+                  {{ form.title }}
                 </div>
               </div><!-- ending of column  -->
 
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Location</label>
-                  <select class="form-control">
-                    <option selected>Kathmandu</option>
-                    <option>Bhaktapur</option>
-                    <option>Lalitpur</option>
-                  </select>
+                  <br>
+                  {{ form.location }}
+                  <!-- {{ form.location.errors }} -->
                 </div>
               </div><!-- ending of column  -->
 
@@ -376,7 +446,8 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Built Date</label>
-                  <input class="form-control" type="date" placeholder="Area(Sq ft)">
+                  <!-- <input class="form-control" type="date" placeholder="Area(Sq ft)"> -->
+                  {{ form.built_date }}
                 </div>
               </div><!-- ending of column  -->
             </div><!-- ending of row  -->
@@ -389,14 +460,16 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Rooms</label>
-                  <input class="form-control" type="number" min="0" placeholder="No. of Rooms">
+                  <!-- <input class="form-control" type="number" min="0" placeholder="No. of Rooms"> -->
+                  {{ form.rooms }}
                 </div>
               </div><!-- ending of column  -->
 
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Bathrooms</label>
-                  <input class="form-control" type="number" min="0" placeholder="No. of Bathrooms">
+                  <!-- <input class="form-control" type="number" min="0" placeholder="No. of Bathrooms"> -->
+                  {{ form.bathrooms }}
                 </div>
               </div><!-- ending of column  -->
 
@@ -404,12 +477,13 @@
               <div class="col-sm-4">
                 <div class="form-group">
                   <label>Area Face</label>
-                  <select class="form-control">
+                  <!-- <select class="form-control">
                     <option selected>East</option>
                     <option>West</option>
                     <option>North</option>
                     <option>South</option>
-                  </select>
+                  </select> -->
+                  {{ form.area_face }}
                 </div>
               </div><!-- ending of column  -->
             </div><!-- ending of row  -->
@@ -422,7 +496,9 @@
               <div class="col-sm-12">
                 <div class="form-group">
                   <label for="Description">Description</label>
-                  <textarea class="form-control shadow-none" id="Description" rows="5"></textarea>
+                  <br>
+                  <!-- <textarea class="form-control shadow-none" id="Description" rows="5"></textarea> -->
+                  {{ form.Description }}
                 </div>
               </div>
             </div>
@@ -434,62 +510,102 @@
             <div class="row">
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Parking">
-                  <label class="custom-control-label" for="Parking">Parking</label>
+                  <!-- <input type="checkbox" class="custom-control-input" id="Parking"> -->
+                  {{form.have_parking}}
+                  <label class="custom-control-label" for="id_have_parking">Parking</label>
                 </div>
               </div>
+              <script>
+                let have_parking = document.querySelector("#id_have_parking");
+                have_parking.classList.add("custom-control-input");
+              </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Electricity">
+                  <!-- <input type="checkbox" class="custom-control-input" id="Electricity"> -->
+                  {{form.have_electricityBackup}}
                   <label class="custom-control-label" for="Electricity">Electricity Backup</label>
                 </div>
               </div>
+              <script>
+                let have_balcony = document.querySelector("#id_have_electricityBackup");
+                have_electricityBackup.classList.add("custom-control-input");
+              </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Drinage">
+                  <!-- <input type="checkbox" class="custom-control-input" id="Drinage"> -->
+                  {{form.have_drinage}}
                   <label class="custom-control-label" for="Drinage">Drinage</label>
                 </div>
               </div>
+              <script>
+                let have_drinage = document.querySelector("#id_have_drinage");
+                have_drinage.classList.add("custom-control-input");
+              </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Security">
+                  <!-- <input type="checkbox" class="custom-control-input" id="Security"> -->
+                  {{form.have_securityStaff}}
                   <label class="custom-control-label" for="Security">Security Staff</label>
                 </div>
               </div>
             </div>
+            <script>
+              let have_securityStaff = document.querySelector("#id_have_securityStaff");
+              have_securityStaff.classList.add("custom-control-input");
+            </script>
 
 
             <div class="row mt-2">
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Lift">
+                  <!-- <input type="checkbox" class="custom-control-input" id="Lift"> -->
+                  {{form.have_lift}}
                   <label class="custom-control-label" for="Lift">Lift</label>
                 </div>
               </div>
+              <script>
+                let have_lift = document.querySelector("#id_have_lift");
+                have_lift.classList.add("custom-control-input");
+              </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Dining">
+                  <!-- <input type="checkbox" class="custom-control-input" id="Dining"> -->
+                  {{form.have_diningRoom}}
                   <label class="custom-control-label" for="Dining">Dining Room</label>
                 </div>
               </div>
+              <script>
+                let have_diningRoom = document.querySelector("#id_have_diningRoom");
+                have_diningRoom.classList.add("custom-control-input");
+              </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Kids">
+                  <!-- <input type="checkbox" class="custom-control-input" id="Kids"> -->
+                  {{form.have_kidsPlayground}}
                   <label class="custom-control-label" for="Kids">Kids playground</label>
                 </div>
               </div>
+              <script>
+                let have_kidsPlayground = document.querySelector("#id_have_kidsPlayground");
+                have_kidsPlayground.classList.add("custom-control-input");
+              </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
-                  <input type="checkbox" class="custom-control-input" id="Water">
+                  <!-- <input type="checkbox" class="custom-control-input" id="Water"> -->
+                  {{form.have_water}}
                   <label class="custom-control-label" for="Water">Water Supply</label>
                 </div>
               </div>
+              <script>
+                let have_water = document.querySelector("#id_have_water");
+                have_water.classList.add("custom-control-input");
+              </script>
             </div>
 
 
@@ -500,15 +616,21 @@
             <div class="row mt-4">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label>Discount Price (If any)</label>
-                  <input class="form-control" type="number" min="0" placeholder="Discount price">
+                  <label>Phone Number</label>
+                  <!-- <input class="form-control" type="number" min="0" placeholder="Discount price"> -->
+                  <br>
+                  {{ form.phone_number }}
+                  <!-- {{ form.phone_number.errors }} -->
                 </div>
               </div>
 
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label>Final Price</label>
-                  <input class="form-control" type="number" min="0" placeholder="Final Price of property">
+                  <label>Price</label>
+                  <!-- <input class="form-control" type="number" min="0" placeholder="Final Price of property"> -->
+                  <br>
+                  {{ form.price }}
+                  <!-- {{ form.price.errors }} -->
                 </div>
               </div>
             </div>
@@ -518,12 +640,13 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="customFile" multiple>
-                  <label class="custom-file-label" for="customFile">Choose file</label>
+                  <!-- <input type="file" class="custom-file-input" id="customFile" multiple> -->
+                  <!-- <label class="custom-file-label" for="customFile">Choose file</label> -->
+                  {{ form.image }}
+                  {{ form.image.errors }}
                 </div>
               </div>
             </div>
-
 
 
             <div class="row ">

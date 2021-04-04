@@ -31,7 +31,13 @@ LOCATION_LIST = (
     ('L', 'Lalitpur'),
     ('L', 'Bhaktapur'),
     ('C', 'Chitwan'),
+)
 
+PROPERTY_AREA_FACE=(
+('E', 'East'),
+('W', 'West'),
+('N', 'North'),
+('S', 'South'),
 )
 
 
@@ -57,6 +63,8 @@ class Item(models.Model):
     slug = models.SlugField()
     category = models.CharField(
         choices=CATEGORY_LIST, max_length=2)
+    area_face = models.CharField(
+        choices=PROPERTY_AREA_FACE, max_length=2)
     label = models.CharField(
         choices=LABEL_LIST, max_length=2, default='Active')
     sold_or_rent = models.CharField(
@@ -66,15 +74,17 @@ class Item(models.Model):
     owner_name = models.CharField(max_length=30)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+9779812345678'. Up to 14 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=10, blank=False, default='')
-    date = models.DateField(blank=True, null=True)
+    built_date = models.DateField(blank=True, null=True)
     rooms = models.IntegerField(blank=True, null=True)
     bathrooms = models.IntegerField(blank=True, null=True)
     floors = models.IntegerField(blank=True, null=True)
     Description = RichTextUploadingField()
     location = models.CharField(
         choices=LOCATION_LIST, max_length=2)
+    Latitude= models.CharField(max_length=25)
+    Longitude= models.CharField(max_length=25)
     map = models.CharField(max_length=150,blank=True, null=True)
-    date = date = models.DateField(blank=True, null=True, default=timezone.now)
+    date =models.DateField(blank=True, null=True, default=timezone.now)
     hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
     related_query_name='hit_count_generic_relation')
 

@@ -24,7 +24,11 @@ urlpatterns = [
     path('Add-property', views.Add_property_by_user, name='add property'),
     path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount')),
     # path('hitcount/', include(('hitcount.urls', 'hitcount'), namespace='hitcount_property_details')),
-    path('kathmandu', views.locationProperties, name='Kathmandu'),
+    path('kathmandu', views.Kathmandu, name='Kathmandu'),
+    path('lalitpur', views.Lalitpur, name='Lalitpur'),
+    path('bhaktapur', views.Bhaktapur, name='Bhaktapur'),
+    path('chitwan', views.Chitwan, name='Chitwan'),
+
     # path('location', views.locationProperties, name='Kathmandu'),
     path('location/<str:city>', views.location_properties_by_cities,
          name='location_properties_by_cities'),

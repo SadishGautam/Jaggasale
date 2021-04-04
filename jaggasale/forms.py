@@ -1,38 +1,18 @@
 from django import forms
 from .models import Item, Images
 
-LOCATION_LIST = (
-    ('K', 'Kathmandu'),
-    ('L', 'Lalitpur'),
-    ('L', 'Bhaktapur'),
-    ('C', 'Chitwan'),
-
-)
-
-CATEGORY_LIST = (
-    ('H', 'House'),
-    ('A', 'Apartment'),
-    ('L', 'Land'),
-
-)
-
-
 
 class HouseForm(forms.ModelForm):
-
     class Meta:
         model = Item
-
-        # category = forms.IntegerField(widget=forms.HiddenInput(), initial=123)
         fields = [
-        'title', 'location', 'area', 'category',  'rooms', 'bathrooms',
-                  'floors', 'Description',  'price', 'phone_number',
-                  'have_parking', 'have_garden', 'have_drinage', 'have_balcony',
-                  'have_hallRoom','have_diningRoom', 'have_elevator', 'have_water',
-                  'have_electricityBackup', 'have_securityStaff',
-                  'have_lift', 'have_kidsPlayground', 'have_electricityPole',
-                  'have_road', 'have_waterSupply', 'image', ]
-
+            'title', 'location', 'area', 'category',  'rooms', 'bathrooms',
+            'floors', 'Description',  'price', 'phone_number',
+            'have_parking', 'have_garden', 'have_drinage', 'have_balcony',
+            'have_hallRoom', 'have_diningRoom', 'have_elevator', 'have_water',
+            'have_electricityBackup', 'have_securityStaff',
+            'have_lift', 'have_kidsPlayground', 'have_electricityPole',
+            'have_road', 'have_waterSupply', 'image','Latitude', 'Longitude', ]
 
 
         widgets = {
@@ -45,16 +25,45 @@ class HouseForm(forms.ModelForm):
             'Description': forms.TextInput(attrs={'placeholder': 'Description', 'class': 'from-control', 'rows': 5, 'cols': '100'}),
             'price': forms.NumberInput(attrs={'placeholder': 'Price', 'class': 'form-control', 'min': 1}),
             'phone_number': forms.TextInput(attrs={'placeholder': 'Phone number', 'class': 'form-control'}),
+            'built_date': forms.NumberInput(attrs={ 'placeholder': 'Built Date', 'class': 'form-control', 'type': "date"}),
+            'area_face': forms.Select(attrs={'class': 'form-control mt-1', 'type': 'number'}),
+            'Latitude': forms.TextInput(attrs={ 'class': 'form-control'}),
+
+
 
         }
-        
+
+        class ApartmentForm(forms.ModelForm):
+            class Meta:
+                model = Item
+                fields = [
+                    'title', 'location', 'area', 'category',  'rooms', 'bathrooms',
+                    'area_face', 'Description',  'price', 'phone_number',
+                    'have_parking',  'have_drinage', 'built_date',
+                    'have_diningRoom', 'have_water',
+                    'have_electricityBackup', 'have_securityStaff',
+                    'have_lift', 'have_kidsPlayground',
+                    'image', ]
+
+
+
+        #
+        # widgets = {
+        #     'built_date': forms.NumberInput(attrs={ 'placeholder': 'Built Date', 'class': 'form-control', 'type': "date"}),
+        #     'area_face': forms.Select(attrs={'class': 'form-control mt-1', 'type': 'number'}),
+        #
+        # }
 
 
 class ContactForm(forms.Form):
-    full_name = forms.CharField(required=True,widget= forms.TextInput (attrs={'class':'form-control','id':'fullname_id', 'placeholder':"First Name, Last Name",  'style':"border:none;background:none; box-shadow: none;outline:none;"}))
-    from_email = forms.EmailField(required=True,widget= forms.TextInput (attrs={'class':'form-control','id':'email_id', 'placeholder':"Your Email",  'style':"border:none;background:none; box-shadow: none;outline:none;"}))
-    phone = forms.CharField(required=True,widget= forms.TextInput (attrs={'class':'form-control','id':'phone_id', 'placeholder':"Phone",  'style':"border:none;background:none; box-shadow: none;outline:none;"}))
-    message = forms.CharField(required=True,widget= forms.Textarea (attrs={'class':'form-control','id':'message_id', 'placeholder':"Feel free to message us", 'rows': '3',  'style':"border:none;background: #f8f9fa !important; box-shadow: none;outline:none;  font-family:'abel';"}))
+    full_name = forms.CharField(required=True, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'id': 'fullname_id', 'placeholder': "First Name, Last Name",  'style': "border:none;background:none; box-shadow: none;outline:none;"}))
+    from_email = forms.EmailField(required=True, widget=forms.TextInput(
+        attrs={'class': 'form-control', 'id': 'email_id', 'placeholder': "Your Email",  'style': "border:none;background:none; box-shadow: none;outline:none;"}))
+    phone = forms.CharField(required=True, widget=forms.TextInput(attrs={
+                            'class': 'form-control', 'id': 'phone_id', 'placeholder': "Phone",  'style': "border:none;background:none; box-shadow: none;outline:none;"}))
+    message = forms.CharField(required=True, widget=forms.Textarea(attrs={'class': 'form-control', 'id': 'message_id', 'placeholder': "Feel free to message us",
+                                                                          'rows': '3',  'style': "border:none;background: #f8f9fa !important; box-shadow: none;outline:none;  font-family:'abel';"}))
 
 # class AdditionalImages(forms.ModelForm):
 #     class Meta:
@@ -62,15 +71,15 @@ class ContactForm(forms.Form):
 #         extra = 3
 #         fields = ['title','images',]
 
-        # exclude = ('label', 'email', 'slug', 'category','sold_or_rent', 'picture_count', 'owner_name', 'phone_number', 'date', 'location', 'map', 'image')
-        # title = forms.CharField(max_length=50)
-        # location = forms.CharField(
-        #     choices=LOCATION_LIST, max_length=2, default='Kathmandu')
-        # area = forms.IntegerField()
-        # rooms = forms.IntegerField()
-        # bathroomrooms = forms.IntegerField( )
-        # floors = forms.IntegerField()
-        # description = forms.CharField(max_length=700)
-        # discount_price = forms.IntegerField()
-        # final_price = forms.IntegerField()
-        # image = forms.ImageField(default='default.jpg', upload_to='static/images')
+    # exclude = ('label', 'email', 'slug', 'category','sold_or_rent', 'picture_count', 'owner_name', 'phone_number', 'date', 'location', 'map', 'image')
+    # title = forms.CharField(max_length=50)
+    # location = forms.CharField(
+    #     choices=LOCATION_LIST, max_length=2, default='Kathmandu')
+    # area = forms.IntegerField()
+    # rooms = forms.IntegerField()
+    # bathroomrooms = forms.IntegerField( )
+    # floors = forms.IntegerField()
+    # description = forms.CharField(max_length=700)
+    # discount_price = forms.IntegerField()
+    # final_price = forms.IntegerField()
+    # image = forms.ImageField(default='default.jpg', upload_to='static/images')
