@@ -89,7 +89,6 @@
         <a style="font-family:'abel';color:var(--pri-color);" href="new-home.php">View all Land & Property</a>
       </div>
     </div>
-
     <section class="all container-fluid p-0 mt-4" style="overflow-x:hidden;">
       <div class="row">
         <div class="col-lg-7 col-md-12 offset-lg-5 container">
@@ -112,13 +111,39 @@
           <hr>
         </div>
       </div>
+
       <div class="row" style="height: 70vh">
         <div class="col-lg-5 col-md-12">
-          <iframe class="sticky-top" src="https://www.google.com/maps/d/embed?mid=1sSWxH-JSdrDridWqgD3tqzDl90XqnhUS" width="100%" frameborder="0" style="border:0;z-index:0;height:80vh;margin-top:-80px" allowfullscreen></iframe>
+          <!-- <iframe class="sticky-top" src="https://www.google.com/maps/d/embed?mid=1sSWxH-JSdrDridWqgD3tqzDl90XqnhUS" width="100%" frameborder="0" style="border:0;z-index:0;height:80vh;margin-top:-80px" allowfullscreen></iframe> -->
+          <div  class="sticky-top"  id="map" style="border:0;z-index:0;height:80vh;margin-top:-80px; position: sticky !important" ></div>
+
+          <script>
+            mapboxgl.accessToken = 'pk.eyJ1Ijoic2FkaXNoMDkiLCJhIjoiY2ttdGUwMDRvMHF0ejJ3czFidGZidTBscCJ9.qesxX1VtX3mGwc5HBKeyGg';
+          var map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [85.33999973693699, 27.674889575252138],
+          zoom: 8
+          });
+            {% for property in cities %}
+
+
+              // Create a default Marker and add it to the map.
+              //  new mapboxgl.Marker()
+              // .setLngLat([85.33999973693699, 27.674889575252138])
+              // .addTo(map);
+
+              // Create a default Marker, colored black, rotated 45 degrees.
+              new mapboxgl.Marker()
+              .setLngLat([{{property.Longitude}}, {{property.Latitude}}])
+              .addTo(map);
+              {% endfor %}
+              </script>
         </div>
         <div class="col-lg-7 col-md-12">
           <div class="row">
             {% for property in cities %}
+
             <div class="col-lg-6 col-md-6 my-3">
 
               <div class="cards card my-3">

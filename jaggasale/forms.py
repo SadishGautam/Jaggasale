@@ -28,6 +28,7 @@ class HouseForm(forms.ModelForm):
             'built_date': forms.NumberInput(attrs={ 'placeholder': 'Built Date', 'class': 'form-control', 'type': "date"}),
             'area_face': forms.Select(attrs={'class': 'form-control mt-1', 'type': 'number'}),
             'Latitude': forms.TextInput(attrs={ 'class': 'form-control'}),
+            'Longitude': forms.TextInput(attrs={ 'class': 'form-control'}),
 
 
 

@@ -240,6 +240,11 @@ def location_properties_by_cities(request):
 def Kathmandu(request):
     Properties_by_cities = Item.objects.all()
     cities = Item.objects.filter(location='K')
+    # id = Item.objects.values('property_id')
+    # longitude = Item.objects.values('Longitude')
+    # latitude = Item.objects.values('Latitude')
+    # print(longitude)
+    # print(latitude)
     return render(request, "location/kathmandu.html", {'cities': cities})
 
 
