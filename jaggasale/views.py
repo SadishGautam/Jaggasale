@@ -24,8 +24,16 @@ from .forms import ContactForm
 
 class HomeView(ListView):
     model = Item
+    context = {'count': Item.objects.count()}
     template_name = 'index.html'
 
+
+
+
+def Index_page(request):
+    prop = Item.objects.all()
+    print(prop)
+    return render(request, "index.html", {'prop': prop})
 
 def handler404(request, exception):
     context = {}

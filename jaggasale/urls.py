@@ -9,6 +9,7 @@ from .views import contactView, successView
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
+    path('', views.Index_page, name='index'),
     path('loginSignup', views.signup, name='signup'),
     path('login', views.Login, name='login'),
     path('profile', views.profilepage, name='user profile'),

@@ -3,43 +3,6 @@
 {% block title %}  Kathmandu - JaggaSale {% endblock %}
 
 
-{% block css %}
-    .header {
-      box-shadow: 1px 1px 10px 1px grey;
-    }
-
-    .header a.hm {
-      background: transparent;
-    }
-
-    .header a {
-      color: black !important;
-    }
-
-    .header .listing .list a,
-    .header .listing .refresh,
-    .header .listing .heart,
-    .header .listing .user {
-      border: 1px solid var(--pri-color);
-    }
-
-    .header .listing .list a:hover {
-      background: var(--pri-color);
-      color: white !important;
-    }
-
-    .header .menu #bars {
-      color: var(--pri-color) !important;
-    }
-
-    .header .register a {
-      color: var(--pri-color) !important;
-    }
-
-    .header .register a:hover {
-      color: var(--sec-color) !important;
-    }
-{% endblock %}
 
 
 {% block body %}
@@ -126,14 +89,6 @@
           zoom: 8
           });
             {% for property in cities %}
-
-
-              // Create a default Marker and add it to the map.
-              //  new mapboxgl.Marker()
-              // .setLngLat([85.33999973693699, 27.674889575252138])
-              // .addTo(map);
-
-              // Create a default Marker, colored black, rotated 45 degrees.
               new mapboxgl.Marker()
               .setLngLat([{{property.Longitude}}, {{property.Latitude}}])
               .addTo(map);
