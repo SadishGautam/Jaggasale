@@ -62,9 +62,9 @@ class Item(models.Model):
     discount_price = models.IntegerField(blank=True, null=True)
     slug = models.SlugField()
     category = models.CharField(
-        choices=CATEGORY_LIST, max_length=2)
+        choices=CATEGORY_LIST, max_length=2, null=True, blank=True)
     area_face = models.CharField(
-        choices=PROPERTY_AREA_FACE, max_length=2)
+        choices=PROPERTY_AREA_FACE, max_length=2, null=True, blank=True)
     label = models.CharField(
         choices=LABEL_LIST, max_length=2, default='Active')
     sold_or_rent = models.CharField(
@@ -81,9 +81,8 @@ class Item(models.Model):
     Description = RichTextUploadingField()
     location = models.CharField(
         choices=LOCATION_LIST, max_length=2)
-    Latitude= models.CharField(max_length=25)
-    Longitude= models.CharField(max_length=25)
-    map = models.CharField(max_length=150,blank=True, null=True)
+    Latitude= models.CharField(max_length=25, blank=True, null=True)
+    Longitude= models.CharField(max_length=25, blank=True, null=True)
     date =models.DateField(blank=True, null=True, default=timezone.now)
     hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk',
     related_query_name='hit_count_generic_relation')
@@ -105,6 +104,25 @@ class Item(models.Model):
     have_electricityPole = models.BooleanField("electricityPole", default=False)
     have_road = models.BooleanField("road", default=False)
     have_waterSupply = models.BooleanField("waterSupply", default=False)
+
+# Extra checkbox for apartment
+    Ap_have_parking = models.BooleanField("Ap_Parking", default=False)
+    AP_have_electricity = models.BooleanField("Ap_electricity", default=False)
+    Ap_have_drinage = models.BooleanField("Ap_drinage", default=False)
+    Ap_have_dining_room = models.BooleanField("Ap_dining_room", default=False)
+    Ap_have_kids_playground = models.BooleanField("Ap_kids_playground", default=False)
+    Ap_have_lift = models.BooleanField("Ap_lift", default=False)
+    Ap_have_water_supply = models.BooleanField("Ap_water_supply", default=False)
+
+
+
+
+# Extra checkbox for Land
+    La_have_road = models.BooleanField("La_road", default=False)
+    La_have_electricity = models.BooleanField("La_electricity", default=False)
+    La_have_drinage = models.BooleanField("La_drinage", default=False)
+    La_have_water = models.BooleanField("La_water", default=False)
+
 
 
 

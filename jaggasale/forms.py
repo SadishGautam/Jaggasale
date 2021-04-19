@@ -7,10 +7,21 @@ class HouseForm(forms.ModelForm):
         model = Item
         fields = [
             'title', 'location', 'area', 'category',  'rooms', 'bathrooms',
-            'floors', 'Description',  'price', 'phone_number',
+            'floors', 'Description', 'built_date', 'area_face', 'price', 'phone_number',
             'have_parking', 'have_garden', 'have_drinage', 'have_balcony',
             'have_hallRoom', 'have_diningRoom', 'have_elevator', 'have_water',
             'have_electricityBackup', 'have_securityStaff',
+            'Ap_have_parking',
+             'AP_have_electricity',
+              'Ap_have_drinage',
+               'Ap_have_dining_room',
+                'Ap_have_kids_playground',
+                 'Ap_have_lift',
+                  'Ap_have_water_supply',
+                   'La_have_road',
+                   'La_have_electricity',
+                   'La_have_drinage',
+                   'La_have_water',
             'have_lift', 'have_kidsPlayground', 'have_electricityPole',
             'have_road', 'have_waterSupply', 'image','Latitude', 'Longitude', ]
 
@@ -34,18 +45,18 @@ class HouseForm(forms.ModelForm):
 
         }
 
-        class ApartmentForm(forms.ModelForm):
-            class Meta:
-                model = Item
-                fields = [
-                    'title', 'location', 'area', 'category',  'rooms', 'bathrooms',
-                    'area_face', 'Description',  'price', 'phone_number',
-                    'have_parking',  'have_drinage', 'built_date',
-                    'have_diningRoom', 'have_water',
-                    'have_electricityBackup', 'have_securityStaff',
-                    'have_lift', 'have_kidsPlayground',
-                    'image', ]
-
+        # class ApartmentForm(forms.ModelForm):
+        #     class Meta:
+        #         model = Item
+        #         fields = [
+        #             'title', 'location', 'area', 'category',  'rooms', 'bathrooms',
+        #             'area_face', 'Description',  'price', 'phone_number',
+        #             'have_parking',  'have_drinage', 'built_date',
+        #             'have_diningRoom', 'have_water',
+        #             'have_electricityBackup', 'have_securityStaff',
+        #             'have_lift', 'have_kidsPlayground',
+        #             'image', ]
+        #
 
 
         #

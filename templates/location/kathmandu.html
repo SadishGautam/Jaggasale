@@ -15,14 +15,22 @@
       <div class="location font-weight-bold">
         <span style="font-family:'abel';letter-spacing:1px;">KATHMANDU</span>
       </div>
+      <form method="post">
+        {% csrf_token %}
+
       <div class="category input-box">
-        <select class="custom-select">
-          <option selected disabled>Categories</option>
-          <option value="1">Buy Category</option>
-          <option value="2">Rent Category</option>
-          <option value="3">Sold Category</option>
+        <select class="custom-select" name="category">
+          <option selected disabled>Categoriesss</option>
+          <option>Buy Category</option>
+          <option>Rent Category</option>
+          <option>Sold Category</option>
         </select>
+        <input type="submit" value="search"/>
       </div>
+      {% for aa in cities %}
+      <h1>{{aa.title}}</h1>
+      {% endfor %}
+      </form>
       <div class="location input-box p-0">
         <select class="custom-select">
           <option selected disabled>Areas</option>

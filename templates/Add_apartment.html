@@ -449,6 +449,7 @@
                   <label>Built Date</label>
                   <!-- <input class="form-control" type="date" placeholder="Area(Sq ft)"> -->
                   {{ form.built_date }}
+
                 </div>
               </div><!-- ending of column  -->
             </div><!-- ending of row  -->
@@ -512,44 +513,44 @@
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
                   <!-- <input type="checkbox" class="custom-control-input" id="Parking"> -->
-                  {{form.have_parking}}
-                  <label class="custom-control-label" for="id_have_parking">Parking</label>
+                  {{form.Ap_have_parking}}
+                  <label class="custom-control-label" for="id_Ap_have_parking">Parking</label>
                 </div>
               </div>
               <script>
-                let have_parking = document.querySelector("#id_have_parking");
-                have_parking.classList.add("custom-control-input");
+                let Ap_have_parking = document.querySelector("#id_Ap_have_parking");
+                Ap_have_parking.classList.add("custom-control-input");
               </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
                   <!-- <input type="checkbox" class="custom-control-input" id="Electricity"> -->
-                  {{form.have_electricityBackup}}
-                  <label class="custom-control-label" for="Electricity">Electricity Backup</label>
+                  {{form.AP_have_electricity}}
+                  <label class="custom-control-label" for="id_AP_have_electricity">Electricity Backup</label>
                 </div>
               </div>
               <script>
-                let have_balcony = document.querySelector("#id_have_electricityBackup");
-                have_electricityBackup.classList.add("custom-control-input");
+                let AP_have_electricity = document.querySelector("#id_AP_have_electricity");
+                AP_have_electricity.classList.add("custom-control-input");
               </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
                   <!-- <input type="checkbox" class="custom-control-input" id="Drinage"> -->
-                  {{form.have_drinage}}
-                  <label class="custom-control-label" for="Drinage">Drinage</label>
+                  {{form.Ap_have_drinage}}
+                  <label class="custom-control-label" for="id_Ap_have_drinage">Drinage</label>
                 </div>
               </div>
               <script>
-                let have_drinage = document.querySelector("#id_have_drinage");
-                have_drinage.classList.add("custom-control-input");
+                let Ap_have_drinage = document.querySelector("#id_Ap_have_drinage");
+                Ap_have_drinage.classList.add("custom-control-input");
               </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
                   <!-- <input type="checkbox" class="custom-control-input" id="Security"> -->
                   {{form.have_securityStaff}}
-                  <label class="custom-control-label" for="Security">Security Staff</label>
+                  <label class="custom-control-label" for="id_have_securityStaff">Security Staff</label>
                 </div>
               </div>
             </div>
@@ -563,50 +564,89 @@
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
                   <!-- <input type="checkbox" class="custom-control-input" id="Lift"> -->
-                  {{form.have_lift}}
-                  <label class="custom-control-label" for="Lift">Lift</label>
+                  {{form.Ap_have_lift}}
+                  <label class="custom-control-label" for="id_Ap_have_lift">Lift</label>
                 </div>
               </div>
               <script>
-                let have_lift = document.querySelector("#id_have_lift");
-                have_lift.classList.add("custom-control-input");
+                let Ap_have_lift = document.querySelector("#id_Ap_have_lift");
+                Ap_have_lift.classList.add("custom-control-input");
               </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
                   <!-- <input type="checkbox" class="custom-control-input" id="Dining"> -->
-                  {{form.have_diningRoom}}
-                  <label class="custom-control-label" for="Dining">Dining Room</label>
+                  {{form.Ap_have_dining_room}}
+                  <label class="custom-control-label" for="id_Ap_have_dining_room">Dining Room</label>
                 </div>
               </div>
               <script>
-                let have_diningRoom = document.querySelector("#id_have_diningRoom");
-                have_diningRoom.classList.add("custom-control-input");
+                let Ap_have_dining_room = document.querySelector("#id_Ap_have_dining_room");
+                Ap_have_dining_room.classList.add("custom-control-input");
               </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
                   <!-- <input type="checkbox" class="custom-control-input" id="Kids"> -->
-                  {{form.have_kidsPlayground}}
-                  <label class="custom-control-label" for="Kids">Kids playground</label>
+                  {{form.Ap_have_kids_playground}}
+                  <label class="custom-control-label" for="id_Ap_have_kids_playground">Kids playground</label>
                 </div>
               </div>
               <script>
-                let have_kidsPlayground = document.querySelector("#id_have_kidsPlayground");
-                have_kidsPlayground.classList.add("custom-control-input");
+                let Ap_have_kids_playground = document.querySelector("#id_Ap_have_kids_playground");
+                Ap_have_kids_playground.classList.add("custom-control-input");
               </script>
 
               <div class="col-sm-3">
                 <div class="custom-control custom-checkbox">
                   <!-- <input type="checkbox" class="custom-control-input" id="Water"> -->
-                  {{form.have_water}}
-                  <label class="custom-control-label" for="Water">Water Supply</label>
+                  {{form.Ap_have_water_supply}}
+                  <label class="custom-control-label" for="id_Ap_have_water_supply">Water Supply</label>
                 </div>
               </div>
               <script>
-                let have_water = document.querySelector("#id_have_water");
-                have_water.classList.add("custom-control-input");
+                let Ap_have_water_supply = document.querySelector("#id_Ap_have_water_supply");
+                Ap_have_water_supply.classList.add("custom-control-input");
               </script>
+            </div>
+
+
+            <div class="row mt-3">
+              <div class="col-sm-12">
+                <div id="Ap_map"></div>
+                <pre id="coordinates" class="coordinates"></pre>
+
+                <script>
+                  mapboxgl.accessToken = 'pk.eyJ1Ijoic2FkaXNoMDkiLCJhIjoiY2tuNjkzY2g4MDQycjJ2bXptZGI2amd3YyJ9.OTTkaBeX4j02ONDjhhkfQg';
+                  var coordinates = document.getElementById('coordinates');
+                  var map2 = new mapboxgl.Map({
+                    container: 'map2',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [85.323177540036, 27.67488957525255],
+                    zoom: 8
+                  });
+
+                  var marker2 = new mapboxgl.Marker({
+                      draggable: true
+                    })
+                    .setLngLat([85.323177540036, 27.67488957525255])
+                    .addTo(map);
+
+                  function onDragEnd() {
+                    var lngLat = marker2.getLngLat();
+                    coordinates.style.display = 'block';
+                    coordinates.innerHTML =
+                      'Longitude: ' + lngLat.lng + '<br />Latitude: ' + lngLat.lat;
+                      let Longitude = lngLat.lng;
+                      let Latitude = lngLat.lat;
+
+                      document.getElementById("id_Latitude").value=Latitude;
+                      document.getElementById("id_Longitude").value=Longitude;
+                  }
+                    marker2.on('dragend', onDragEnd);
+
+                </script>
+              </div>
             </div>
 
 

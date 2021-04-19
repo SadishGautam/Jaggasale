@@ -24,7 +24,9 @@ from .forms import ContactForm
 
 class HomeView(ListView):
     model = Item
-    context = {'count': Item.objects.count()}
+    item_list = Item.objects.all()
+    print(['object_list'])
+    # context = {'count': Item.objects.count()}
     template_name = 'index.html'
 
 
@@ -248,6 +250,9 @@ def location_properties_by_cities(request):
 def Kathmandu(request):
     Properties_by_cities = Item.objects.all()
     cities = Item.objects.filter(location='K')
+    if request.method=="POST":
+        category = request.POST.get('category')
+        title = request.POST.get('title')
     # id = Item.objects.values('property_id')
     # longitude = Item.objects.values('Longitude')
     # latitude = Item.objects.values('Latitude')
