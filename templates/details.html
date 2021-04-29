@@ -668,6 +668,7 @@
             </section>
             <hr>
 
+
             <section class="apartments">
               <h2 class="pb-4" style="font-family: var(--pri-font);text-shadow: 1px 1px 3px grey;">Apartments Amenities</h2>
               <div class="border">
@@ -815,7 +816,13 @@
               </div>
               <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
             </section>
-            <section style="height:150px;"></section>
+            <!-- <section style="height:150px;"></section> -->
+
+
+
+
+
+
 
           </div>
           <div class="col-lg-4">
@@ -898,8 +905,94 @@
             </div>
           </div>
         </div>
+
+
+                          <!-- ////  -->
+
+                          <!-- ///// -->
+
       </div>
     </section>
+
+
+
+
+
+
+    <section id="Recommended_properties" class="featured" style="margin-top: 0px; background-color:#f7f7f7;">
+      <div class="container">
+        <h2 class="heading font-weight-bold" style="font-family:'abel'; color:var(--pri-color) !important;"> <i class="far fa-thumbs-up"></i> Recommended Properties </h2>
+      <div class="row mt-4">
+        <div id="owl-sold-property" class="owl-carousel owl-theme">
+        {% for recommended_properties in response  %}
+        <!-- <div class="col-sm-12 col-md-6 col-lg-4"> -->
+
+          <div class="card">
+            <div class="card-img" style="position: relative;overflow:hidden;">
+              <div class="img-box" style="height:210px">
+                <img src="https://i.pinimg.com/originals/aa/12/1e/aa121e2010448532595792934d72e517.jpg" height="100%" width="100%">
+              </div>
+              <a href="property/{{object.id}}">
+                <div class="img-overlay"></div>
+              </a>
+              <div class="badge badge1 px-2 py-1 badge-success">Recommended</div>
+              <div class="badge badge2 px-2 py-1"><i class="far fa-thumbs-up"></i></div>
+              <div class="home-heart">
+                <i id="home1" class="fas mx-1 py-2 fa-home"></i>
+                <i id="heart1" class="fas mx-1 py-2 fa-heart"></i>
+              </div>
+            </div>
+            <div class="container px-3">
+              <div class="card-title mt-2">
+                <a href="/property/{{object.id}}">{{recommended_properties.Title|slice:"0:44"}}...</a>
+              </div>
+              <div class="card-content">
+                <div class="row room">
+                  <div class="col-lg-6">
+                    <p><i class="fas fa-map-marker-alt"></i> {{recommended_properties.City}}</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p><i class="fas fa-user-clock"></i> {{recommended_properties.Year|floatformat:"0"}} </p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p><i class="fas fa-eye"></i> {{recommended_properties.Views}} views</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p> <i class="fas fa-clock"></i> {{recommended_properties.Posted|slice:"0:8"}}..</p>
+                  </div>
+                </div>
+                <hr style="border-top:.5px solid lightgrey">
+                <div class="car-footer ">
+
+                  <!-- <strike>Rs. {{recommended_properties.Title}}</strike> -->
+
+                  <span style="color:black;font-weight:bold; font-size:24px;" >Rs. {{recommended_properties.Price}}</span>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+        <!-- </div> -->
+        {% endfor %}
+      </div>
+      </div>
+            </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
 
 
   </section>
@@ -1026,4 +1119,54 @@
     }
   })
 </script>
+
+<script type="36ca0483887fc711e1ef5a96-text/javascript">
+  $('#owl-sold-property').owlCarousel({
+    loop: true,
+    margin: 20,
+    nav: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    dots: false,
+    responsive: {
+      0: {
+        items: 1
+      },
+      600: {
+        items: 2
+      },
+      1000: {
+        items: 3
+      }
+    }
+  })
+</script>
+
+
+<!-- <script type="text/javascript">
+  $('#owl_property_recommend').owlCarousel({
+    loop: true,
+    margin: 6,
+    nav: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    dots: false,
+    responsive: {
+      0: {
+        items: 1
+      },
+      600: {
+        items: 1
+      },
+      1000: {
+        items: 1
+      }
+    }
+  })
+</script> -->
+
+
+
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox-plus-jquery.min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>

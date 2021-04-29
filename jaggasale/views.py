@@ -16,7 +16,7 @@ from django.shortcuts import get_object_or_404
 from hitcount.views import HitCountDetailView
 from .forms import HouseForm  # ApartmentForm
 from django.forms import modelformset_factory
-
+import requests
 from django.core.mail import send_mail, BadHeaderError
 from .forms import ContactForm
 # from .filters import ItemFilter
@@ -157,6 +157,9 @@ def handleDetails(request, id):
     # propertyImages = Images.objects.filter(imageitem_id= id)
     propertyImages = Images.objects.filter(imageitem_id=id)
     print(propertyImages)
+    response = requests.get('http://127.0.0.1:5000/recommendproperty?Property_ID='+str(id)).json()
+    print(response)
+    Rec_property = ["Title", "Address"]
 
     if request.method == 'GET':
         form = ContactForm()
@@ -176,7 +179,9 @@ def handleDetails(request, id):
             return HttpResponse('Success! Thank you for your message.')
     contex = {'propertyList': propertyList,
               'propertyImages': propertyImages,
-              'form': form
+              'form': form,
+              'response': response,
+              # 'Rec_property': Rec_property,
               }
     return render(request, "details.html", contex)
 

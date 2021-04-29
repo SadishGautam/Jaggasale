@@ -683,6 +683,14 @@ input {
   transition: .5s;
 }
 
+
+#Recommended_properties .card{
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.132);
+}
+
+
+
+
 .featured .card:hover {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.332);
 }

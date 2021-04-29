@@ -17,6 +17,10 @@ body {
 }
 
 
+
+
+
+
 html{
     font-family: 'Ubuntu', sans-serif;
 } */
@@ -168,8 +172,8 @@ html{
 }
 
 .description .card img {
-  height: 25px;
-  width: 140px;
+  /* height: 25px;
+  width: 140px; */
   /* display: inline-block; */
 }
 
