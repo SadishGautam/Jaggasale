@@ -277,9 +277,9 @@
               <i id="heart1" class="fas mx-1 py-2 fa-heart"></i>
             </div>
           </div>
-          <div class="container px-4">
+          <div class="container px-3">
             <div class="card-title mt-3">
-              <a href="/property/{{object.id}}">{{object.title}}</a>
+              <a href="/property/{{object.id}}">{{object.title|slice:"0:44"}}..</a>
             </div>
             <div class="card-content mt-3">
               <div class="row room">
@@ -293,7 +293,7 @@
                   <p><i class="fas fa-bed"></i> {{object.rooms}} Rooms</p>
                 </div>
                 <div class="col-lg-6">
-                  <p> <i class="fas fa-clock"></i> {{object.date}}</p>
+                  <p> <i class="fas fa-clock"></i> {{object.date|slice:"0:2"}}</p>
                 </div>
               </div>
               <hr style="border-top:.5px solid lightgrey">
@@ -356,7 +356,7 @@
           </div>
 
           <div class="card-title mt-3">
-            <a href="/property/{{i.id}}">{{object.title}}</a>
+            <a href="/property/{{i.id}}">{{object.title}}...</a>
           </div>
           <div class="car-footer">
             <strike>Rs. 34,00,000/mo</strike> <br> <span style="color:black;font-weight:bold;">Rs. 2,80,000/mo</span>
