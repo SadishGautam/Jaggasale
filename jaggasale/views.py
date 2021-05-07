@@ -68,6 +68,8 @@ def Add_property_by_user(request):
     form = HouseForm(request.POST or None, request.FILES)
     count = Item.objects.filter(user=request.user).count()
     if request.method == "POST":
+        images = request.FILES.getlist('imagesss')
+
         if form.is_valid():
             saving = form.save(commit=False)
             print(request.user)
@@ -83,6 +85,9 @@ def Add_property_by_user(request):
         else:
             # form = HouseForm()
             messages.error(request, "Property cannot be saved")
+        for image in images:
+            photo = Images.objects.create(image=image,)
+            photo.save()
     return render(request, "Add_apartment.html", {'form': form, 'count': count})
 
 

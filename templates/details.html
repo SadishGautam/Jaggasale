@@ -485,19 +485,21 @@
         <div class="row">
           <div class="col-lg-8">
             <section class=" owl-sad mb-4">
-              {% for img in propertyImages %}
+
               <div class="owl-carousel owl-theme" id="sadis-owl">
+                {% for i in photo %}
                 <div class="item">
-                  <div class="img-box"><img src="{{ img.image.url }}" class="img-fluid" alt=""></div>
+                  <div class="img-box"><img src="{{ i.image.url }}" class="img-fluid" alt=""></div>
+                </div>
+                {% endfor %}
+                <div class="item">
+                  <div class="img-box"><img src="{{ propertyList.image.url }}" class="img-fluid" alt=""></div>
                 </div>
                 <div class="item">
-                  <div class="img-box"><img src="{{ img.image.url }}" class="img-fluid" alt=""></div>
-                </div>
-                <div class="item">
-                  <div class="img-box"><img src="{{ img.image.url }}" class="img-fluid" alt=""></div>
+                  <div class="img-box"><img src="{{ propertyList.image.url }}" class="img-fluid" alt=""></div>
                 </div>
               </div>
-              {% endfor %}
+
             </section>
             <div class="photo-numbering">
               <p><i class="fas fa-camera"></i> &nbsp <span class="photos-no"> 11</span></p>
@@ -533,7 +535,7 @@
         <div class="row">
           <div class="col-lg-8">
             <div class="main-description">
-              <h2 style="font-family:var(--pri-font);text-shadow: 1px 1px 5px grey;">Description</h2>
+              <h2 style="font-family:var(--pri-font);text-shadow: 1px 1px 5px grey;">Descriptionss</h2>
               <br>
               <p>
                 {{ propertyList.Description|safe }}
@@ -579,9 +581,9 @@
 
             </section>
             <hr>
-            <section class="features">
+            <section class="features tooltip" title="This feature is coming soon!">
               <h2 class="pb-4" style="font-family: var(--pri-font);text-shadow: 1px 1px 3px grey;">Facts and Features</h2>
-              <div class="row" style="font-family: 'abel';">
+              <div class="row" style="font-family: 'abel';"  aria-label="Javascript is a programing languaje">
                 <div class="col-lg-3 col-md-3">
                   <div class="cnt d-flex">
                     <div>
@@ -666,6 +668,44 @@
                 </div>
               </div>
             </section>
+
+
+            <style>
+              .features .row {
+                    /* position: relative; */
+                    backdrop-filter: blur(2px) !important;
+                    filter: blur(2px);
+                    -webkit-filter: blur(2px);
+                  }
+
+                  .tooltip {
+                    display: inline;
+                    position: relative;
+                  }
+
+
+                  .tooltip:hover:after{
+                    display: -webkit-flex;
+                    display: flex;
+                    -webkit-justify-content: center;
+                    content: attr(title);
+                  }
+
+
+                .tooltip:hover:before{
+                /* border: solid;
+                border-color: #444 transparent;
+                border-width: 12px 6px 0 6px;
+                content: "";
+                left: 45%;
+                bottom: 30px;
+                position: absolute; */
+              }
+
+
+            </style>
+
+
             <hr>
 
 
@@ -674,30 +714,54 @@
               <div class="border">
                 <div class="row" style="font-family:'abel'">
                   <div class="col-lg-3 col-md-3">
-                    <i class="far fa-check-square"></i> Balcony
+                    {% if propertyList.have_parking %}
+                    <i class="far fa-check-square">
+                    </i>{% else %}<i class="far fa-square"></i>
+                    {% endif %} Balcony
                   </div>
                   <div class="col-lg-3 col-md-3">
-                    <i class="far fa-check-square"></i> Basement
+                    {% if propertyList.have_garden %}
+                    <i class="far fa-check-square"></i>
+                    {% else %} <i class="far fa-square"></i>
+                    {% endif %} Garden
                   </div>
                   <div class="col-lg-3 col-md-3">
-                    <i class="far fa-check-square"></i> Dining Room
+                    {% if propertyList.have_drinage %}
+                    <i class="far fa-check-square"></i>
+                    {% else %} <i class="far fa-square"></i>
+                    {% endif %} Drinage
                   </div>
                   <div class="col-lg-3 col-md-3">
-                    <i class="far fa-check-square"></i> Dishwasher
+                    {% if propertyList.have_balcony %}
+                    <i class="far fa-check-square"></i>
+                    {% else %} <i class="far fa-square"></i>
+                    {% endif %} Balcony
                   </div>
                 </div>
                 <div class="row mt-4" style="font-family:'abel'">
                   <div class="col-lg-3 col-md-3">
-                    <i class="far fa-check-square"></i> Elevator
+                    {% if propertyList.have_hallRoom %}
+                    <i class="far fa-check-square"></i>
+                    {% else %} <i class="far fa-square"></i>
+                    {% endif %} Hall Room
                   </div>
                   <div class="col-lg-3 col-md-3">
-                    <i class="far fa-check-square"></i>Gym
+                    {% if propertyList.have_diningRoom %}
+                    <i class="far fa-check-square"></i>
+                    {% else %} <i class="far fa-square"></i>
+                    {% endif %} Dining Room
                   </div>
                   <div class="col-lg-3 col-md-3">
-                    <i class="far fa-check-square"></i> Family Room
+                    {% if propertyList.have_elevator %}
+                    <i class="far fa-check-square"></i>
+                    {% else %} <i class="far fa-square"></i>
+                    {% endif %} Elevator
                   </div>
                   <div class="col-lg-3 col-md-3">
-                    <i class="far fa-check-square"></i> Fireplace
+                    {% if propertyList.have_water %}
+                    <i class="far fa-check-square"></i>
+                    {% else %} <i class="far fa-square"></i>
+                    {% endif %} Water
                   </div>
                 </div>
             </section>
@@ -819,6 +883,18 @@
             <!-- <section style="height:150px;"></section> -->
 
 
+
+            <script type="text/javascript">
+              const api_url = 'https://api.geoapify.com/v2/places?categories=commercial.food_and_drink&filter=circle:85.3459289929769,27.6855453,2000&bias=proximity:85.3459289929769,27.6855453&limit=4&apiKey=a46f6787113941dabf4252d0951cd9bf'
+              async function getFood(){
+                const response = await fetch(api_url);
+                const data = await response.json();
+                const {features} = data;
+                console.log(data);
+              }
+
+              getFood();
+            </script>
 
 
 

@@ -97,6 +97,8 @@ class Item(models.Model):
     have_diningRoom = models.BooleanField("diningRoom", default=False)
     have_elevator = models.BooleanField("elevator", default=False)
     have_water = models.BooleanField("water", default=False)
+
+    
     have_electricityBackup = models.BooleanField("electricityBackup", default=False)
     have_securityStaff = models.BooleanField("securityStaff", default=False)
     have_lift = models.BooleanField("lift", default=False)
@@ -149,9 +151,9 @@ class Item(models.Model):
 
 
 class Images(models.Model):
-    imageitem = models.ForeignKey(Item, on_delete=models.CASCADE)
+    imageitem = models.ForeignKey(Item, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=30, blank=True)
-    images= models.ImageField(blank= True, upload_to='static/images')
+    image= models.ImageField(null=True, blank= True, upload_to='static/images')
 
 
     def __str__(self):

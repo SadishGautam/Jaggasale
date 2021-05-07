@@ -1,0 +1,101 @@
+/* #Adding_property {
+  background-color: rgba(167, 164, 164, .151);
+  box-shadow: 13px 0 0 0 rgba(0, 0, 0, 0.16), 13px 0 0 0 rgba(0, 0, 0, 0.23);
+} */
+
+
+
+#Adding_property .nav-pills {
+  display: flex;
+  justify-content: center;
+}
+
+#Adding_property .nav-pills .nav-link {
+  border-radius: 0px !important;
+}
+
+#Adding_property .add_property_container_box {
+  /* background-color: #ffffff; */
+  background-color: rgba(167, 164, 164, .151);
+  /* border-radius: 10px; */
+  box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+  padding: 40px;
+  /* box-shadow: 3px 3px 16px rgba(0,0,0,0.16), 0 3px 16px rgba(0,0,0,0.23); */
+}
+
+
+#Adding_property .nav-pills li a {
+  margin: 20px 0px;
+  color: #000000;
+  font-weight: bold;
+}
+
+#Adding_property .nav-pills li a active {
+  color: #43c370 !important;
+}
+
+#Adding_property .add_property_container_box .nav-pills li a {}
+
+#Adding_property .add_property_container_box .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background-color: #43c370 !important;
+  color: #ffffff !important;
+}
+
+#pills-tabContent label {
+  font-size: 19px;
+  font-weight: bold;
+  margin-bottom: .2rem;
+}
+
+#pills-tabContent input[type=text], [type=number], [type=file], #pills-tabContent textarea, #pills-tabContent .form-group select {
+  padding: 5px 13px;
+  border: 1px solid #ccc !important;
+  border-radius: 0;
+  resize: vertical;
+}
+
+#pills-tabContent .form-group input, #pills-tabContent textarea, #pills-tabContent .form-group select:focus {
+  outline: 0px !important;
+  box-shadow: none !important;
+}
+
+ #pills-tabContent .form-group select{
+   font-family: 'Farro', sans-serif;
+   font-size: 18px;
+   font-weight: normal;
+ }
+
+#pills-tabContent .form-group button{
+  border-radius: 0;
+}
+
+#pills-tabContent .form-group button:hover{
+  background-color: #43c370 !important;
+  border-color: #43c370 !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* avvvvvvv */

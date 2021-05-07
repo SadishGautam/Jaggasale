@@ -23,7 +23,7 @@ class HouseForm(forms.ModelForm):
                    'La_have_drinage',
                    'La_have_water',
             'have_lift', 'have_kidsPlayground', 'have_electricityPole',
-            'have_road', 'have_waterSupply', 'image','Latitude', 'Longitude', ]
+            'have_road', 'have_waterSupply','image', 'Latitude', 'Longitude', ]
 
 
         widgets = {
@@ -40,6 +40,7 @@ class HouseForm(forms.ModelForm):
             'area_face': forms.Select(attrs={'class': 'form-control mt-1', 'type': 'number'}),
             'Latitude': forms.TextInput(attrs={ 'class': 'form-control'}),
             'Longitude': forms.TextInput(attrs={ 'class': 'form-control'}),
+            
 
 
 
@@ -78,10 +79,12 @@ class ContactForm(forms.Form):
                                                                           'rows': '3',  'style': "border:none;background: #f8f9fa !important; box-shadow: none;outline:none;  font-family:'abel';"}))
 
 # class AdditionalImages(forms.ModelForm):
+#     image = forms.ImageField(label='Image')
 #     class Meta:
 #         model = Images
-#         extra = 3
-#         fields = ['title','images',]
+#         fields = [{
+#
+#         }'images',]
 
     # exclude = ('label', 'email', 'slug', 'category','sold_or_rent', 'picture_count', 'owner_name', 'phone_number', 'date', 'location', 'map', 'image')
     # title = forms.CharField(max_length=50)
