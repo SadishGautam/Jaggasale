@@ -7,7 +7,7 @@ class HouseForm(forms.ModelForm):
         model = Item
         fields = [
             'title', 'location', 'area', 'category',  'rooms', 'bathrooms',
-            'floors', 'Description', 'built_date', 'area_face', 'price', 'phone_number',
+            'floors', 'Description', 'address','built_date', 'area_face', 'price', 'phone_number',
             'have_parking', 'have_garden', 'have_drinage', 'have_balcony',
             'have_hallRoom', 'have_diningRoom', 'have_elevator', 'have_water',
             'have_electricityBackup', 'have_securityStaff',
@@ -29,7 +29,9 @@ class HouseForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Title', 'class': 'form-control'}),
             'location': forms.Select(attrs={'class': 'form-control mt-1', 'type': 'number'}),
+            'category': forms.Select(attrs={'class': 'form-control mt-1', 'type': 'number'},),
             'area': forms.NumberInput(attrs={'placeholder': 'Area', 'class': 'form-control', 'min': 0}),
+            'address': forms.TextInput(attrs={'placeholder': 'Address', 'class': 'form-control'}),
             'rooms': forms.NumberInput(attrs={'placeholder': 'Rooms', 'class': 'form-control', 'min': 1}),
             'bathrooms': forms.NumberInput(attrs={'placeholder': 'Bathrooms', 'class': 'form-control', 'min': 1}),
             'floors': forms.NumberInput(attrs={'placeholder': 'Floors', 'class': 'form-control', 'min': 1}),
@@ -40,7 +42,7 @@ class HouseForm(forms.ModelForm):
             'area_face': forms.Select(attrs={'class': 'form-control mt-1', 'type': 'number'}),
             'Latitude': forms.TextInput(attrs={ 'class': 'form-control'}),
             'Longitude': forms.TextInput(attrs={ 'class': 'form-control'}),
-            
+
 
 
 

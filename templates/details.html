@@ -427,7 +427,7 @@
         <div class="row py-3 list-unstyled" style="font-family:'abel';">
           <div class="col-lg-2 mt-3">
             <li>
-              <h4>{{ propertyList.title }}</h4>
+              <h4>{{ url.Title }}</h4>
             </li>
           </div>
           <div class="col-lg-2 mt-3 ">
@@ -484,20 +484,20 @@
 
         <div class="row">
           <div class="col-lg-8">
-            <section class=" owl-sad mb-4">
+            <section class=" owl-sad mb-4" id="slider_img">
 
               <div class="owl-carousel owl-theme" id="sadis-owl">
-                {% for i in photo %}
+                {% for i in item.images_set.all %}
                 <div class="item">
-                  <div class="img-box"><img src="{{ i.image.url }}" class="img-fluid" alt=""></div>
+                  <div class="img-box bigslider"><img src="{{ i.image.url }}" class="img-fluid" alt=""></div>
                 </div>
                 {% endfor %}
-                <div class="item">
-                  <div class="img-box"><img src="{{ propertyList.image.url }}" class="img-fluid" alt=""></div>
+                <!-- <div class="item">
+                  <div class="img-box bigslider"><img src="{{ propertyList.image.url }}" class="img-fluid" alt=""></div>
                 </div>
                 <div class="item">
-                  <div class="img-box"><img src="{{ propertyList.image.url }}" class="img-fluid" alt=""></div>
-                </div>
+                  <div class="img-box bigslider"><img src="{{ propertyList.image.url }}" class="img-fluid" alt=""></div>
+                </div> -->
               </div>
 
             </section>
@@ -772,17 +772,20 @@
               <span class="heading" style="font-family:'abel';"> <i class="fas fa-utensils"></i> Food </span>
               <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
               <div class="items">
-                <p>Da Munch Box <span>(0.00 mi) </span> <span style="float: right; ">14 REVIEWS
+
+
+                <p>{{out.0.features.0.properties.name|slice:"0:27"}} <span>({{out.0.features.0.properties.distance}} m) </span> <span style="float: right; ">14 REVIEWS
                     <i class="far checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
                     <i class="far fa-star"></i>
                   </span> </p>
+
               </div>
               <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
               <div class="items">
-                <p>Hot Wing Truck <span>(0.00 mi) </span> <span style="float: right; ">8 REVIEWS
+                <p>{{out.0.features.1.properties.name|slice:"0:27"}} <span>({{out.0.features.1.properties.distance}} m) </span> <span style="float: right; ">8 REVIEWS
                     <i class="far checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
@@ -792,7 +795,7 @@
               </div>
               <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
               <div class="items">
-                <p>Tuggle Law <span>(0.00 mi) </span> <span style="float: right; ">10 REVIEWS
+                <p>{{out.0.features.2.properties.name|slice:"0:27"}} <span>({{out.0.features.2.properties.distance}} m) </span> <span style="float: right; ">10 REVIEWS
                     <i class="far checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
@@ -802,7 +805,7 @@
               </div>
               <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
               <div class="items">
-                <p>Sandwich Brothers <span>(0.00 mi) </span> <span style="float: right; ">5 REVIEWS
+                <p>{{out.0.features.3.properties.name|slice:"0:27"}} <span>({{out.0.features.3.properties.distance}} m) </span> <span style="float: right; ">5 REVIEWS
                     <i class="far checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
                     <i class="far   fa-star"></i>
@@ -810,13 +813,13 @@
                     <i class="far fa-star"></i>
                   </span> </p>
               </div>
-
+<!-- starting nearby education -->
               <hr style=" border-top: 1.5px solid rgba(24, 22, 22, 0.986); margin: 50px 0;">
               <span class="heading" style="font-family:'abel';"> <i class="fas fa-book-open"></i> Education
               </span>
               <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
               <div class="items">
-                <p>Da Munch Box <span>(0.00 mi) </span> <span style="float: right; ">14 REVIEWS
+                <p>{{out.1.features.0.properties.name|slice:"0:27"}} <span>({{out.1.features.0.properties.distance}} m) </span> <span style="float: right; ">14 REVIEWS
                     <i class="far checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
@@ -826,7 +829,7 @@
               </div>
               <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
               <div class="items">
-                <p>Hot Wing Truck <span>(0.00 mi) </span> <span style="float: right; ">8 REVIEWS
+                <p>{{out.1.features.1.properties.name|slice:"0:27"}} <span>({{out.1.features.1.properties.distance}} m) </span> <span style="float: right; ">8 REVIEWS
                     <i class="far checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
@@ -836,7 +839,7 @@
               </div>
               <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
               <div class="items">
-                <p>Tuggle Law <span>(0.00 mi) </span> <span style="float: right; ">10 REVIEWS
+                <p>{{out.1.features.2.properties.name|slice:"0:27"}}<span>({{out.1.features.2.properties.distance}} m) </span> <span style="float: right; ">10 REVIEWS
                     <i class="far checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
@@ -844,13 +847,16 @@
                     <i class="far  checked fa-star"></i>
                   </span> </p>
               </div>
+<!-- Ending Nearby education -->
 
+
+<!-- Starting nearby hospitals -->
 
               <hr style=" border-top: 1.5px solid rgba(24, 22, 22, 0.986);margin: 50px 0;">
               <span class="heading" style="font-family:'abel';"> <i class="fas fa-cogs"></i> Homeservices </span>
               <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
               <div class="items">
-                <p>Da Munch Box <span>(0.00 mi) </span> <span style="float: right; ">14 REVIEWS
+                <p>{{out.2.features.4.properties.name|slice:"0:27"}} <span>({{out.2.features.0.properties.distance}} m) </span> <span style="float: right; ">14 REVIEWS
                     <i class="far checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
@@ -860,7 +866,7 @@
               </div>
               <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
               <div class="items">
-                <p>Hot Wing Truck <span>(0.00 mi) </span> <span style="float: right; ">8 REVIEWS
+                <p>{{out.2.features.3.properties.name|slice:"0:27"}} <span>({{out.2.features.1.properties.distance}} m) </span> <span style="float: right; ">8 REVIEWS
                     <i class="far checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
@@ -870,7 +876,7 @@
               </div>
               <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
               <div class="items">
-                <p>Tuggle Law <span>(0.00 mi) </span> <span style="float: right; ">10 REVIEWS
+                <p>{{out.2.features.2.properties.name|slice:"0:27"}} <span>({{out.2.features.2.properties.distance}} m) </span> <span style="float: right; ">10 REVIEWS
                     <i class="far checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
                     <i class="far  checked fa-star"></i>
@@ -879,24 +885,10 @@
                   </span> </p>
               </div>
               <hr style=" border-top: 1px solid rgba(131, 126, 126, 0.623);">
+
+              <!-- Ending Neaarby hospitals -->
             </section>
             <!-- <section style="height:150px;"></section> -->
-
-
-
-            <script type="text/javascript">
-              const api_url = 'https://api.geoapify.com/v2/places?categories=commercial.food_and_drink&filter=circle:85.3459289929769,27.6855453,2000&bias=proximity:85.3459289929769,27.6855453&limit=4&apiKey=a46f6787113941dabf4252d0951cd9bf'
-              async function getFood(){
-                const response = await fetch(api_url);
-                const data = await response.json();
-                const {features} = data;
-                console.log(data);
-              }
-
-              getFood();
-            </script>
-
-
 
 
 
@@ -945,11 +937,11 @@
                       </div>
                     </div>
                   </div>
-                  <p> <span style="font-family:'abel'"><i class="fab fa-opencart mr-1" style="color:rgba(67,195,112,1);"></i> Sadish Gautam</span> </p>
+                  <p> <span style="font-family:'abel'"><i class="fab fa-opencart mr-1" style="color:rgba(67,195,112,1);"></i> {{property_owner_name.first_name}} {{property_owner_name.last_name}}</span> </p>
                 </div>
 
 
-                <form method="post">
+                <form method="post" >
                   {% csrf_token %}
 
                   <p class="d-flex bg-light p-2">
@@ -1008,7 +1000,7 @@
               <div class="img-box" style="height:210px">
                 <img src="https://i.pinimg.com/originals/aa/12/1e/aa121e2010448532595792934d72e517.jpg" height="100%" width="100%">
               </div>
-              <a href="property/{{object.id}}">
+              <a href="property/{{recommended_properties.Property_ID}}">
                 <div class="img-overlay"></div>
               </a>
               <div class="badge badge1 px-2 py-1 badge-success">Recommended</div>
@@ -1020,13 +1012,9 @@
             </div>
             <div class="container px-3">
               <div class="card-title mt-2">
-                <a href="/property/{{object.id}}">{{recommended_properties.Title|slice:"0:44"}}...</a>
+                {{recommended_properties}}
+                <a href="/property/{{recommended_properties.Property_ID}}">{{recommended_properties.Title|slice:"0:44"}}...</a>
               </div>
-              <div class="card-content">
-                <div class="row room">
-                  <div class="col-lg-6">
-                    <p><i class="fas fa-map-marker-alt"></i> {{recommended_properties.City}}</p>
-                  </div>
                   <div class="col-lg-6">
                     <p><i class="fas fa-user-clock"></i> {{recommended_properties.Year|floatformat:"0"}} </p>
                   </div>

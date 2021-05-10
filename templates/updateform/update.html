@@ -1,6 +1,6 @@
 {% extends 'basic.html' %}
 {% load static %}
-{% block title %} Login - JaggaSale {% endblock %}
+{% block title %} Update property - JaggaSale {% endblock %}
 
 
 
@@ -68,6 +68,89 @@ font-family:'abel';
     </div>
   </div>
 </section>
+
+
+<style type="text/css">
+  body {background: whitesmoke;text-align: center;}
+  button{background-color: darkslategrey;color: white;border: 0;font-size: 18px;font-weight: 500;border-radius: 7px;padding: 10px 10px;cursor: pointer;white-space: nowrap;}
+  #success{background: green;}
+  #error{background: red;}
+  #warning{background: coral;}
+  #info{background: cornflowerblue;}
+  #question{background: grey;}
+</style>
+
+
+<form id="positionForm">
+  <input type="radio" name="position" value="top-left" checked>Top Left
+  <input type="radio" name="position" value="top-center">Top Center
+  <input type="radio" name="position" value="top-right">Top Right
+  <input type="radio" name="position" value="top-full-width">Top Full Width
+  <input type="radio" name="position" value="bottom-left">Bottom Left
+  <input type="radio" name="position" value="bottom-center">Bottom center
+  <input type="radio" name="position" value="bottom-right">Bottom right
+  <input type="radio" name="position" value="bottom-full-width">Bottom Full Width
+</form>
+<button id="position">Show Toast</button>
+
+
+
+{% if messages %}
+{% for message in messages %}
+
+                <script>toastr.{{ message.tags }}('{{ message }}');</script>
+
+
+{% endfor %}
+{% endif%}
+
+<script type="text/javascript">
+  // Default Configuration
+    $(document).ready(function() {
+      toastr.options = {
+        'closeButton': true,
+        'debug': false,
+        'newestOnTop': false,
+        'progressBar': false,
+        'positionClass': 'toast-top-right',
+        'preventDuplicates': false,
+        'showDuration': '1000',
+        'hideDuration': '1000',
+        'timeOut': '5000',
+        'extendedTimeOut': '1000',
+        'showEasing': 'swing',
+        'hideEasing': 'linear',
+        'showMethod': 'fadeIn',
+        'hideMethod': 'fadeOut',
+      }
+    });
+
+    // Toast Type
+  		$('#success').click(function(event) {
+  			toastr.success('You clicked Success toast');
+  		});
+  		$('#info').click(function(event) {
+  			toastr.info('You clicked Info toast')
+  		});
+  		$('#error').click(function(event) {
+  			toastr.error('You clicked Error Toast')
+  		});
+  		$('#warning').click(function(event) {
+  			toastr.warning('You clicked Warning Toast')
+  		});
+
+
+
+    	// Toast Position
+    		$('#position').click(function(event) {
+    			var pos = $('input[name=position]:checked', '#positionForm').val();
+    			toastr.options.positionClass = "toast-" + pos;
+    			toastr.options.preventDuplicates = false;
+    			toastr.info('This sample position', 'Toast Position')
+    		});
+</script>
+
+
 
 
 

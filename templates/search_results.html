@@ -1,9 +1,318 @@
-{% extends 'basic.html' %}
 {% load static %}
-{% block title %}  Kathmandu - JaggaSale {% endblock %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="static/cssbootstrap.min.css"> -->
 
 
-{% block css %}
+  <!-- css -->
+
+  <link rel="icon" href="/static/pics/home.ico">
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/ofc-detail1.css">
+  <link rel="stylesheet" href="/static/css/why-choose.css">
+  <link rel="stylesheet" href="/static/css/register.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/footer.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/about.css">
+
+
+  <!-- fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0-11/css/all.css">
+  <link href="https://fonts.googleapis.com/css?family=Farro&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Farro|Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Abel&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Tangerine&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+
+  <!-- carousel -->
+  <link rel="stylesheet" type="text/css" href="/static/css/owl-carousel.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/owl.theme.default.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+
+
+  <title> {% block title %} hero {% endblock %} </title>
+</head>
+
+<body>
+
+  <!-- ---------------------------Sadish Codes---------------------------  -->
+
+  <div class="container-fluid header pt-5 pb-2">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-12 ">
+        <a href="{% url 'home' %}" style="padding-left:40px;color:white;text-decoration: none;display: inline-block;text-shadow:1px 1px 3px grey;font-family:'Tangerine'">
+          <!-- <h1 class="display-4">JaggaSale.com</h1> -->
+          <div class="company_logo">
+            <img src="/static/images/jagaa_sale_compress_logo.png" height="100px" width="auto" alt="">
+
+          </div>
+        </a>
+
+
+      </div>
+      <div class="col-lg-5 col-md-5 col-sm-12 text-center">
+
+        <ul class="list-unstyled d-flex mt-3">
+          <li class="dropdown">
+            <a class="dropbtn hm" href="{% url 'home' %}">HOME</a>
+            <div class="dropdown-content">
+              <a href="{% url 'about us' %}">About</a>
+              <a href="{% url 'contact us' %}">Contact</a>
+              <a href="{% url 'news' %}">News</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="{% url 'Kathmandu' %}" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">KATHMANDU</a>
+            <div class="dropdown-content">
+              <a href="#">Baneshwor</a>
+              <a href="#">Sundhara</a>
+              <a href="#">Kalanki</a>
+              <a href="#">Gaushala</a>
+              <a href="#">Balaju</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="#" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">LALITPUR</a>
+            <div class="dropdown-content">
+              <a href="#">Patan</a>
+              <a href="#">Lagankhel</a>
+              <a href="#">Jawalakhel</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="#" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">BHAKTAPUR</a>
+            <div class="dropdown-content">
+              <a href="#">Siddhapokhari</a>
+              <a href="#">Jagati</a>
+              <a href="#">Suryabinayak</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a href="#" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">OTHERS</a>
+            <div class="dropdown-content">
+              <a href="#">Land</a>
+              <a href="#">Property</a>
+              <a href="#">Cars</a>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+
+
+
+      <!-- login/signup part in header -->
+      {% if user.is_authenticated %}
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="listing mt-2 d-flex align-items-center">
+          <div class="list ml-5">
+            <a href="{% url 'add property' %}"><i class="fas fa-home"></i>&nbsp; ADD LISTING</a>
+          </div>
+
+          <div class="login-form" style="position:relative;">
+            <div class="user icon ml-3">
+              <a style="color:white;" href="{% url 'user profile' %}"><i class="far fa-user"></i></a>
+            </div>
+            <div class="login container wish font-weight-bold">
+              <a href="{% url 'user profile' %}"> {{ user.first_name}} {{ user.last_name  |default:'Guest' }} </a>
+            </div>
+
+          </div>
+
+          <div class="wishlist" style="position:relative;">
+            <div class="heart icon ml-3">
+              <a style="color:white" href="#"><i class="far fa-heart"></i></a><span class="badge">0</span>
+            </div>
+
+          </div>
+
+
+          <div class="refresh ml-3">
+            <a style="color:white;" href="{% url 'handleLogout' %}"><i class="fas fa-sign-out-alt" style=" padding-left: 5px; padding-right: 5px;"></i></a>
+          </div>
+        </div>
+      </div>
+
+      {% else %}
+
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="listing mt-2 d-flex align-items-center">
+          <div class="list ml-5">
+            <a href="{% url 'signup' %}"><i class="fas fa-home"></i>&nbsp; Register</a>
+          </div>
+
+          <div class="login-form" style="position:relative;">
+            <div class="user icon ml-3">
+              <a style="color:white;" href="#"><i class="far fa-user"></i></a>
+            </div>
+            <div class="login container">
+              <form method="post" action="/welcome">
+                {% csrf_token %}
+                <div class="form-group">
+                  <strong>Username</strong>
+                </div>
+                <div class="form-group">
+                  <input type="text" spellcheck="false" id="loginusername" class="form-control log bg-light" placeholder="Enter Username" required>
+                </div>
+                <div class="form-group">
+                  <strong>Password</strong>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control log bg-light" id="loginpassword" placeholder="Enter Password" required>
+                </div>
+                <div class="form-group">
+                  <div class="custom-checkbox custom-control">
+
+                    <input id="pk" type="checkbox" class="custom-control-input">
+                    <label style="user-select: none; cursor:pointer" for="pk" class="custom-control-label">Remember me</label>
+
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button class="btn form-control d-flex align-items-center justify-content-center" type="submit">
+                    <span>SIGN IN</span>
+                  </button>
+
+                </div>
+                <div class="register text-center">
+                  <a href="http://127.0.0.1:8000/loginSignup"> REGISTRATION</a>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      {% endif %}
+
+
+
+
+
+
+      <!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+    </div>
+
+    <div class="menu" style="display: none;">
+      <span id="bars" style="font-size:30px;cursor:pointer;color:white" onclick="openNav()">&#9776;</span>
+    </div>
+
+    <div id="myNav" class="overlay">
+      <div class="overlay-content">
+        <ul class="list-unstyled">
+          <li class="small-drop">
+            <div class="accordion">
+              <div class="card" style="background: var(--pri-color)">
+                <div class="card-header">
+                  <a href="{% url 'home' %}" style="color:white;text-decoration:none;">HOME</a>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="small-drop">
+            <div class="accordion" id="accordionExample">
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    KATHMANDU<i style="float: right;" class="fas fa-chevron-down"></i>
+                  </a>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <a href="kathmandu.php">Baneshwor</a>
+                    <a href="#">Sundhara</a>
+                    <a href="#">Kalanki</a>
+                    <a href="#">Gaushala</a>
+                    <a href="#">Balaju</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="small-drop">
+            <div class="accordion" id="accordionExample">
+              <div class="card">
+                <div class="card-header" id="headingTwo">
+                  <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    LALITPUR<i style="float: right;" class="fas fa-chevron-down"></i>
+                  </a>
+                </div>
+
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <a href="#">Patan</a>
+                    <a href="#">Lagankhel</a>
+                    <a href="#">Jawalakhel</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="small-drop">
+            <div class="accordion" id="accordionExample">
+              <div class="card">
+                <div class="card-header" id="headingThree">
+                  <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    BHAKTAPUR<i style="float: right;" class="fas fa-chevron-down"></i>
+                  </a>
+                </div>
+
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <a href="#">Siddhapokhari</a>
+                    <a href="#">Jagati</a>
+                    <a href="#">Suryabinayak</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="small-drop">
+            <div class="accordion" id="accordionExample">
+              <div class="card">
+                <div class="card-header" id="headingFour">
+                  <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    OTHERS<i style="float: right;" class="fas fa-chevron-down"></i>
+                  </a>
+                </div>
+
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <a href="#">Land</a>
+                    <a href="#">Property</a>
+                    <a href="#">Cars</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <a href="javascript:void(0)" class="closenav" onclick="closeNav()"><i style="padding:0 10px" class="fas fa-times"></i></a>
+
+  </div>
+
+
+  <style>
     .header {
       box-shadow: 1px 1px 10px 1px grey;
     }
@@ -39,13 +348,13 @@
     .header .register a:hover {
       color: var(--sec-color) !important;
     }
-{% endblock %}
-
-
-{% block body %}
+  </style>
 
   <div class="clearfix"></div>
 
+
+
+<!-- /////////////////////////////////////////////////////////////////// -->
 
   <section class="new-home-category mt-3">
     <div class="top-category container d-flex justify-content-between flex-wrap">
@@ -60,6 +369,7 @@
           <option value="3">Sold Category</option>
         </select>
       </div>
+
       <div class="location input-box p-0">
         <select class="custom-select">
           <option selected disabled>Areas</option>
@@ -70,7 +380,7 @@
           <option value="5">Balaju</option>
         </select>
       </div>
-      <form method="post" class="d-flex" >
+      <form method="get"  class="d-flex" >
         {% csrf_token %}
       <div class="price input-box">
         <button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -79,9 +389,9 @@
           Rs. <span id="demo2"  name="demo1"></span>
         </button>
         <div class="dropdown-menu p-3" style="z-index:1">
-          Min Price: <input type="range" class="custom-range" name="minprice" min="10000" max="100000" value="50000" id="customRange1">
+          Min Price: <input type="range" class="custom-range" name="minprice" min="10" max="100000" value="50000" id="customRange1">
 
-          Max Price: <input type="range" class="custom-range" name="maxprice" min="100000" max="1000000" value="800000" id="customRange2">
+          Max Price: <input type="range" class="custom-range" name="maxprice" min="100" max="1000000" value="800000" id="customRange2">
         </div>
       </div>
       <button type="submit" class="btn search" name="button" value="psearch"> SEARCH</button>
@@ -90,17 +400,31 @@
       </div> -->
       </form>
 
+      <script type="text/javascript">
+        var slider = document.getElementById("customRange1");
+        var output = document.getElementById("demo1");
+        output.innerHTML = slider.value;
 
-      <!-- <div class="location">
-        <a style="font-family:'abel';color:var(--pri-color);" href="new-home.php">View all Land & Property</a>
-      </div> -->
+        slider.oninput = function() {
+          output.innerHTML = this.value;
+        }
+
+        var sliders = document.getElementById("customRange2");
+        var outputs = document.getElementById("demo2");
+        outputs.innerHTML = sliders.value;
+
+        sliders.oninput = function() {
+          outputs.innerHTML = this.value;
+        }
+      </script>
+
     </div>
 
     <section class="all container-fluid p-0 mt-4" style="overflow-x:hidden;">
       <div class="row">
         <div class="col-lg-7 col-md-12 offset-lg-5 container">
           <div class="apartments d-flex flex-wrap justify-content-around pb-0 pt-0">
-            <h2 style="font-family: 'abel'">Apartments</h2>
+            <h2 style="font-family: 'abel'">Properties</h2>
             <h6 style="cursor: pointer;"><i class="fas mt-2 fa-redo"></i> Reset Search</h6>
             <h6 style="cursor: pointer;"><i class="far mt-2 fa-heart"></i> Save Search</h6>
             <div class="new d-flex" style="width: 160px;">
@@ -120,8 +444,23 @@
       </div>
       <div class="row" style="height: 70vh">
         <div class="col-lg-5 col-md-12">
-          <iframe class="sticky-top" src="https://www.google.com/maps/d/embed?mid=1sSWxH-JSdrDridWqgD3tqzDl90XqnhUS" width="100%" frameborder="0" style="border:0;z-index:0;height:80vh;margin-top:-80px" allowfullscreen></iframe>
-        </div>
+        <div  class="sticky-top"  id="map" style="border:0;z-index:0;height:80vh;margin-top:-80px; position: sticky !important" ></div>
+
+        <script>
+          mapboxgl.accessToken = 'pk.eyJ1Ijoic2FkaXNoMDkiLCJhIjoiY2ttdGUwMDRvMHF0ejJ3czFidGZidTBscCJ9.qesxX1VtX3mGwc5HBKeyGg';
+        var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [85.33999973693699, 27.674889575252138],
+        zoom: 8
+        });
+          {% for search_properties in Title %}
+            new mapboxgl.Marker()
+            .setLngLat([{{search_properties.Longitude}}, {{search_properties.Latitude}}])
+            .addTo(map);
+            {% endfor %}
+            </script>
+      </div>
         <div class="col-lg-7 col-md-12">
           <div class="row">
             {% for search_properties in Title %}
@@ -129,10 +468,11 @@
 
               <div class="cards card my-3">
                 <img src="{{search_properties.image.url}}" width="100%" height="250px">
-                <a class="overlay" href="details.php"></a>
+                <a class="overlay" href="property/{{search_properties.id}}"></a>
                 <div class="img-content">
-                  <a class="font-weight-bold" style="color:black; text-decoration:none" href="details.php">{{search_properties.title}}</a>
-                  <p><strike class="mr-2 text-light">{{search_properties.discount_price}}</strike> {{search_properties.discount_price}}</p>
+                  <a class="font-weight-bold" style="color:black; text-decoration:none" href="/property/{{search_properties.id}}">{{search_properties.title}}</a>
+                  <p>
+                     {{search_properties.price}}</p>
                   <i class="fas fa-bed"></i> 4 Beds
                   <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
                   <i class="fas fa-ruler-combined"></i> 4210 sq.ft
@@ -149,259 +489,117 @@
                   <i class="fas fa-camera"></i> 15
                 </div>
               </div>
-
-              <!-- <div class="cards card my-3">
-                <img src="static/pics/news2.jpg" width="100%" height="250px">
-                <a class="overlay" href="details.php"></a>
-                <div class="img-content">
-                  <a style="color:white; text-decoration:none" href="details.php">Office Space In New Baneshwor</a>
-                  <p><strike class="mr-2 text-light">Rs. 5,50,000</strike> Rs. 4.50,000</p>
-                  <i class="fas fa-bed"></i> 4 Beds
-                  <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
-                  <i class="fas fa-ruler-combined"></i> 4210 sq.ft
-                </div>
-                <div class="home-heart">
-                  <i id="home4" class="fas mx-1 py-2 fa-home"></i>
-                  <i id="heart4" class="fas mx-1 py-2 fa-heart"></i>
-                </div>
-                <div class="badges">
-                  <div class="badge badge1 px-2 py-1 badge-success">FEATURED</div>
-                  <div class="badge badge2 px-2 py-1 badge-danger">SOLD</div>
-                </div>
-                <div class="badge camera px-2 py-1">
-                  <i class="fas fa-camera"></i> 15
-                </div>
-              </div>
-              <div class="cards card my-3">
-                <img src="static/pics/news3.jpg" width="100%" height="250px">
-                <a class="overlay" href="#"></a>
-                <div class="img-content">
-                  <a style="color:white; text-decoration:none" href="#">Office Space In New Baneshwor</a>
-                  <p><strike class="mr-2 text-light">Rs. 5,50,000</strike> Rs. 4.50,000</p>
-                  <i class="fas fa-bed"></i> 4 Beds
-                  <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
-                  <i class="fas fa-ruler-combined"></i> 4210 sq.ft
-                </div>
-                <div class="home-heart">
-                  <i id="home4" class="fas mx-1 py-2 fa-home"></i>
-                  <i id="heart4" class="fas mx-1 py-2 fa-heart"></i>
-                </div>
-                <div class="badges">
-                  <div class="badge badge1 px-2 py-1 badge-success">FEATURED</div>
-                  <div class="badge badge2 px-2 py-1 badge-danger">SOLD</div>
-                </div>
-                <div class="badge camera px-2 py-1">
-                  <i class="fas fa-camera"></i> 15
-                </div>
-              </div>
-              <div class="cards card my-3">
-                <img src="static/pics/apartment3.jpg" width="100%" height="250px">
-                <a class="overlay" href="#"></a>
-                <div class="img-content">
-                  <a style="color:white; text-decoration:none" href="#">Office Space In New Baneshwor</a>
-                  <p><strike class="mr-2 text-light">Rs. 5,50,000</strike> Rs. 4.50,000</p>
-                  <i class="fas fa-bed"></i> 4 Beds
-                  <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
-                  <i class="fas fa-ruler-combined"></i> 4210 sq.ft
-                </div>
-                <div class="home-heart">
-                  <i id="home4" class="fas mx-1 py-2 fa-home"></i>
-                  <i id="heart4" class="fas mx-1 py-2 fa-heart"></i>
-                </div>
-                <div class="badges">
-                  <div class="badge badge1 px-2 py-1 badge-success">FEATURED</div>
-                  <div class="badge badge2 px-2 py-1 badge-danger">SOLD</div>
-                </div>
-                <div class="badge camera px-2 py-1">
-                  <i class="fas fa-camera"></i> 15
-                </div>
-              </div>
-              <div class="cards card my-3">
-                <img src="static/pics/apartment2.jpg" width="100%" height="250px">
-                <a class="overlay" href="#"></a>
-                <div class="img-content">
-                  <a style="color:white; text-decoration:none" href="#">Office Space In New Baneshwor</a>
-                  <p><strike class="mr-2 text-light">Rs. 5,50,000</strike> Rs. 4.50,000</p>
-                  <i class="fas fa-bed"></i> 4 Beds
-                  <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
-                  <i class="fas fa-ruler-combined"></i> 4210 sq.ft
-                </div>
-                <div class="home-heart">
-                  <i id="home4" class="fas mx-1 py-2 fa-home"></i>
-                  <i id="heart4" class="fas mx-1 py-2 fa-heart"></i>
-                </div>
-                <div class="badges">
-                  <div class="badge badge1 px-2 py-1 badge-success">FEATURED</div>
-                  <div class="badge badge2 px-2 py-1 badge-danger">SOLD</div>
-                </div>
-                <div class="badge camera px-2 py-1">
-                  <i class="fas fa-camera"></i> 15
-                </div>
-              </div>
-              <div class="cards card my-3">
-                <img src="static/pics/apartment1.jpg" width="100%" height="250px">
-                <a class="overlay" href="#"></a>
-                <div class="img-content">
-                  <a style="color:white; text-decoration:none" href="#">Office Space In New Baneshwor</a>
-                  <p><strike class="mr-2 text-light">Rs. 5,50,000</strike> Rs. 4.50,000</p>
-                  <i class="fas fa-bed"></i> 4 Beds
-                  <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
-                  <i class="fas fa-ruler-combined"></i> 4210 sq.ft
-                </div>
-                <div class="home-heart">
-                  <i id="home4" class="fas mx-1 py-2 fa-home"></i>
-                  <i id="heart4" class="fas mx-1 py-2 fa-heart"></i>
-                </div>
-                <div class="badges">
-                  <div class="badge badge1 px-2 py-1 badge-success">FEATURED</div>
-                  <div class="badge badge2 px-2 py-1 badge-danger">SOLD</div>
-                </div>
-                <div class="badge camera px-2 py-1">
-                  <i class="fas fa-camera"></i> 15
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6 my-3">
-              <div class="cards card my-3">
-                <img src="static/pics/space1.jpg" width="100%" height="250px">
-                <a class="overlay" href="details.php"></a>
-                <div class="img-content">
-                  <a style="color:white; text-decoration:none" href="details.php">Office Space In New Baneshwor</a>
-                  <p><strike class="mr-2 text-light">Rs. 5,50,000</strike> Rs. 4.50,000</p>
-                  <i class="fas fa-bed"></i> 4 Beds
-                  <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
-                  <i class="fas fa-ruler-combined"></i> 4210 sq.ft
-                </div>
-                <div class="home-heart">
-                  <i id="home4" class="fas mx-1 py-2 fa-home"></i>
-                  <i id="heart4" class="fas mx-1 py-2 fa-heart"></i>
-                </div>
-                <div class="badges">
-                  <div class="badge badge1 px-2 py-1 badge-success">FEATURED</div>
-                  <div class="badge badge2 px-2 py-1 badge-danger">SOLD</div>
-                </div>
-                <div class="badge camera px-2 py-1">
-                  <i class="fas fa-camera"></i> 15
-                </div>
-              </div>
-              <div class="cards card my-3">
-                <img src="static/pics/sale1.jpg" width="100%" height="250px">
-                <a class="overlay" href="details.php"></a>
-                <div class="img-content">
-                  <a style="color:white; text-decoration:none" href="details.php">Office Space In New Baneshwor</a>
-                  <p><strike class="mr-2 text-light">Rs. 5,50,000</strike> Rs. 4.50,000</p>
-                  <i class="fas fa-bed"></i> 4 Beds
-                  <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
-                  <i class="fas fa-ruler-combined"></i> 4210 sq.ft
-                </div>
-                <div class="home-heart">
-                  <i id="home4" class="fas mx-1 py-2 fa-home"></i>
-                  <i id="heart4" class="fas mx-1 py-2 fa-heart"></i>
-                </div>
-                <div class="badges">
-                  <div class="badge badge1 px-2 py-1 badge-success">FEATURED</div>
-                  <div class="badge badge2 px-2 py-1 badge-danger">SOLD</div>
-                </div>
-                <div class="badge camera px-2 py-1">
-                  <i class="fas fa-camera"></i> 15
-                </div>
-              </div>
-              <div class="cards card my-3">
-                <img src="static/pics/apartment3.jpg" width="100%" height="250px">
-                <a class="overlay" href="#"></a>
-                <div class="img-content">
-                  <a style="color:white; text-decoration:none" href="#">Office Space In New Baneshwor</a>
-                  <p><strike class="mr-2 text-light">Rs. 5,50,000</strike> Rs. 4.50,000</p>
-                  <i class="fas fa-bed"></i> 4 Beds
-                  <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
-                  <i class="fas fa-ruler-combined"></i> 4210 sq.ft
-                </div>
-                <div class="home-heart">
-                  <i id="home4" class="fas mx-1 py-2 fa-home"></i>
-                  <i id="heart4" class="fas mx-1 py-2 fa-heart"></i>
-                </div>
-                <div class="badges">
-                  <div class="badge badge1 px-2 py-1 badge-success">FEATURED</div>
-                  <div class="badge badge2 px-2 py-1 badge-danger">SOLD</div>
-                </div>
-                <div class="badge camera px-2 py-1">
-                  <i class="fas fa-camera"></i> 15
-                </div>
-              </div>
-              <div class="cards card my-3">
-                <img src="static/pics/apartment4.jpg" width="100%" height="250px">
-                <a class="overlay" href="#"></a>
-                <div class="img-content">
-                  <a style="color:white; text-decoration:none" href="#">Office Space In New Baneshwor</a>
-                  <p><strike class="mr-2 text-light">Rs. 5,50,000</strike> Rs. 4.50,000</p>
-                  <i class="fas fa-bed"></i> 4 Beds
-                  <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
-                  <i class="fas fa-ruler-combined"></i> 4210 sq.ft
-                </div>
-                <div class="home-heart">
-                  <i id="home4" class="fas mx-1 py-2 fa-home"></i>
-                  <i id="heart4" class="fas mx-1 py-2 fa-heart"></i>
-                </div>
-                <div class="badges">
-                  <div class="badge badge1 px-2 py-1 badge-success">FEATURED</div>
-                  <div class="badge badge2 px-2 py-1 badge-danger">SOLD</div>
-                </div>
-                <div class="badge camera px-2 py-1">
-                  <i class="fas fa-camera"></i> 15
-                </div>
-              </div>
-              <div class="cards card my-3">
-                <img src="static/pics/apartment5.jpg" width="100%" height="250px">
-                <a class="overlay" href="#"></a>
-                <div class="img-content">
-                  <a style="color:white; text-decoration:none" href="#">Office Space In New Baneshwor</a>
-                  <p><strike class="mr-2 text-light">Rs. 5,50,000</strike> Rs. 4.50,000</p>
-                  <i class="fas fa-bed"></i> 4 Beds
-                  <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
-                  <i class="fas fa-ruler-combined"></i> 4210 sq.ft
-                </div>
-                <div class="home-heart">
-                  <i id="home4" class="fas mx-1 py-2 fa-home"></i>
-                  <i id="heart4" class="fas mx-1 py-2 fa-heart"></i>
-                </div>
-                <div class="badges">
-                  <div class="badge badge1 px-2 py-1 badge-success">FEATURED</div>
-                  <div class="badge badge2 px-2 py-1 badge-danger">SOLD</div>
-                </div>
-                <div class="badge camera px-2 py-1">
-                  <i class="fas fa-camera"></i> 15
-                </div>
-              </div>
-              <div class="cards card my-3">
-                <img src="static/pics/apartment6.jpg" width="100%" height="250px">
-                <a class="overlay" href="#"></a>
-                <div class="img-content">
-                  <a style="color:white; text-decoration:none" href="#">Office Space In New Baneshwor</a>
-                  <p><strike class="mr-2 text-light">Rs. 5,50,000</strike> Rs. 4.50,000</p>
-                  <i class="fas fa-bed"></i> 4 Beds
-                  <span class="mx-3"><i class="fas fa-bath"></i> 3 Baths</span>
-                  <i class="fas fa-ruler-combined"></i> 4210 sq.ft
-                </div>
-                <div class="home-heart">
-                  <i id="home4" class="fas mx-1 py-2 fa-home"></i>
-                  <i id="heart4" class="fas mx-1 py-2 fa-heart"></i>
-                </div>
-                <div class="badges">
-                  <div class="badge badge1 px-2 py-1 badge-success">FEATURED</div>
-                  <div class="badge badge2 px-2 py-1 badge-danger">SOLD</div>
-                </div>
-                <div class="badge camera px-2 py-1">
-                  <i class="fas fa-camera"></i> 15
-                </div>
-              </div> -->
             </div>
             {% endfor %}
+            {% if Title is none %}
+            <p>Search property not found!</p>
+            {% endif %}
           </div>
         </div>
       </div>
     </section>
 
   </section>
+<!-- //////////////////////////////////////// -->
+
+  <footer class="plain">
+    <div class="container">
+      <div class="row ql pt-5">
+        <div class="col-lg-3 col-md-6">
+          <div class="popular container">
+            <h5 class="text-white mb-4 font-weight-bold">Popular Searches</h5>
+            <ul class="list1 list-unstyled">
+              <li><a href="#">Appartment for Rent</a></li>
+              <li><a href="#">Appartment Low to High</a></li>
+              <li><a href="#">Offices for Buy</a></li>
+              <li><a href="#">Offices for Rent</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="hommarkets container">
+            <h5 class="text-white mb-4 font-weight-bold">Homepage Markets</h5>
+            <ul class="list1 list-unstyled">
+              <li><a href="#">Jadibuti Offices</a></li>
+              <li><a href="#">Sunrise Appartments</a></li>
+              <li><a href="#">Balkumari Townhome</a></li>
+              <li><a href="#">Tinkune Offices</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="quick">
+            <div class="container">
+              <h5 class="text-white mb-4 font-weight-bold">Quick Links</h5>
+              <ul class="list1 list-unstyled">
+                <li><a href="kathmandu.php">Kathmandu</a></li>
+                <li><a href="#">Lalitpur</a></li>
+                <li><a href="#">Bhaktapur</a></li>
+                <li><a href="#">Others</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="subscribe">
+            <div class="container">
+              <h5 class="text-white mb-4 font-weight-bold">Subscribe</h5>
+              <div class="form-group">
+                <div class="icon d-flex align-items-center justify-content-center bg-secondary">
+                  <span style="padding-left: 10px"><i class="fas fa-user text-white"></i></span>
+                  <input style="border:none;outline:none;box-shadow:none;color: white;" type="text" class="form-control bg-secondary" id="flname" placeholder="Full Name*" name="flname" autocomplete="off">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="icon d-flex align-items-center justify-content-center bg-secondary">
+                  <span style="padding-left:10px; text-align:center;"><i class="fas fa-envelope text-white">
+                    </i></span>
+                  <input style="border: none; outline: none; box-shadow: none; color:white" type="email" class="form-control bg-secondary" id="email" placeholder="Enter email*" name="email" autocomplete="off">
+                </div>
+              </div>
+              <button style="font-family: 'abel'" type="submit" class="btn btn-primary form-control">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="foranchors mt-5">
+        <h6><a href="index.php">Home</a>|<a href="about.php">About Us</a>|<a href="contact.php">Contact Us</a>|
+          <a href="news.php">News</a>|<a href="wishlist.php">Wishlist</a>
+        </h6>
+      </div>
+      <hr size="30" class="w-100 mx-auto mt-5" style="padding:0.1px; background:grey;">
+      <div class="containerfooter text-white py-2">
+        <div class="wrap d-flex align-items-center justify-content-between mb-4" style="font-family: 'abel';flex-wrap:wrap">
+          <div class="copyright text-center my-2">
+            <span style="color:lightgray;">&copy; 2019 </span><a style="color: var(--pri-color);text-decoration:none;" href="index.php">JaggaSale</a><span style="color:lightgray;"> All rights reserve.
+            </span>
+          </div>
+          <div class="icons text-center my-2">
+            <span>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+            </span>
+          </div>
+          <div class="dsn text-center my-2">
+            <span>Designed & Developed by <a href="http://Sadish.com.np" target="blank" style="color: var(--sec-color);text-decoration: none;">Sadish Gautam</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js" type="36ca0483887fc711e1ef5a96-text/javascript"></script>
 
 
-{% endblock %}
+  <!-- <script type="36ca0483887fc711e1ef5a96-text/javascript" src="/static/js/custom.js"></script> -->
+  <script src="https://ajax.cloudflare.com/cdn-cgi/scripts/7089c43e/cloudflare-static/rocket-loader.min.js" data-cf-settings="36ca0483887fc711e1ef5a96-|49" defer=""></script>
+</body>
+
+</html>

@@ -27,10 +27,10 @@ LABEL_LIST = (
 )
 
 LOCATION_LIST = (
-    ('K', 'Kathmandu'),
-    ('L', 'Lalitpur'),
-    ('L', 'Bhaktapur'),
-    ('C', 'Chitwan'),
+    ('Kathmandu', 'Kathmandu'),
+    ('Lalitpur', 'Lalitpur'),
+    ('Bhaktapur', 'Bhaktapur'),
+    ('Chitwan', 'Chitwan'),
 )
 
 PROPERTY_AREA_FACE=(
@@ -56,7 +56,7 @@ class user_details(models.Model):
 
 class Item(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=500)
     price = models.IntegerField()
     email = models.EmailField(max_length=70, null=True, blank=True, unique=True)
     discount_price = models.IntegerField(blank=True, null=True)
@@ -71,6 +71,7 @@ class Item(models.Model):
         choices=PROPERTY_FOR, max_length=4, default='SOLD')
     picture_count = models.IntegerField(blank=True, null=True)
     area = models.IntegerField(blank=True, null=True)
+    address = models.CharField(max_length=70, blank=True, null=True)
     owner_name = models.CharField(max_length=30)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+9779812345678'. Up to 14 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=10, blank=False, default='')
@@ -80,7 +81,7 @@ class Item(models.Model):
     floors = models.IntegerField(blank=True, null=True)
     Description = RichTextUploadingField()
     location = models.CharField(
-        choices=LOCATION_LIST, max_length=2)
+        choices=LOCATION_LIST, max_length=20)
     Latitude= models.CharField(max_length=25, blank=True, null=True)
     Longitude= models.CharField(max_length=25, blank=True, null=True)
     date =models.DateField(blank=True, null=True, default=timezone.now)
@@ -98,7 +99,7 @@ class Item(models.Model):
     have_elevator = models.BooleanField("elevator", default=False)
     have_water = models.BooleanField("water", default=False)
 
-    
+
     have_electricityBackup = models.BooleanField("electricityBackup", default=False)
     have_securityStaff = models.BooleanField("securityStaff", default=False)
     have_lift = models.BooleanField("lift", default=False)
@@ -145,11 +146,6 @@ class Item(models.Model):
 
 # class Propertyreturn render(request, "/")FeatureCheckbox(models.Model):
 #
-
-
-
-
-
 class Images(models.Model):
     imageitem = models.ForeignKey(Item, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=30, blank=True)

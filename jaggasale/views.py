@@ -19,29 +19,37 @@ from django.forms import modelformset_factory
 import requests
 from django.core.mail import send_mail, BadHeaderError
 from .forms import ContactForm
+
 # from .filters import ItemFilter
 
 
 class HomeView(ListView):
     model = Item
-    item_list = Item.objects.all()
-    print(['object_list'])
-    # context = {'count': Item.objects.count()}
+    def get_queryset(self, *args, **kwargs):
+        qs = super(HomeView, self).get_queryset(*args, **kwargs)
+        qs = qs.order_by("-id")
+        return qs[:6]
     template_name = 'index.html'
 
 
 
-
-def Index_page(request):
-    prop = Item.objects.all()
-    print(prop)
-    return render(request, "index.html", {'prop': prop})
+#
+# def Index_page(request):
+#     prop = Item.objects.all()
+#     print(prop)
+#     return render(request, "index.html", {'prop': prop})
 
 def handler404(request, exception):
     context = {}
     response = render(request, "404.html", context=context)
     response.status_code = 404
     return response
+
+
+def toastr(request):
+    return render(request, "updateform/toastr.html")
+
+
 
 
 def signup(request):
@@ -134,17 +142,23 @@ def update_property(request, id):
     edit_property = Item.objects.get(pk=id)
     edit_form = HouseForm(request.POST or None,
                           request.FILES, instance=edit_property)
-
+    edit_form = HouseForm(instance=edit_property)
     # edit_form = HouseForm(request.POST or None, instance = edit_property)
     if edit_form.is_valid():
+        edit_form.cleaned_data.get('title')
+        edit_form.cleaned_data.get('price')
         saving = edit_form.save()
+        messages.success(request, "Property Updated successfully")
+
         print(request.user)
+    else:
+        messages.error(request, "Error in Updating property")
 
     contex = {'user_property': user_property,
               'edit_property': edit_property,
-              'edit_form': edit_form
+              'edit_form': edit_form,
               }
-    messages.success(request, "Property Updated successfully")
+    # edit_form = HouseForm(instance=edit_property)
     return render(request, 'updateform/update.html', contex)
 
 
@@ -155,17 +169,34 @@ def userPropertyList(request):
 # Property detail page
 def handleDetails(request, id):
     # fetch the property using id
+
     propertyLists = Item.objects.all()
     propertyList = Item.objects.get(pk=id)
     print(propertyList)
     count_hit = True
+    property_owner_name = User.objects.get(id=propertyList.user_id)
+
+
+    url = requests.get("http://127.0.0.1:5000/property?Property_ID=" + str(id))
+
     # propertyImages = Images.objects.filter(imageitem_id= id)
     propertyImages = Images.objects.filter(imageitem_id=id)
-    print(propertyImages)
+    # print(propertyImages)
     response = requests.get('http://127.0.0.1:5000/recommendproperty?Property_ID='+str(id)).json()
-    print(response)
-    Rec_property = ["Title", "Address"]
 
+    # print(response)
+    Rec_property = ["Title", "Address"]
+    category = ['catering.restaurant', 'education.school', 'healthcare.hospital']
+    out = []
+    latitude = propertyList.Latitude
+    longitude = propertyList.Longitude
+
+
+    # for i,j in enumerate(category):
+    for i in category:
+        a = requests.get('https://api.geoapify.com/v2/places?categories='+i+'&filter=circle:'+latitude+','+longitude+',3000&bias=proximity:'+latitude+','+longitude+'&limit=05&apiKey=a46f6787113941dabf4252d0951cd9bf')
+        out.append(a.json())
+    print(out)
     if request.method == 'GET':
         form = ContactForm()
     else:
@@ -177,8 +208,9 @@ def handleDetails(request, id):
             message = form.cleaned_data['message']
 
             try:
+                # property_user = User.objects.get(id=form.cleaned_data['to_email'])
                 send_mail(full_name, message, from_email,
-                          ['sadish.gautam09@gmail.com'])
+                          [property_owner_name.email])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return HttpResponse('Success! Thank you for your message.')
@@ -186,64 +218,81 @@ def handleDetails(request, id):
               'propertyImages': propertyImages,
               'form': form,
               'response': response,
-              # 'Rec_property': Rec_property,
+              'out': out,
+              'url': url,
+              'property_owner_name': property_owner_name,
               }
     return render(request, "details.html", contex)
 
 
-def contactView(request):
-    if request.method == 'GET':
-        form = ContactForm()
-    else:
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            subject = form.cleaned_data['subject']
-            from_email = form.cleaned_data['from_email']
-            message = form.cleaned_data['message']
-            try:
-                send_mail(subject, message, from_email,
-                          ['sadish.gautam09@gmail.com'])
-            except BadHeaderError:
-                return HttpResponse('Invalid header found.')
-            return HttpResponse('Success! Thank you for your message.')
-    return render(request, "email.html", {'form': form})
+# def contactView(request, id):
+#
+#
+#     if request.method == 'GET':
+#         form = ContactForm()
+#     else:
+#         form = ContactForm(request.POST)
+#         if form.is_valid():
+#             subject = form.cleaned_data['subject']
+#             from_email = form.cleaned_data['from_email']
+#             message = form.cleaned_data['message']
+#             try:
+#                 property_user = User.objects.get(id=form.cleaned_data['to_email'])
+#                 send_mail(subject, message, from_email,
+#                           [property_user.email])
+#             except BadHeaderError:
+#                 return HttpResponse('Invalid header found.')
+#             return HttpResponse('Success! Thank you for your message.')
+#     return render(request, "email.html", {'form': form})
 
 
 def successView(request):
     return HttpResponse('Success! Thank you for your message.')
 
 
+def is_valid_queryparam(param):
+    return param != '' and param is not None
+
 # Search page
 def SearchResultsView(request):
+    # property_item = Item.objects.all()
     query = request.GET.get('search', '')
     Title = Item.objects.filter(title__icontains=query)
-    # categories = Item.objects.filter(category)
-    contex = {'Title': Title,
-              # 'categories': categories
+    minprice = request.GET.get('minprice')
+    maxprice = request.GET.get('maxprice')
 
-              }
+    if is_valid_queryparam(maxprice):
+        Title = Title.filter(price__gte=minprice)
+
+    if is_valid_queryparam(minprice):
+        Title = Title.filter(price__lt=maxprice)
+
+
+    contex = {'Title': Title,}
+
+            # 'property_item':property_item,                    }
     return render(request, 'search_results.html', contex)
 
 
-def SearchFilter(request):
-    if request.method == "POST":
-        minprice = request.POST.get('minprice')
-        maxprice = request.POST.get('maxprice')
-        print(minprice)
-        print(maxprice)
-
-        filtered_search = Item.objects.raw(
-            'select id, title, price from jaggasale_item where price between "' + minprice + '" and "' + maxprice + '"')
-        return render(request, 'search_results.html', {'filtered_search': filtered_search})
-
-    else:
-        Title = Item.objects.all()
-
-        contex = {'Title': Title,
-                  # 'categories': categories
-
-                  }
-        return render(request, 'search_results.html', contex)
+# def SearchFilter(request):
+#     if request.method == "POST":
+#         minprice = request.POST.get('minprice')
+#         maxprice = request.POST.get('maxprice')
+#         print(minprice)
+#         print(maxprice)
+#
+#         filtered_search = Item.objects.raw(
+#             'select id, title, price from jaggasale_item where price between "' + minprice + '" and "' + maxprice + '"')
+#         return render(request, 'search_results.html', {'filtered_search': filtered_search})
+#
+#     else:
+#         Title = Item.objects.all()
+#
+#         contex = {'Title': Title,
+#                   # 'categories': categories
+#
+#                   }
+#         return render(request, 'search_results.html', contex)
 
 
 def handleProperty(request):
@@ -260,14 +309,16 @@ def location_properties_by_cities(request):
 def Kathmandu(request):
     Properties_by_cities = Item.objects.all()
     cities = Item.objects.filter(location='K')
-    if request.method=="POST":
-        category = request.POST.get('category')
-        title = request.POST.get('title')
-    # id = Item.objects.values('property_id')
-    # longitude = Item.objects.values('Longitude')
-    # latitude = Item.objects.values('Latitude')
-    # print(longitude)
-    # print(latitude)
+    minprice = request.GET.get('minprice')
+    maxprice = request.GET.get('maxprice')
+
+    if is_valid_queryparam(maxprice):
+        cities = Title.filter(price__gte=minprice)
+
+    if is_valid_queryparam(minprice):
+        cities = Title.filter(price__lt=maxprice)
+
+
     return render(request, "location/kathmandu.html", {'cities': cities})
 
 

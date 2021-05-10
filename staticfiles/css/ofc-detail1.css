@@ -137,6 +137,14 @@ html{
   padding: 1px 9px;
 }
 
+/* .main-details-slider .owl-carousel .owl-item img{
+  height: 20px !important;
+} */
+
+
+
+
+
 .main-details-slider .row {
   display: flex;
   flex-wrap: wrap;

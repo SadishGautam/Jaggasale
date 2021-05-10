@@ -86,18 +86,10 @@
                 <div class="form-group">
 
                   <!-- (Startig) selecting House as default category from javascript -->
-                  {{ form.category }}
 
-                  <script>
-                    (function() {
-                      var id_category = document.getElementById('id_category').value = 'H';
-                    })();
-                  </script>
-                  <style>
-                    #id_category {
-                      display: none !important;
-                    }
-                  </style>
+
+
+
                   <!-- (Ending) selecting House as default category from javascript -->
 
                   <label>Title</label>
@@ -122,9 +114,11 @@
                   <label>Area(Sq ft)</label>
                   <br>
                   {{ form.area }}
+
                   {{ form.area.errors }}
                 </div>
               </div><!-- ending of column  -->
+
             </div><!-- ending of row  -->
 
 
@@ -166,7 +160,7 @@
 
             <!-- Description text -->
             <div class="row">
-              <div class="col-sm-12">
+              <div class="col-sm-7">
                 <div class="form-group" id="id_description_box">
                   <label for="Description">Description</label>
                   <br>
@@ -177,6 +171,28 @@
                 </div>
 
               </div>
+              <div class="col-sm-5 ">
+                <div class="form-group mt-4" id="id_category">
+                  <label for="category">Category</label>
+                  <br>
+                  {{ form.category }}
+                  {{ form.category.errors }}
+                </div>
+
+                <div class="form-group" id="id_address">
+                  <label for="address">Address</label>
+                  <br>
+                  {{ form.address }}
+                  {{ form.address.errors }}
+                </div>
+
+              </div>
+
+              <script>
+                (function() {
+                  var id_category = document.getElementById('id_category').value = 'H';
+                })();
+              </script>
             </div>
 
 
@@ -723,16 +739,7 @@
                   <!-- (Startig) selecting House as default category from javascript -->
                   {{ form.category }}
 
-                  <script>
-                    (function() {
-                      var id_category = document.getElementById('id_category').value = 'A';
-                    })();
-                  </script>
-                  <style>
-                    #id_category {
-                      display: none !important;
-                    }
-                  </style>
+
                   <!-- (Ending) selecting House as default category from javascript -->
 
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Item, Images
-from import_export.admin import ImportExportActionModelAdmin
+# from import_export.admin import ImportExportActionModelAdmin
 
 
 class ItemImageInLine(admin.TabularInline):
@@ -14,8 +14,8 @@ class ItemAdmin(admin.ModelAdmin):
     readonly_fields = ('image_tag',)
     inlines = [ItemImageInLine]
 
-class BookAdmin(ImportExportActionModelAdmin):
-    pass
+# class BookAdmin(ImportExportActionModelAdmin):
+#     pass
 
 # class ImagesAdmin(admin.ModelAdmin):
 #     prepopulated_fields = {'slug': ('title', )}
@@ -23,6 +23,6 @@ class BookAdmin(ImportExportActionModelAdmin):
 
 
 
-# admin.site.register(Item, ItemAdmin)
+admin.site.register(Item, ItemAdmin)
 admin.site.register(Images)
-admin.site.register(Item, BookAdmin)
+# admin.site.register(Item, BookAdmin)

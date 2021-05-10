@@ -115,7 +115,7 @@
             <div class="feedback-title">
                 <h1>FEEDBACK FORM</h1>
             </div>
-            <form>
+            <form id="my-form" action="https://formspree.io/f/xbjqdvgk" method="POST">
                 <div class="row mt-5">
                 <div class="col-lg-6">
                 <div class="form-group">
@@ -142,11 +142,38 @@
                     <textarea style="background: rgba(217, 234, 243, 0.815);width:100%; height:120px;border:none;padding: 10px;" placeholder="Your Message"></textarea>
                     </div>
                     <div class="form-group">
-                        <button class="btn form-control">SUBMIT</button>
+                        <button class="btn form-control"id="my-form-button">SUBMIT</button>
                     </div>
+                    <p id="my-form-status"></p>
                 </div>
                 </div>
             </form>
+
+
+                <script>
+                    var form = document.getElementById("my-form");
+
+                    async function handleSubmit(event) {
+                      event.preventDefault();
+                      var status = document.getElementById("my-form-status");
+                      var data = new FormData(event.target);
+                      fetch(event.target.action, {
+                        method: form.method,
+                        body: data,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                      }).then(response => {
+                        status.innerHTML = "<span style='color: green;'>Your Form has been submitted to JaggaSale 😃!";
+                        form.reset()
+                      }).catch(error => {
+                        status.innerHTML = "<span style='color: red;'>Oops! There was a problem submitting your form"
+                      });
+                    }
+                    form.addEventListener("submit", handleSubmit)
+                </script>
+
+
         </div>
         <div class="col-lg-4">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3533.091964212953!2d85.34678271440121!3d27.683552382801775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19a18187378f%3A0x8ba2460dd7896e64!2sOnline+Zeal!5e0!3m2!1sen!2snp!4v1565672847612!5m2!1sen!2snp"width="100%" height="300" frameborder="0" style="border:1px solid var(--sec-color)" allowfullscreen></iframe>

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'sites',
     'blog',
     'hitcount',
-    'import_export',
+    # 'import_export',
     # 'django_filters',
 ]
 
@@ -175,6 +175,16 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+#
+# from django.contrib.messages import constants as messages
+# MESSAGE_TAGS = {
+#     messages.DEBUG: 'info',
+#     messages.INFO: 'info',
+#     messages.SUCCESS: 'success',
+#     messages.WARNING: 'warning',
+#     messages.ERROR: 'danger',
+# }
 
 
 ###################################

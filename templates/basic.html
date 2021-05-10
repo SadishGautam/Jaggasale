@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="/static/css/register.css">
   <link rel="stylesheet" type="text/css" href="/static/css/footer.css">
   <link rel="stylesheet" type="text/css" href="/static/css/about.css">
-  <!-- <link rel="stylesheet" type="text/css" href="/static/css/login.css"> -->
+  <link rel="stylesheet" type="text/css" href="/static/css/toastr.css">
   <link rel="stylesheet" type="text/css" href="/static/css/Add_apartment.css">
 
 
@@ -42,7 +42,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
 
   <!-- Toastr css -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"> -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
 
@@ -465,6 +465,9 @@
             <div class="subscribe">
               <div class="container">
                 <h5 class="text-white mb-4 font-weight-bold">Subscribe</h5>
+                <form  id="my-newsletter-form" action="https://formspree.io/f/mjvjgnyg" method="POST">
+
+
                 <div class="form-group">
                   <div class="icon d-flex align-items-center justify-content-center bg-secondary">
                     <span style="padding-left: 10px"><i class="fas fa-user text-white"></i></span>
@@ -479,8 +482,32 @@
                   </div>
                 </div>
 
-                <button style="font-family: 'abel'" type="submit" class="btn btn-primary form-control">Subscribe</button>
+                <button id="my-newsletter-form-button" style="font-family: 'abel'" type="submit" class="btn btn-primary form-control">Subscribe</button>
+                <p id="my-newsletter-form-status"></p>
+                </form>
 
+                      <script>
+                        var form = document.getElementById("my-newsletter-form");
+
+                        async function handleSubmit(event) {
+                          event.preventDefault();
+                          var status = document.getElementById("my-newsletter-form-status");
+                          var data = new FormData(event.target);
+                          fetch(event.target.action, {
+                            method: form.method,
+                            body: data,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                          }).then(response => {
+                            status.innerHTML = "Thanks for your submission!";
+                            form.reset()
+                          }).catch(error => {
+                            status.innerHTML = "Oops! There was a problem submitting your form"
+                          });
+                        }
+                        form.addEventListener("submit", handleSubmit)
+                    </script>
               </div>
             </div>
           </div>
@@ -519,6 +546,21 @@
     </footer>
 
 
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'success'%}
+                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+                {% elif message.tags == 'info' %}
+                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+                {% elif message.tags == 'warning' %}
+                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+                {% elif message.tags == 'error' %}
+                    <script type=text/javascript>toastr.{{ message.tags }}('{{ message }}')</script>
+        {% endif %}
+    {% endfor %}
+    {% endif%}
+
+
     <!-- --------------------Sadish Codes----------------------- -->
 
 
@@ -528,9 +570,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
     <script type="text/javascript" src="/static/js/custom.js"></script>
+    <script type="text/javascript" src="/static/js/toastr.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox-plus-jquery.min.js"></script>
     <!-- Toastr js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> -->
     {% load static %}
 
 
