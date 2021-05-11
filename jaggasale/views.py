@@ -19,6 +19,7 @@ from django.forms import modelformset_factory
 import requests
 from django.core.mail import send_mail, BadHeaderError
 from .forms import ContactForm
+from django.forms import ModelChoiceField
 
 # from .filters import ItemFilter
 
@@ -75,6 +76,7 @@ def profilepage(request):
 def Add_property_by_user(request):
     form = HouseForm(request.POST or None, request.FILES)
     count = Item.objects.filter(user=request.user).count()
+
     if request.method == "POST":
         images = request.FILES.getlist('imagesss')
 
@@ -94,28 +96,12 @@ def Add_property_by_user(request):
             # form = HouseForm()
             messages.error(request, "Property cannot be saved")
         for image in images:
-            photo = Images.objects.create(image=image,)
+            photo = Images.objects.create(image=image, imageitem=saving)
             photo.save()
     return render(request, "Add_apartment.html", {'form': form, 'count': count})
 
 
-# Adding Apartment property by user
-# @login_required(login_url="/login")
-# def Add_property_by_user(request):
-#     form = ApartmentForm(request.POST or None, request.FILES)
-#     if request.method == "POST":
-#         if form.is_valid():
-#             saving = form.save(commit=False)
-#             print(request.user)
-#             saving.user = request.user
-#             saving.save()
-#             # response.user.HouseForm.add(form)
-#             messages.success(request, "saved")
-#             form = ApartmentForm()
-#         else:
-#             # form = HouseForm()
-#             messages.error(request, "Property cannot be saved")
-#     return render(request, "Add_apartment.html", {'form': form})
+
 
 
 # Deleting property by user
@@ -131,7 +117,7 @@ def delete_property(request, id):
     del_property.delete()
     print("deleted")
     messages.success(request, "Property deleted successfully")
-    return HttpResponseRedirect("/", {'del_property': del_property})
+    return HttpResponseRedirect("profile.html", {'del_property': del_property})
     # return render(request, 'profile.html',{'del_property': del_property})
 
 
@@ -181,7 +167,10 @@ def handleDetails(request, id):
 
     # propertyImages = Images.objects.filter(imageitem_id= id)
     propertyImages = Images.objects.filter(imageitem_id=id)
-    # print(propertyImages)
+    pictuess_count = Images.objects.filter(imageitem_id=id).count()
+    print(propertyImages)
+    for i in propertyImages:
+        print(i.image.url)
     response = requests.get('http://127.0.0.1:5000/recommendproperty?Property_ID='+str(id)).json()
 
     # print(response)
@@ -190,13 +179,15 @@ def handleDetails(request, id):
     out = []
     latitude = propertyList.Latitude
     longitude = propertyList.Longitude
+    print(latitude)
+
 
 
     # for i,j in enumerate(category):
     for i in category:
-        a = requests.get('https://api.geoapify.com/v2/places?categories='+i+'&filter=circle:'+latitude+','+longitude+',3000&bias=proximity:'+latitude+','+longitude+'&limit=05&apiKey=a46f6787113941dabf4252d0951cd9bf')
+        a = requests.get('https://api.geoapify.com/v2/places?categories='+i+'&filter=circle:'+latitude+','+longitude+',5000&bias=proximity:'+latitude+','+longitude+'&limit=5&apiKey=a46f6787113941dabf4252d0951cd9bf')
         out.append(a.json())
-    print(out)
+    # print(out)
     if request.method == 'GET':
         form = ContactForm()
     else:
@@ -212,8 +203,10 @@ def handleDetails(request, id):
                 send_mail(full_name, message, from_email,
                           [property_owner_name.email])
             except BadHeaderError:
-                return HttpResponse('Invalid header found.')
-            return HttpResponse('Success! Thank you for your message.')
+
+                messages.error(request, 'Invalid header found.')
+
+            messages.success(request, 'Success! Thank you for your message.')
     contex = {'propertyList': propertyList,
               'propertyImages': propertyImages,
               'form': form,
@@ -221,6 +214,7 @@ def handleDetails(request, id):
               'out': out,
               'url': url,
               'property_owner_name': property_owner_name,
+              'pictuess_count': pictuess_count,
               }
     return render(request, "details.html", contex)
 
@@ -258,6 +252,7 @@ def SearchResultsView(request):
     # property_item = Item.objects.all()
     query = request.GET.get('search', '')
     Title = Item.objects.filter(title__icontains=query)
+
     minprice = request.GET.get('minprice')
     maxprice = request.GET.get('maxprice')
 
@@ -267,8 +262,14 @@ def SearchResultsView(request):
     if is_valid_queryparam(minprice):
         Title = Title.filter(price__lt=maxprice)
 
-
-    contex = {'Title': Title,}
+    new_updated_title = []
+    j=0
+    for i in Title:
+        new_updated_title.append(i)
+        j+=1
+        if j>6:
+            break
+    contex = {'Title': new_updated_title,}
 
             # 'property_item':property_item,                    }
     return render(request, 'search_results.html', contex)
@@ -308,7 +309,7 @@ def location_properties_by_cities(request):
 
 def Kathmandu(request):
     Properties_by_cities = Item.objects.all()
-    cities = Item.objects.filter(location='K')
+    cities = Item.objects.filter(location='Kathmandu')[:7]
     minprice = request.GET.get('minprice')
     maxprice = request.GET.get('maxprice')
 
@@ -318,26 +319,33 @@ def Kathmandu(request):
     if is_valid_queryparam(minprice):
         cities = Title.filter(price__lt=maxprice)
 
-
     return render(request, "location/kathmandu.html", {'cities': cities})
 
 
 def Lalitpur(request):
     Properties_by_cities = Item.objects.all()
-    cities = Item.objects.filter(location='L')
-    return render(request, "location/kathmandu.html", {'cities': cities})
+    cities = Item.objects.filter(location='Lalitpur')[:7]
+    minprice = request.GET.get('minprice')
+    maxprice = request.GET.get('maxprice')
+
+    if is_valid_queryparam(maxprice):
+        cities = Title.filter(price__gte=minprice)
+
+    if is_valid_queryparam(minprice):
+        cities = Title.filter(price__lt=maxprice)
+    return render(request, "location/lalitpur.html", {'cities': cities})
 
 
 def Bhaktapur(request):
     Properties_by_cities = Item.objects.all()
-    cities = Item.objects.filter(location='B')
-    return render(request, "location/kathmandu.html", {'cities': cities})
+    cities = Item.objects.filter(location='Bhaktapur')[:5]
+    return render(request, "location/bhaktapur.html", {'cities': cities})
 
 
 def Chitwan(request):
     Properties_by_cities = Item.objects.all()
-    cities = Item.objects.filter(location='C')
-    return render(request, "location/kathmandu.html", {'cities': cities})
+    cities = Item.objects.filter(location='Chitwan')[:7]
+    return render(request, "location/chitwan.html", {'cities': cities})
 
 
 def handleSignup(request):

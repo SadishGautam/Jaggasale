@@ -156,7 +156,7 @@ color: var(--sec-color) !important;
                   <div class="img-box" style="height:210px">
                     <img src="{{property.image.url}}" height="100%" width="100%">
                   </div>
-                  <a href="">
+                  <a href="/property/{{property.id}}">
                     <div class="img-overlay"></div>
                   </a>
                   <!-- <div class="badge badge1 px-2 py-1 badge-success">ACTIVE</div> -->
@@ -168,7 +168,7 @@ color: var(--sec-color) !important;
                 </div>
                 <div class="container px-4">
                   <div class="card-title mt-3">
-                    <a href="{{property.title}}">{{property.title|slice:"0:18"}}...</a>
+                    <a href="/property/{{property.id}}">{{property.title|slice:"0:18"}}...</a>
                   </div>
                   <div class="card-content mt-3">
 

@@ -32,7 +32,7 @@ def adarsha():
     if property_data is None:
         return None
 
-    property_data.drop(property_data.columns[[5,6,7,8,9,12,13,14,15,16,18]], axis=1, inplace=True)
+    property_data.drop(property_data.columns[[18]], axis=1, inplace=True)
 
     # property_data.head()
 
@@ -102,7 +102,7 @@ def recommend_Property(Property_ID):
 
     except Exception:
         return None
-    
+
     id = inddict[Property_ID]
 
     similarity_scores = list(enumerate(cosine_similarity_combine[id]))

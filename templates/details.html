@@ -86,7 +86,7 @@
             </div>
           </li>
           <li class="dropdown">
-            <a href="#" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">LALITPUR</a>
+            <a href="{% url 'Lalitpur' %}" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">LALITPUR</a>
             <div class="dropdown-content">
               <a href="#">Patan</a>
               <a href="#">Lagankhel</a>
@@ -94,7 +94,7 @@
             </div>
           </li>
           <li class="dropdown">
-            <a href="#" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">BHAKTAPUR</a>
+            <a href="{% url 'Bhaktapur' %}" style="color:white;text-decoration:none;transition:.5s;" class="dropbtn">BHAKTAPUR</a>
             <div class="dropdown-content">
               <a href="#">Siddhapokhari</a>
               <a href="#">Jagati</a>
@@ -230,7 +230,7 @@
             <div class="accordion" id="accordionExample">
               <div class="card">
                 <div class="card-header" id="headingOne">
-                  <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <a style="color:black;text-decoration:none;" href="{% url 'Kathmandu' %}" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     KATHMANDU<i style="float: right;" class="fas fa-chevron-down"></i>
                   </a>
                 </div>
@@ -251,7 +251,7 @@
             <div class="accordion" id="accordionExample">
               <div class="card">
                 <div class="card-header" id="headingTwo">
-                  <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  <a style="color:black;text-decoration:none;" href="{% url 'Lalitpur' %}" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     LALITPUR<i style="float: right;" class="fas fa-chevron-down"></i>
                   </a>
                 </div>
@@ -270,7 +270,7 @@
             <div class="accordion" id="accordionExample">
               <div class="card">
                 <div class="card-header" id="headingThree">
-                  <a style="color:black;text-decoration:none;" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  <a style="color:black;text-decoration:none;" href="{% url 'Bhaktapur' %}" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                     BHAKTAPUR<i style="float: right;" class="fas fa-chevron-down"></i>
                   </a>
                 </div>
@@ -378,7 +378,7 @@
               <a href="#"> <i class="far fa-heart"></i> <a href="#"> SAVE</a></a>
             </li>
             <li>
-              <i class="fas fa-share-alt-square"></i> <a href="#" onclick="copyToClipboard()" data-toggle="modal" data-target="#exampleModalCenter"> SHARE</a>
+              <i class="fas fa-share-alt-square"></i> <a href="#" onclick="copyToClipboard()" data-toggle="modal" data-target="#exampleModalCenter"> COPY LINK</a>
             </li>
 
 
@@ -427,7 +427,7 @@
         <div class="row py-3 list-unstyled" style="font-family:'abel';">
           <div class="col-lg-2 mt-3">
             <li>
-              <h4>{{ url.Title }}</h4>
+              <h4>{{ propertyList.title }}</h4>
             </li>
           </div>
           <div class="col-lg-2 mt-3 ">
@@ -487,9 +487,10 @@
             <section class=" owl-sad mb-4" id="slider_img">
 
               <div class="owl-carousel owl-theme" id="sadis-owl">
-                {% for i in item.images_set.all %}
+                {% for i in propertyImages %}
                 <div class="item">
                   <div class="img-box bigslider"><img src="{{ i.image.url }}" class="img-fluid" alt=""></div>
+
                 </div>
                 {% endfor %}
                 <!-- <div class="item">
@@ -502,26 +503,28 @@
 
             </section>
             <div class="photo-numbering">
-              <p><i class="fas fa-camera"></i> &nbsp <span class="photos-no"> 11</span></p>
+              <p><i class="fas fa-camera"></i> &nbsp <span class="photos-no">
+                {{pictuess_count}}
+              </span></p>
             </div>
           </div>
 
           <div class="col-lg-4">
             <div class="row">
               <div class="column">
-                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
-                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
-                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
+                {% for i in propertyImages|slice:"3" %}
+                <a href="{{ i.image.url }}" data-lightbox="roadtrip"> <img src="{{ i.image.url }}" alt=""> </a>
+                {% endfor %}
               </div>
               <div class="column">
-                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
-                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
-                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
+                {% for i in propertyImages|slice:"3" %}
+                <a href="{{ i.image.url }}" data-lightbox="roadtrip"> <img src="{{ i.image.url }}" alt=""> </a>
+                {% endfor %}
               </div>
               <div class="column">
-                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
-                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
-                <a href="{{ propertyList.image.url }}" data-lightbox="roadtrip"> <img src="{{ propertyList.image.url }}" alt=""> </a>
+                {% for i in propertyImages|slice:"3" %}
+                <a href="{{ i.image.url }}" data-lightbox="roadtrip"> <img src="{{ i.image.url }}" alt=""> </a>
+                {% endfor %}
               </div>
             </div>
           </div>
@@ -893,6 +896,7 @@
 
 
           </div>
+
           <div class="col-lg-4">
             <div class="sticky sticky-top">
               <div class="card" style="position: relative;">
@@ -966,9 +970,10 @@
 
                   <button type="submit" class="contact btn text-white text-center w-100">
                     CONTACT PROPERTY</button>
+
                 </form>
 
-
+                {% include  'alert.html' %}
               </div>
             </div>
           </div>
@@ -987,6 +992,7 @@
 
 
 
+
     <section id="Recommended_properties" class="featured" style="margin-top: 0px; background-color:#f7f7f7;">
       <div class="container">
         <h2 class="heading font-weight-bold" style="font-family:'abel'; color:var(--pri-color) !important;"> <i class="far fa-thumbs-up"></i> Recommended Properties </h2>
@@ -994,13 +1000,12 @@
         <div id="owl-sold-property" class="owl-carousel owl-theme">
         {% for recommended_properties in response  %}
         <!-- <div class="col-sm-12 col-md-6 col-lg-4"> -->
-
           <div class="card">
             <div class="card-img" style="position: relative;overflow:hidden;">
               <div class="img-box" style="height:210px">
-                <img src="https://i.pinimg.com/originals/aa/12/1e/aa121e2010448532595792934d72e517.jpg" height="100%" width="100%">
+                <img src = "/media/{{ recommended_properties.image }}" height="100%" width="100%">
               </div>
-              <a href="property/{{recommended_properties.Property_ID}}">
+              <a href="/property/{{recommended_properties.id}}">
                 <div class="img-overlay"></div>
               </a>
               <div class="badge badge1 px-2 py-1 badge-success">Recommended</div>
@@ -1012,47 +1017,37 @@
             </div>
             <div class="container px-3">
               <div class="card-title mt-2">
-                {{recommended_properties}}
-                <a href="/property/{{recommended_properties.Property_ID}}">{{recommended_properties.Title|slice:"0:44"}}...</a>
+                <a href="/property/{{recommended_properties.id}}">{{recommended_properties.title|slice:"0:44"}}...</a>
               </div>
+              <div class="card-content">
+                <div class="row room">
                   <div class="col-lg-6">
-                    <p><i class="fas fa-user-clock"></i> {{recommended_properties.Year|floatformat:"0"}} </p>
+                    <p><i class="fas fa-map-marker-alt"></i> {{recommended_properties.location}}</p>
                   </div>
                   <div class="col-lg-6">
-                    <p><i class="fas fa-eye"></i> {{recommended_properties.Views}} views</p>
+                    <p><i class="fas fa-user-clock"></i> Active </p>
                   </div>
                   <div class="col-lg-6">
-                    <p> <i class="fas fa-clock"></i> {{recommended_properties.Posted|slice:"0:8"}}..</p>
+                    <p><i class="fas fa-eye"></i> {{recommended_properties.area}} views</p>
+                  </div>
+                  <div class="col-lg-6">
+                    <p> <i class="fas fa-clock"></i> {{recommended_properties.date|slice:"0:8"}}..</p>
                   </div>
                 </div>
                 <hr style="border-top:.5px solid lightgrey">
                 <div class="car-footer ">
-
                   <!-- <strike>Rs. {{recommended_properties.Title}}</strike> -->
-
-                  <span style="color:black;font-weight:bold; font-size:24px;" >Rs. {{recommended_properties.Price}}/-</span>
-
+                  <span style="color:black;font-weight:bold; font-size:24px;" >Rs. {{recommended_properties.price}}/-</span>
                 </div>
               </div>
             </div>
           </div>
-
-
-
-
         <!-- </div> -->
         {% endfor %}
       </div>
       </div>
             </div>
     </section>
-
-
-
-
-
-
-
 
 
 

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'sites',
     'blog',
     'hitcount',
+    'templatetags',
     # 'import_export',
     # 'django_filters',
 ]
@@ -70,6 +71,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            
         },
     },
 ]
