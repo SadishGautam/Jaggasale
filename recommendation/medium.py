@@ -32,7 +32,7 @@ def adarsha():
     if property_data is None:
         return None
 
-    property_data.drop(property_data.columns[[18]], axis=1, inplace=True)
+    # property_data.drop(property_data.columns[[18]], axis=1, inplace=True)
 
     # property_data.head()
 
